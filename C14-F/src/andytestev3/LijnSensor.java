@@ -5,10 +5,10 @@ import lejos.hardware.Sound;
 import lejos.hardware.port.SensorPort;
 import lejos.robotics.Color;
 import lejos.utility.Delay;
-import andytestev3.library.ColorSensor;
-import andytestev3.library.Lcd;
+import andytestev3.ColorSensor;
+import andytestev3.Lcd;
 
-public class lijnsensor
+public class LijnSensor
 {
     public static void main(String[] args)
     {
