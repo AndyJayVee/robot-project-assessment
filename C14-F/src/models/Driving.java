@@ -30,6 +30,7 @@ public class Driving {
 		public void travelAndRotate() {
 			pilot.travel(travelDistance);
 			pilot.rotate(rotation);
+			pilot.arc(10, 14);
 		}
 		
 	
