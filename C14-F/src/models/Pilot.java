@@ -10,13 +10,14 @@ public class Pilot {
 
 	MovePilot pilot;
 	Driving drive;
-	
+	private static final double MAX_LINEAR_SPEED = 350;
+//	private static final double MAX_ANGULAR_SPEED = 0;
 	
 	//Wheel diameter and offset (half track with) is set in mm.
 	private static final double WHEEL_DIAMETER = 43.2;
 	private static final double TRACK_WIDTH = 148.0;
-	private double linearSpeed = pilot.getMaxLinearSpeed();
-	private double angularSpeed = pilot.getMaxAngularSpeed();
+	private double linearSpeed = MAX_LINEAR_SPEED;
+	private double angularSpeed = 350;
 	
 	public void setLinearSpeed(double linearSpeed) {
 		this.linearSpeed = linearSpeed;
@@ -40,13 +41,8 @@ public class Pilot {
 	drive = new Driving(pilot);
 	drive.travelAndRotate();
 	
-//	pilot.setLinearSpeed(linearSpeed);
-//	pilot.setAngularSpeed(angularSpeed);
-//	
-	//while (Hier de voorwaarden){
-	// Hier de bewegingen om de auto aan te sturen.
-	//
-	//}
+		pilot.setLinearSpeed(linearSpeed);
+		pilot.setAngularSpeed(angularSpeed);
 	
 	pilot.stop();
 	}
