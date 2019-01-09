@@ -6,6 +6,7 @@ public class Driving {
 	
 	private int travelDistance;
 	private int rotation;
+	private static final int MAX_SPEED = 30;
 	
 	MovePilot pilot;
 	public Driving (MovePilot p) {
@@ -30,7 +31,14 @@ public class Driving {
 		public void travelAndRotate() {
 			pilot.travel(travelDistance);
 			pilot.rotate(rotation);
-			pilot.arc(10, 14);
+		}
+		
+		public void straight(float Distance) {
+			pilot.travel(Distance);
+		}
+		
+		public void turn (int bearing) {
+			pilot.rotate(-bearing);
 		}
 		
 	
