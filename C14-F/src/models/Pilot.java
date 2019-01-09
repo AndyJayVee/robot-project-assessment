@@ -7,14 +7,16 @@ import lejos.robotics.chassis.WheeledChassis;
 import lejos.robotics.navigation.MovePilot;
 
 public class Pilot {
+
 	MovePilot pilot;
 	Driving drive;
+	
 	
 	//Wheel diameter and offset (half track with) is set in mm.
 	private static final double WHEEL_DIAMETER = 43.2;
 	private static final double TRACK_WIDTH = 148.0;
-	private double linearSpeed;
-	private double angularSpeed;
+	private double linearSpeed = pilot.getMaxLinearSpeed();
+	private double angularSpeed = pilot.getMaxAngularSpeed();
 	
 	public void setLinearSpeed(double linearSpeed) {
 		this.linearSpeed = linearSpeed;
@@ -22,6 +24,10 @@ public class Pilot {
 
 	public void setAngularSpeed(double angularSpeed) {
 		this.angularSpeed = angularSpeed;
+	}
+	
+	public MovePilot getPilot() {
+		return pilot;
 	}
 	
 	//Pilot constructor
@@ -34,9 +40,9 @@ public class Pilot {
 	drive = new Driving(pilot);
 	drive.travelAndRotate();
 	
-	pilot.setLinearSpeed(linearSpeed);
-	pilot.setAngularSpeed(angularSpeed);
-	
+//	pilot.setLinearSpeed(linearSpeed);
+//	pilot.setAngularSpeed(angularSpeed);
+//	
 	//while (Hier de voorwaarden){
 	// Hier de bewegingen om de auto aan te sturen.
 	//

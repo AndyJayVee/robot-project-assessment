@@ -6,9 +6,14 @@ public class Driving {
 	
 	private int travelDistance;
 	private int rotation;
-	private static final int MAX_SPEED = 30;
 	
 	MovePilot pilot;
+	
+		
+	public Driving() {
+		super();
+	}
+
 	public Driving (MovePilot p) {
 		pilot = p;
 	}

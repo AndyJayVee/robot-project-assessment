@@ -22,7 +22,7 @@ public class Marvin {
 	public static void main(String[] args) {
 		Marvin marvin = new Marvin();
 		marvin.run();
-		// models.Driving.straight(10);
+		
 		
 	}
 	
@@ -31,9 +31,9 @@ public class Marvin {
 		display.drawString("Welkom", 0, 3);
 		display.drawString("Team Foxtrot!", 0, 4);
 		waitForKey(Button.ENTER);
-//		Pilot pilot = new Pilot();
-//		Driving drive = new Driving(pilot);
-//		drive.straight(5.0);
+		Pilot pilot = new Pilot();
+		Driving drive = new Driving(pilot.getPilot());
+		drive.straight((float) 5.0);
 	}
 	
 	public void waitForKey(Key key) {
