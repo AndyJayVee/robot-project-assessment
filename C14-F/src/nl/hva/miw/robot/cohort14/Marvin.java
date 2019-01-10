@@ -5,7 +5,12 @@ import lejos.hardware.Button;
 import lejos.hardware.Key;
 import lejos.hardware.ev3.LocalEV3;
 import lejos.hardware.lcd.TextLCD;
+import lejos.hardware.port.SensorPort;
+import lejos.hardware.sensor.EV3IRSensor;
+import lejos.hardware.sensor.SensorMode;
 import lejos.utility.Delay;
+import models.Driving;
+import models.Pilot;
 
 public class Marvin {
 	
@@ -18,7 +23,11 @@ public class Marvin {
 	
 	public static void main(String[] args) {
 		Marvin marvin = new Marvin();
+		
+		
 		marvin.run();
+		
+		 
 	}
 	
 	private void run() {
@@ -26,6 +35,20 @@ public class Marvin {
 		display.drawString("Welkom", 0, 3);
 		display.drawString("Team Foxtrot!", 0, 4);
 		waitForKey(Button.ENTER);
+//		Pilot pilot = new Pilot();
+//		Driving drive = new Driving(pilot.getPilot());
+//		float distance = -500;
+//		drive.driveRectangle(distance);
+		EV3IRSensor ir = new EV3IRSensor(SensorPort.S4);
+		SensorMode seek = ir.getSeekMode();
+		float[] sample = new float[seek.sampleSize()];
+		
+		while(Button.ESCAPE.isUp()) {
+			seek.fetchSample(sample, 0);
+			int direction = (int) sample[0];
+			System.out.println("Direction: " + direction);
+			ir.close();
+		}
 	}
 	
 	public void waitForKey(Key key) {

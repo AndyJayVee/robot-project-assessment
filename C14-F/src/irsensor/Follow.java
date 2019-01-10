@@ -4,12 +4,9 @@ import lejos.hardware.Button;
 import lejos.hardware.ev3.LocalEV3;
 import lejos.hardware.lcd.Font;
 import lejos.hardware.lcd.GraphicsLCD;
-import lejos.hardware.motor.EV3LargeRegulatedMotor;
-import lejos.hardware.port.MotorPort;
 import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3IRSensor;
 import lejos.hardware.sensor.SensorMode;
-import lejos.robotics.RegulatedMotor;
 
 /**
  * Requires a wheeled vehicle with two independently controlled motors connected
@@ -61,37 +58,18 @@ public class Follow {
 
 		introMessage();
 
-		EV3IRSensor ir = new EV3IRSensor(SensorPort.S4);
-		RegulatedMotor left = new EV3LargeRegulatedMotor(MotorPort.B);
-		RegulatedMotor right = new EV3LargeRegulatedMotor(MotorPort.C);
-		SensorMode seek = ir.getSeekMode();
-		float[] sample = new float[seek.sampleSize()];
+		EV3IRSensor ir = new EV3IRSensor(SensorPort.S4); // activeert een nieuwe IR-sensor op poort S4
+		SensorMode seek = ir.getSeekMode(); // activeert de Seek modus
+		float[] sample = new float[seek.sampleSize()]; // maakt array met sample informatie
 
 		while (Button.ESCAPE.isUp()) {
 			seek.fetchSample(sample, 0);
 			int direction = (int) sample[0];
 			System.out.println("Direction: " + direction);
-			int distance = (int) sample[1];
+			int distance = (int) sample[1];			
+			System.out.println("Distance: " + distance);
 
-			if (direction > 0) {
-				left.forward();
-				right.stop(true);
-			} else if (direction < 0) {
-				right.forward();
-				left.stop(true);
-			} else {
-				if (distance < Integer.MAX_VALUE) {
-					left.forward();
-					right.forward();
-				} else {
-					left.stop(true);
-					right.stop(true);
-				}
-			}
-		}
-
-		left.close();
-		right.close();
 		ir.close();
 	}
+}
 }
