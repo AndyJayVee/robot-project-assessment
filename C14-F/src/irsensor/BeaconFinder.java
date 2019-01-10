@@ -1,3 +1,4 @@
+
 package irsensor;
 
 import lejos.hardware.Button;
@@ -7,6 +8,7 @@ import lejos.hardware.lcd.GraphicsLCD;
 import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3IRSensor;
 import lejos.hardware.sensor.SensorMode;
+import models.Driving;
 
 /**
  * Requires a wheeled vehicle with two independently controlled motors connected
@@ -15,6 +17,23 @@ import lejos.hardware.sensor.SensorMode;
  * @author Lawrie Griffiths
  */
 public class BeaconFinder {
+
+	private static final int MAXIMUM_RANGE_IR_SENSOR = 75; // eventueel aanpassen
+	private boolean beaconFound; // activeert het break point in de methode roam
+
+	/**
+	 * @return the beaconFound
+	 */
+	public boolean isBeaconFound() {
+		return beaconFound;
+	}
+
+	/**
+	 * @param beaconFound the beaconFound to set
+	 */
+	public void setBeaconFound(boolean beaconFound) {
+		this.beaconFound = beaconFound;
+	}
 
 	public static void introMessage() {
 
@@ -64,31 +83,27 @@ public class BeaconFinder {
 
 		while (Button.ESCAPE.isUp()) {
 			seek.fetchSample(sample, 0);
-			int direction = (int) sample[0];
-			System.out.println("Direction: " + direction);
-			int distance = (int) sample[1];			
+			int bearing = (int) sample[0];
+			System.out.println("Bearing: " + bearing);
+			int distance = (int) sample[1];
 			System.out.println("Distance: " + distance);
-				
-				if (direction > 0) {
-					left.forward();
-					right.stop(true);
-				} else if (direction < 0) {
-					right.forward();
-					left.stop(true);
-				} else {
-					if (distance < Integer.MAX_VALUE) {
-						left.forward();
-						right.forward();
-					} else {
-						left.stop(true);
-						right.stop(true);
-					}
-				}
+
+			if (distance > Integer.MAX_VALUE) { // als het beacon out of range is
+				setBeaconFound(false); // beaconFound false
+				Driving.roam; // begin met roam
+			} else if (distance < MAXIMUM_RANGE_IR_SENSOR) { // maximum range IR sensor
+				setBeaconFound(true); // beaconFound true
+				Driving.straight; // begin met straight
 			}
-			
-			left.close();
-			right.close();
+
+			if (bearing != 0) { // als het beacon niet recht voor de sensor is
+				Driving.turn(bearing); // gaat de robot in de richting van het beacon roteren met "direction" graden
+			} else if (bearing == 0) { // als het beacon recht voor de sensor is
+				Driving.straight(distance); // gaat de robot rechtuit rijden gedurende afstand "distance"
+			}
 			ir.close();
 		}
+
+	}
 
 }
