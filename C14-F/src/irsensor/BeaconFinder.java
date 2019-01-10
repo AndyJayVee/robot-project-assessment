@@ -1,15 +1,15 @@
+// opgeslagen, maar niet werkend
+
 package irsensor;
 
+import models.Driving;
 import lejos.hardware.Button;
 import lejos.hardware.ev3.LocalEV3;
 import lejos.hardware.lcd.Font;
 import lejos.hardware.lcd.GraphicsLCD;
-import lejos.hardware.motor.EV3LargeRegulatedMotor;
-import lejos.hardware.port.MotorPort;
 import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3IRSensor;
 import lejos.hardware.sensor.SensorMode;
-import lejos.robotics.RegulatedMotor;
 
 /**
  * Requires a wheeled vehicle with two independently controlled motors connected
@@ -68,73 +68,76 @@ public class BeaconFinder {
 
 	protected static final int BEARING_ZERO = 0;
 
-	public static void introMessage() {
-
-		GraphicsLCD g = LocalEV3.get().getGraphicsLCD(); // generic initiation message
-		g.drawString("Beacon Finder", 5, 0, 0);
-		g.setFont(Font.getSmallFont());
-		g.drawString("Team Foxtrot", 2, 20, 0);
-
-		// Quit GUI button:
-		g.setFont(Font.getSmallFont()); // can also get specific size using Font.getFont()
-		int y_quit = 100;
-		int width_quit = 45;
-		int height_quit = width_quit / 2;
-		int arc_diam = 6;
-		g.drawString("QUIT", 9, y_quit + 7, 0);
-		g.drawLine(0, y_quit, 45, y_quit); // top line
-		g.drawLine(0, y_quit, 0, y_quit + height_quit - arc_diam / 2); // left line
-		g.drawLine(width_quit, y_quit, width_quit, y_quit + height_quit / 2); // right line
-		g.drawLine(0 + arc_diam / 2, y_quit + height_quit, width_quit - 10, y_quit + height_quit); // bottom line
-		g.drawLine(width_quit - 10, y_quit + height_quit, width_quit, y_quit + height_quit / 2); // diagonal
-		g.drawArc(0, y_quit + height_quit - arc_diam, arc_diam, arc_diam, 180, 90);
-
-		// Enter GUI button:
-		g.fillRect(width_quit + 10, y_quit, height_quit, height_quit);
-		g.drawString("GO", width_quit + 15, y_quit + 7, 0, true);
-
-		Button.waitForAnyPress();
-		if (Button.ESCAPE.isDown())
-			System.exit(0);
-		g.clear();
-	}
+//	public static void introMessage() {
+//
+//		GraphicsLCD g = LocalEV3.get().getGraphicsLCD(); // generic initiation message
+//		g.drawString("Beacon Finder", 5, 0, 0);
+//		g.setFont(Font.getSmallFont());
+//		g.drawString("Team Foxtrot", 2, 20, 0);
+//
+//		// Quit GUI button:
+//		g.setFont(Font.getSmallFont()); // can also get specific size using Font.getFont()
+//		int y_quit = 100;
+//		int width_quit = 45;
+//		int height_quit = width_quit / 2;
+//		int arc_diam = 6;
+//		g.drawString("QUIT", 9, y_quit + 7, 0);
+//		g.drawLine(0, y_quit, 45, y_quit); // top line
+//		g.drawLine(0, y_quit, 0, y_quit + height_quit - arc_diam / 2); // left line
+//		g.drawLine(width_quit, y_quit, width_quit, y_quit + height_quit / 2); // right line
+//		g.drawLine(0 + arc_diam / 2, y_quit + height_quit, width_quit - 10, y_quit + height_quit); // bottom line
+//		g.drawLine(width_quit - 10, y_quit + height_quit, width_quit, y_quit + height_quit / 2); // diagonal
+//		g.drawArc(0, y_quit + height_quit - arc_diam, arc_diam, arc_diam, 180, 90);
+//
+//		// Enter GUI button:
+//		g.fillRect(width_quit + 10, y_quit, height_quit, height_quit);
+//		g.drawString("GO", width_quit + 15, y_quit + 7, 0, true);
+//
+//		Button.waitForAnyPress();
+//		if (Button.ESCAPE.isDown())
+//			System.exit(0);
+//		g.clear();
+//	}
 
 	public static void main(String[] args) {
 
-		introMessage();
+//		introMessage();
 
 		EV3IRSensor ir = new EV3IRSensor(SensorPort.S4); // activeert een nieuwe IR-sensor op poort S4
 		SensorMode seek = ir.getSeekMode(); // activeert de Seek modus
 		float[] sample = new float[seek.sampleSize()]; // maakt array met sample informatie
+		
+		
 
 		// Driving.setBearing(direction);
 		// roomba feature
 		// als in bereik van sensor
-		// pas bearing aan tot 0 graden
-		// recht op de meid
 
 		while (seek.sampleSize() > 0) {
 			seek.fetchSample(sample, 0);
 			int direction = (int) sample[0];
+			System.out.println(sample);
 
-			if (direction > 0) {
-				turn(-5);
-			} else if (direction < 0) {
-				turn(5);
-			} else {
-				if (distance < Integer.MAX_VALUE) {
-					straight();
-				} else {
-					stop(true);
-				}
-			}
-			turn(seek.sampleSize());
-		}
-
-		straight(seek.fetchSample(sample, BEARING_ZERO));
+//			if (direction > 0) {
+//				Driving.turn(-5);
+//			} else if (direction < 0) {
+//				Driving.turn(5);
+//			} else {
+//				if (distance < Integer.MAX_VALUE) {
+//					Driving.straight();
+//				} else {
+//					stop(true);
+//				}
+//			}
+//			Driving.turn(seek.sampleSize());
+//		}
+//
+//		straight(seek.fetchSample(sample, BEARING_ZERO));
 
 		ir.close();
 	}
+	}
+}
 
 	// voorbeeld code:
 	// Get sample from infrared sensor set in <b>seek mode</b>.
@@ -158,4 +161,3 @@ public class BeaconFinder {
 //	    result.add((float) Math.round(sample[7]));
 //	    return result;
 //}
-}

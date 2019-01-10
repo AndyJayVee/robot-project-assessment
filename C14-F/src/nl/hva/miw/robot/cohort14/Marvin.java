@@ -5,7 +5,10 @@ import lejos.hardware.Button;
 import lejos.hardware.Key;
 import lejos.hardware.ev3.LocalEV3;
 import lejos.hardware.lcd.TextLCD;
+import lejos.robotics.navigation.MovePilot;
 import lejos.utility.Delay;
+import models.Driving;
+import models.Pilot;
 
 public class Marvin {
 	
@@ -19,6 +22,8 @@ public class Marvin {
 	public static void main(String[] args) {
 		Marvin marvin = new Marvin();
 		marvin.run();
+		
+		
 	}
 	
 	private void run() {
@@ -26,6 +31,9 @@ public class Marvin {
 		display.drawString("Welkom", 0, 3);
 		display.drawString("Team Foxtrot!", 0, 4);
 		waitForKey(Button.ENTER);
+		Pilot pilot = new Pilot();
+		Driving drive = new Driving(pilot.getPilot());
+		drive.straight((float) 5.0);
 	}
 	
 	public void waitForKey(Key key) {
