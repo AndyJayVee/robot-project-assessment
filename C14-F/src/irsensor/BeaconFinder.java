@@ -105,16 +105,6 @@ public class BeaconFinder {
 				Driving.straight(distance); // gaat de robot rechtuit rijden gedurende afstand "distance"
 			}
 
-			if (direction != 0) { // als het beacon niet recht voor de sensor is
-				Driving.turn(direction); // gaat de robot in de richting van het beacon roteren met "direction" graden
-			} else if (direction == 0) { // als het beacon recht voor de sensor is
-				Driving.straight(distance); // gaat de robot rechtuit rijden gedurende afstand "distance"
-			} else if (distance < Integer.MAX_VALUE) { // als het beacon out of range is
-				Driving.roam(inRange); // boolean
-			} else if (distance < 25) {
-
-			}
-
 
 			ir.close();
 		}
