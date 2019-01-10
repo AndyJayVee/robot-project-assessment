@@ -67,36 +67,11 @@ public class Driving {
 								// 340 graden draaien.
 			if (beaconFound) {
 				break;
-	
-	//Methode om de robot te laten rijden en een bochtje te laten maken zoals
-	//bijvoorbeeld bij een vierkant.
-		public void travelAndRotate() {
-			pilot.travel(travelDistance);
-			pilot.rotate(rotation);
-		}
-		
-	//methode om stuk rechtuit te rijden.
-		public void straight(float Distance) {
-			pilot.travel(Distance);
-		public void straight(int distance) {
-			pilot.travel(distance);
-		}
-		
-	//methode om te roteren. 
-		public void turn (int bearing) {
-			pilot.rotate(-bearing);
-		}
-		
-	//methode om een vierkant te rijden en dit daarna ook te vieren!
-		public void driveRectangle(float distance) {
-			for (int i = 0; i<4; i++) {
-				pilot.rotate(90);
-				pilot.travel(distance);
-				Sound.beep();
 			}
 		}
 	}
-
+	
+		
 	// methode om een vierkant te rijden en dit daarna ook te vieren!
 	public void driveRectangle(int distance) {
 		for (int i = 0; i < 4; i++) {
