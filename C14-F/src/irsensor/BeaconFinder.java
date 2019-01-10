@@ -1,3 +1,4 @@
+
 package irsensor;
 
 import lejos.hardware.Button;
@@ -16,6 +17,23 @@ import models.Driving;
  * @author Leo Snel
  */
 public class BeaconFinder {
+
+	private static final int MAXIMUM_RANGE_IR_SENSOR = 75; // eventueel aanpassen
+	private boolean beaconFound; // activeert het break point in de methode roam
+
+	/**
+	 * @return the beaconFound
+	 */
+	public boolean isBeaconFound() {
+		return beaconFound;
+	}
+
+	/**
+	 * @param beaconFound the beaconFound to set
+	 */
+	public void setBeaconFound(boolean beaconFound) {
+		this.beaconFound = beaconFound;
+	}
 
 	public static void introMessage() {
 
@@ -72,6 +90,21 @@ public class BeaconFinder {
 			int distance = (int) sample[1];
 			System.out.println("Distance: " + distance);
 
+
+			if (distance > Integer.MAX_VALUE) { // als het beacon out of range is
+				setBeaconFound(false); // beaconFound false
+				Driving.roam; // begin met roam
+			} else if (distance < MAXIMUM_RANGE_IR_SENSOR) { // maximum range IR sensor
+				setBeaconFound(true); // beaconFound true
+				Driving.straight; // begin met straight
+			}
+
+			if (bearing != 0) { // als het beacon niet recht voor de sensor is
+				Driving.turn(bearing); // gaat de robot in de richting van het beacon roteren met "direction" graden
+			} else if (bearing == 0) { // als het beacon recht voor de sensor is
+				Driving.straight(distance); // gaat de robot rechtuit rijden gedurende afstand "distance"
+			}
+
 			if (direction != 0) { // als het beacon niet recht voor de sensor is
 				Driving.turn(direction); // gaat de robot in de richting van het beacon roteren met "direction" graden
 			} else if (direction == 0) { // als het beacon recht voor de sensor is
@@ -82,8 +115,10 @@ public class BeaconFinder {
 
 			}
 
+
 			ir.close();
 		}
 
 	}
+
 }
