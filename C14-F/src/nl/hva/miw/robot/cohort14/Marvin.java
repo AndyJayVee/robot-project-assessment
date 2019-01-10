@@ -1,3 +1,8 @@
+/**
+ * @author loek 
+ * Main Class including followLine
+ */
+
 package nl.hva.miw.robot.cohort14;
 
 import lejos.hardware.Brick;
@@ -24,32 +29,23 @@ public class Marvin {
 	}
 
 	public static void main(String[] args) {
+		// initialize a MArvin object
 		Marvin marvin = new Marvin();
+		
+		//invoke marvin to do sometinh: followLine method
 		marvin.followLine();
 //		marvin.readAndPrintSample();
 //		marvin.run();
-//		marvin.moveDriving();
-//		marvin.simpleTurn();
+
+
 
 	}
 	
-	private void simpleTurn() {
-		TextLCD display = brick.getTextLCD();
-		display.drawString("Welkom", 0, 3);
-		display.drawString("Team Foxtrot!", 0, 4);
-		waitForKey(Button.ENTER);
-		Pilot pilot = new Pilot();
-		Driving drive = new Driving(pilot.getPilot());
-		float distance = -500;
-		drive.turn(-3);	
-		drive.turn(-3);	
-		drive.turn(-3);	
-		drive.straight(10);
-		drive.turn(8);
-
-		
-	}
-
+	
+	//method to follow a line
+	// this works best if the marvin is placed on the border of the black line
+	// with the line on the left of marvin
+	
 	private void followLine() {
 		// intro
 		TextLCD display = brick.getTextLCD();
@@ -79,7 +75,9 @@ public class Marvin {
 		}
 
 	}
-
+	
+	
+// method to print EV3Sensor on Foxtrot display (for testing purposes)
 	private void readAndPrintSample() {
 		// TODO Auto-generated method stub
 
@@ -106,19 +104,8 @@ public class Marvin {
 		}
 
 	}
-
-
-
-	private void moveDriving() {
-		TextLCD display = brick.getTextLCD();
-		display.drawString("Welkom", 0, 3);
-		display.drawString("Team Foxtrot!", 0, 4);
-		waitForKey(Button.ENTER);
-		Pilot pilot = new Pilot();
-		Driving drive = new Driving(pilot.getPilot());
-		float distance = -500;
-		drive.driveRectangle(distance);
-	}
+	
+	// original run method from initial commit to run start sequence == display text on display and wait for Enter
 	
 	private void run() {
 		TextLCD display = brick.getTextLCD();
@@ -127,6 +114,7 @@ public class Marvin {
 		waitForKey(Button.ENTER);
 	}
 
+	
 	public void waitForKey(Key key) {
 		while (key.isUp()) {
 			Delay.msDelay(100);
