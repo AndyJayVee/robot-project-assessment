@@ -25,11 +25,58 @@ public class Marvin {
 
 	public static void main(String[] args) {
 		Marvin marvin = new Marvin();
-//		marvin.run();
-//		marvin.readSensor();
 		marvin.followLine();
 //		marvin.readAndPrintSample();
 //		marvin.run();
+//		marvin.moveDriving();
+//		marvin.simpleTurn();
+
+	}
+	
+	private void simpleTurn() {
+		TextLCD display = brick.getTextLCD();
+		display.drawString("Welkom", 0, 3);
+		display.drawString("Team Foxtrot!", 0, 4);
+		waitForKey(Button.ENTER);
+		Pilot pilot = new Pilot();
+		Driving drive = new Driving(pilot.getPilot());
+		float distance = -500;
+		drive.turn(-3);	
+		drive.turn(-3);	
+		drive.turn(-3);	
+		drive.straight(10);
+		drive.turn(8);
+
+		
+	}
+
+	private void followLine() {
+		// intro
+		TextLCD display = brick.getTextLCD();
+		display.drawString("Press Enter", 0, 3);
+		display.drawString("Follow Line", 0, 4);
+		waitForKey(Button.ENTER);
+
+		// start with driving straight
+		Pilot pilot = new Pilot();
+		Driving drive = new Driving(pilot.getPilot());
+
+		// initialize array to fetch sample in
+		float[] scannedColor = new float[1];
+		sensor.setCurrentMode("Red");
+
+		// while not pressed continue
+		while (Button.DOWN.isUp()) {
+			sensor.fetchSample(scannedColor, 0);
+			if (scannedColor[0] < .10) { // white
+				drive.turn(10); 
+			} else if (scannedColor[0] > .70)  { // black
+				drive.turn(-10);
+			} else { // grey
+				drive.straight(-50);
+				// ga een kant op draaien
+			}
+		}
 
 	}
 
@@ -60,55 +107,9 @@ public class Marvin {
 
 	}
 
-	private void followLine() {
-		// drive straight
 
 
-		TextLCD display = brick.getTextLCD();
-		display.drawString("Press Enter", 0, 3);
-		display.drawString("Team Foxtrot", 0, 4);
-		waitForKey(Button.ENTER);
-		// initialize array to fetch sample in
-		float[] scannedColor = new float[1];
-		sensor.setCurrentMode("Red");
-
-		while (Button.DOWN.isUp()) {
-			// fetch sample
-			sensor.fetchSample(scannedColor, 0);
-
-			if (scannedColor[0] < .40) {
-				Pilot pilot = new Pilot();
-				Driving drive = new Driving(pilot.getPilot());
-				float distance = -500;
-				drive.straight(distance);
-			} else {
-				// ga een kant op draaien
-			}
-		}
-
-	}
-
-	private void readSensor() {
-		TextLCD display = brick.getTextLCD();
-		display.drawString("Welkom", 0, 3);
-		display.drawString("Team Foxtrot!", 0, 4);
-		waitForKey(Button.ENTER);
-		// initialize Driving and Pilot
-		Pilot pilot = new Pilot();
-		Driving drive = new Driving(pilot.getPilot());
-		// TODO magic number ; set distance
-		float distance = -250;
-		// start with driving the distance in a straight line by invoking Driving method
-		drive.straight(distance);
-		// after drive, read sensordata
-		SensorAndFilterSample sensorAndFilterSample = new SensorAndFilterSample();
-		sensorAndFilterSample.getLatestSample();
-
-		// TODO Auto-generated method stub
-
-	}
-
-	private void run() {
+	private void moveDriving() {
 		TextLCD display = brick.getTextLCD();
 		display.drawString("Welkom", 0, 3);
 		display.drawString("Team Foxtrot!", 0, 4);
@@ -117,6 +118,13 @@ public class Marvin {
 		Driving drive = new Driving(pilot.getPilot());
 		float distance = -500;
 		drive.driveRectangle(distance);
+	}
+	
+	private void run() {
+		TextLCD display = brick.getTextLCD();
+		display.drawString("Welkom", 0, 3);
+		display.drawString("Team Foxtrot!", 0, 4);
+		waitForKey(Button.ENTER);
 	}
 
 	public void waitForKey(Key key) {
