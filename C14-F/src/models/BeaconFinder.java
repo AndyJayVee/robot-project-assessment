@@ -34,19 +34,22 @@ public class BeaconFinder {
 			int distance = (int) sample[1];
 			System.out.println("Distance: " + distance);
 
-			if (distance > MAXIMUM_RANGE_IR_SENSOR) {
-				drive.roam(beaconFound); // begin met roam
-			} else if (distance < MAXIMUM_RANGE_IR_SENSOR) { // maximum range IR sensor
-				drive.straight(MAXIMUM_RANGE_IR_SENSOR); // begin met straight
-			}
+			while (bearing != 0 && distance != 0) {
+				if (distance > MAXIMUM_RANGE_IR_SENSOR) {
+					drive.roam(beaconFound); // begin met roam
+				} else if (distance <= MAXIMUM_RANGE_IR_SENSOR) { // maximum range IR sensor
+					setBeaconFound(beaconFound = true); // CHECKEN MET FRANK
+					drive.straight((MAXIMUM_RANGE_IR_SENSOR) / 10); // begin met klein stukje straight
+				}
 
-			if (bearing != 0) { // als het beacon niet recht voor de sensor is
-				drive.turn(bearing); // gaat de robot in de richting van het beacon roteren met "direction" graden
-			} else if (bearing == 0) { // als het beacon recht voor de sensor is
-				drive.straight(distance); // gaat de robot rechtuit rijden gedurende afstand "distance"
-			}
+				if (bearing != 0) { // als het beacon niet recht voor de sensor is
+					drive.turn(bearing); // gaat de robot in de richting van het beacon roteren met "bearing" graden
+				} else if (bearing == 0) { // als het beacon recht voor de sensor is
+					drive.straight(distance); // gaat de robot rechtuit rijden gedurende afstand "distance"
+				} 
 
-			ir.close();
+				ir.close();
+			}
 		}
 	}
 }
