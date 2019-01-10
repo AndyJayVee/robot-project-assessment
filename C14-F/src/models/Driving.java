@@ -42,6 +42,8 @@ public class Driving {
 	//methode om stuk rechtuit te rijden.
 		public void straight(float Distance) {
 			pilot.travel(Distance);
+		public void straight(int distance) {
+			pilot.travel(distance);
 		}
 		
 	//methode om te roteren. 
