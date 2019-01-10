@@ -14,7 +14,7 @@ import lejos.hardware.sensor.SensorMode;
  * 
  * @author Lawrie Griffiths
  */
-public class Follow {
+public class BeaconFinder {
 
 	public static void introMessage() {
 
@@ -68,8 +68,27 @@ public class Follow {
 			System.out.println("Direction: " + direction);
 			int distance = (int) sample[1];			
 			System.out.println("Distance: " + distance);
+				
+				if (direction > 0) {
+					left.forward();
+					right.stop(true);
+				} else if (direction < 0) {
+					right.forward();
+					left.stop(true);
+				} else {
+					if (distance < Integer.MAX_VALUE) {
+						left.forward();
+						right.forward();
+					} else {
+						left.stop(true);
+						right.stop(true);
+					}
+				}
+			}
+			
+			left.close();
+			right.close();
+			ir.close();
+		}
 
-		ir.close();
-	}
-}
 }
