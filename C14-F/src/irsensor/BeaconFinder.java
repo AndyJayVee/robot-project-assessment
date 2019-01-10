@@ -7,12 +7,13 @@ import lejos.hardware.lcd.GraphicsLCD;
 import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3IRSensor;
 import lejos.hardware.sensor.SensorMode;
+import models.Driving;
 
 /**
- * Requires a wheeled vehicle with two independently controlled motors connected
- * to motor ports B and C, and an EV3 IR sensor connected to port 4.
+ * Requires a wheeled vehicle with two independently controlled motors, and an
+ * EV3 IR sensor connected to port 4.
  * 
- * @author Lawrie Griffiths
+ * @author Leo Snel
  */
 public class BeaconFinder {
 
@@ -58,37 +59,31 @@ public class BeaconFinder {
 
 		introMessage();
 
+		// vanaf hier is de IR-sensorcode:
+
 		EV3IRSensor ir = new EV3IRSensor(SensorPort.S4); // activeert een nieuwe IR-sensor op poort S4
 		SensorMode seek = ir.getSeekMode(); // activeert de Seek modus
 		float[] sample = new float[seek.sampleSize()]; // maakt array met sample informatie
 
 		while (Button.ESCAPE.isUp()) {
 			seek.fetchSample(sample, 0);
-			int direction = (int) sample[0];
-			System.out.println("Direction: " + direction);
-			int distance = (int) sample[1];			
+			int bearing = (int) sample[0];
+			System.out.println("Bearing: " + bearing);
+			int distance = (int) sample[1];
 			System.out.println("Distance: " + distance);
-				
-				if (direction > 0) {
-					left.forward();
-					right.stop(true);
-				} else if (direction < 0) {
-					right.forward();
-					left.stop(true);
-				} else {
-					if (distance < Integer.MAX_VALUE) {
-						left.forward();
-						right.forward();
-					} else {
-						left.stop(true);
-						right.stop(true);
-					}
-				}
+
+			if (direction != 0) { // als het beacon niet recht voor de sensor is
+				Driving.turn(direction); // gaat de robot in de richting van het beacon roteren met "direction" graden
+			} else if (direction == 0) { // als het beacon recht voor de sensor is
+				Driving.straight(distance); // gaat de robot rechtuit rijden gedurende afstand "distance"
+			} else if (distance < Integer.MAX_VALUE) { // als het beacon out of range is
+				Driving.roam(inRange); // boolean
+			} else if (distance < 25) {
+
 			}
-			
-			left.close();
-			right.close();
+
 			ir.close();
 		}
 
+	}
 }
