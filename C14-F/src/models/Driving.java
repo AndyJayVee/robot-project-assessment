@@ -63,4 +63,12 @@ public class Driving {
 			Sound.beepSequenceUp();
 			
 		}
+
+		public void driveCurve(double radius, double angle) {
+			// code die een bochtje draait
+			 pilot.arc(radius, angle);
+			
+			// TODO Auto-generated method stub
+			
+		}
 }

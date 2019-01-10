@@ -14,6 +14,7 @@ import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3ColorSensor;
 import lejos.utility.Delay;
 import models.Driving;
+import models.LineFollower;
 import models.Pilot;
 import models.SensorAndFilter;
 import models.SensorAndFilterSample;
@@ -21,7 +22,7 @@ import models.SensorAndFilterSample;
 public class Marvin {
 
 	Brick brick;
-	static EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S2);
+//	static EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S2);
 
 	public Marvin() {
 		super();
@@ -29,92 +30,60 @@ public class Marvin {
 	}
 
 	public static void main(String[] args) {
-		// initialize a MArvin object
+		// initialize a Marvin object
 		Marvin marvin = new Marvin();
-		
-		//invoke marvin to do sometinh: followLine method
-		marvin.followLine();
+
+		// initialize LineFollower
+		LineFollower lineFollower = new LineFollower();
+
+		marvin.runEnter();
+
+		// invoke marvin to do something: followLine method
+	
 //		marvin.readAndPrintSample();
-//		marvin.run();
-
-
 
 	}
-	
-	
-	//method to follow a line
-	// this works best if the marvin is placed on the border of the black line
-	// with the line on the left of marvin
-	
-	private void followLine() {
-		// intro
-		TextLCD display = brick.getTextLCD();
-		display.drawString("Press Enter", 0, 3);
-		display.drawString("Follow Line", 0, 4);
-		waitForKey(Button.ENTER);
 
-		// start with driving straight
-		Pilot pilot = new Pilot();
-		Driving drive = new Driving(pilot.getPilot());
-
-		// initialize array to fetch sample in
-		float[] scannedColor = new float[1];
-		sensor.setCurrentMode("Red");
-
-		// while not pressed continue
-		while (Button.DOWN.isUp()) {
-			sensor.fetchSample(scannedColor, 0);
-			if (scannedColor[0] < .10) { // white
-				drive.turn(10); 
-			} else if (scannedColor[0] > .70)  { // black
-				drive.turn(-10);
-			} else { // grey
-				drive.straight(-50);
-				// ga een kant op draaien
-			}
-		}
-
-	}
-	
-	
 // method to print EV3Sensor on Foxtrot display (for testing purposes)
-	private void readAndPrintSample() {
+//	private void readAndPrintSample() {
 		// TODO Auto-generated method stub
 
-		TextLCD display = brick.getTextLCD();
-		display.drawString("Press Enter", 0, 3);
-		display.drawString("Team Foxtrot", 0, 4);
-		waitForKey(Button.ENTER);
-		// initialize array to fetch sample in
-		float[] scannedColor = new float[1];
-		sensor.setCurrentMode("Red");
-
-		while (Button.DOWN.isUp()) {
-			// fetch sample
-			sensor.fetchSample(scannedColor, 0);
+//		TextLCD display = brick.getTextLCD();
+//		display.drawString("Press Enter", 0, 3);
+//		display.drawString("Team Foxtrot", 0, 4);
+//		waitForKey(Button.ENTER);
+//		// initialize array to fetch sample in
+//		float[] scannedColor = new float[1];
+//		sensor.setCurrentMode("Red");
+//
+//		while (Button.DOWN.isUp()) {
+//			// fetch sample
+//			sensor.fetchSample(scannedColor, 0);
 //		SensorAndFilterSample sensorAndFilterSample = new SensorAndFilterSample();
 //		sensorAndFilterSample.getLatestSample();
 //		SensorAndFilterSample sensorAndFilter = new SensorAndFilterSample();
-			if (scannedColor[0] < .20) {
-				display.drawString("Donker", 0, 4);
-			} else {
-				display.drawString("Licht", 0, 4);
+//			if (scannedColor[0] < .20) {
+//				display.drawString("Donker", 0, 4);
+//			} else {
+//				display.drawString("Licht", 0, 4);
+//
+//			}
+//		}
+//
+//	}
 
-			}
-		}
+	// Follow instructions on display
 
-	}
-	
-	// original run method from initial commit to run start sequence == display text on display and wait for Enter
-	
-	private void run() {
+	private void runEnter() {
 		TextLCD display = brick.getTextLCD();
-		display.drawString("Welkom", 0, 3);
-		display.drawString("Team Foxtrot!", 0, 4);
+		display.drawString(" Foxtrot ", 0, 3);
+		display.drawString(" Press Enter for Line", 0, 4);
 		waitForKey(Button.ENTER);
+		// initialize LineFollower
+		LineFollower lineFollower = new LineFollower();
+		lineFollower.followLine();
 	}
 
-	
 	public void waitForKey(Key key) {
 		while (key.isUp()) {
 			Delay.msDelay(100);
