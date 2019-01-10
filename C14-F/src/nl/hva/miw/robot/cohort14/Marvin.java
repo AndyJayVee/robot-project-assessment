@@ -1,5 +1,6 @@
 package nl.hva.miw.robot.cohort14;
 
+import ColorSensorAndy.SensorAndFilter;
 import lejos.hardware.Brick;
 import lejos.hardware.Button;
 import lejos.hardware.Key;
@@ -19,6 +20,13 @@ public class Marvin {
 	public static void main(String[] args) {
 		Marvin marvin = new Marvin();
 		marvin.run();
+		SensorAndFilter sensor = new SensorAndFilter();
+		sensor.getLatestSample();
+		 for (int i = 0; i < 100000; i++) {
+		        System.out.print(sensor.getLatestSample());
+		        System.out.println();     
+		 }
+		      
 	}
 	
 	private void run() {
