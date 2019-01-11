@@ -69,18 +69,21 @@ public class BeaconFinderLoek {
 	 * Puts the robot in roamingmode. Roaming is defined in Driving
 	 */
 	private void roamMode() {
-		// roam
+		// TODO is this the correct way to start roam??
 		drive.roam(beaconFound); // start roam
-
+        
 		// fetch measurement and store the value
 		seek.fetchSample(sample, 0);
 		distance = (int) sample[1];
 		System.out.println("Roaming: distance: " + distance);
-
+		
+		while (distance > 500){
+		    drive.roam();
+		}
+		// TODO this is a place where my code might not work
+        // as soon as distance < 500 start inRange() method
 		// TODO if latest distance fetch == within range, stop roaming
 		// start actions if in range (turn and straight)
-		if (distance < 70) {
-			// proceed with inRange actions
 			inRange();
 		}
 	}
