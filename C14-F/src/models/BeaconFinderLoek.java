@@ -57,7 +57,7 @@ public class BeaconFinderLoek {
 			// so while distance is inifite keep roaming
 			if (distance > 500) {
 				roamMode();
-			} else {// when
+			} else {
 				inRange();
 			}
 		}
@@ -70,7 +70,7 @@ public class BeaconFinderLoek {
 	 */
 	private void roamMode() {
 		// roam
-		drive.roam(beaconFound); // begin met roam
+		drive.roam(beaconFound); // start roam
 
 		// fetch measurement and store the value
 		seek.fetchSample(sample, 0);
@@ -78,7 +78,7 @@ public class BeaconFinderLoek {
 		System.out.println("Roaming: distance: " + distance);
 
 		// TODO if latest distance fetch == within range, stop roaming
-		// and start phase2
+		// start actions if in range (turn and straight)
 		if (distance < 70) {
 			// proceed with inRange actions
 			inRange();
@@ -99,8 +99,10 @@ public class BeaconFinderLoek {
 		seek.fetchSample(sample, 0);
 
 		bearing = (int) sample[0];
-
-		drive.straight(distance); // gaat de robot rechtuit rijden gedurende afstand "distance"
+		
+        // drive the distance as fetched
+		drive.straight(distance);
+		// fetch again and adjust bearing/distance if needed
 		seek.fetchSample(sample, 0);
 		distance = (int) sample[1];
 		if (distance == 0) {
