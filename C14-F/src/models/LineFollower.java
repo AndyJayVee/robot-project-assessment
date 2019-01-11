@@ -24,7 +24,7 @@ public class LineFollower {
 	}
 
 	/**
-	 * / method to follow a line / this works best if the marvin is placed on the
+	 * method to follow a line / this works best if the marvin is placed on the
 	 * border of the black line / with the line on the left of marvin
 	 */
 

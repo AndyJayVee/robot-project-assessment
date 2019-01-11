@@ -33,46 +33,21 @@ public class Marvin {
 		// initialize a Marvin object
 		Marvin marvin = new Marvin();
 
-		// initialize LineFollower
+		// instantiate LineFollower
 		LineFollower lineFollower = new LineFollower();
 
+		// run method
 		marvin.runEnter();
 
-		// invoke marvin to do something: followLine method
-	
-//		marvin.readAndPrintSample();
+
 
 	}
 
-// method to print EV3Sensor on Foxtrot display (for testing purposes)
-//	private void readAndPrintSample() {
-		// TODO Auto-generated method stub
 
-//		TextLCD display = brick.getTextLCD();
-//		display.drawString("Press Enter", 0, 3);
-//		display.drawString("Team Foxtrot", 0, 4);
-//		waitForKey(Button.ENTER);
-//		// initialize array to fetch sample in
-//		float[] scannedColor = new float[1];
-//		sensor.setCurrentMode("Red");
-//
-//		while (Button.DOWN.isUp()) {
-//			// fetch sample
-//			sensor.fetchSample(scannedColor, 0);
-//		SensorAndFilterSample sensorAndFilterSample = new SensorAndFilterSample();
-//		sensorAndFilterSample.getLatestSample();
-//		SensorAndFilterSample sensorAndFilter = new SensorAndFilterSample();
-//			if (scannedColor[0] < .20) {
-//				display.drawString("Donker", 0, 4);
-//			} else {
-//				display.drawString("Licht", 0, 4);
-//
-//			}
-//		}
-//
-//	}
 
-	// Follow instructions on display
+	/** This method waits for Enter key
+	 *  After Enter it will invoke followLine()
+	 */
 
 	private void runEnter() {
 		TextLCD display = brick.getTextLCD();
@@ -84,6 +59,7 @@ public class Marvin {
 		lineFollower.followLine();
 	}
 
+	
 	public void waitForKey(Key key) {
 		while (key.isUp()) {
 			Delay.msDelay(100);
@@ -92,4 +68,35 @@ public class Marvin {
 			Delay.msDelay(100);
 		}
 	}
+	
+	/**
+	 * TEST method to print EV3Sensor on Foxtrot display
+	 */
+
+		// private void readAndPrintSample() {
+			// TODO Auto-generated method stub
+
+//			TextLCD display = brick.getTextLCD();
+//			display.drawString("Press Enter", 0, 3);
+//			display.drawString("Team Foxtrot", 0, 4);
+//			waitForKey(Button.ENTER);
+//			// initialize array to fetch sample in
+//			float[] scannedColor = new float[1];
+//			sensor.setCurrentMode("Red");
+	//
+//			while (Button.DOWN.isUp()) {
+//				// fetch sample
+//				sensor.fetchSample(scannedColor, 0);
+//			SensorAndFilterSample sensorAndFilterSample = new SensorAndFilterSample();
+//			sensorAndFilterSample.getLatestSample();
+//			SensorAndFilterSample sensorAndFilter = new SensorAndFilterSample();
+//				if (scannedColor[0] < .20) {
+//					display.drawString("Donker", 0, 4);
+//				} else {
+//					display.drawString("Licht", 0, 4);
+	//
+//				}
+//			}
+	//
+//		}
 }
