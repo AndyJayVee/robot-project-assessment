@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
+<<<<<<< HEAD
 	<name>c14-f</name>
+=======
+	<name>code robotproject2</name>
+>>>>>>> d2a59ec3920e8f48aa20991d230a80268ffbc8ea
 	<comment></comment>
 	<projects>
 	</projects>
@@ -10,8 +14,19 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
+<<<<<<< HEAD
 	</buildSpec>
 	<natures>
+=======
+		<buildCommand>
+			<name>org.lejos.ev3.ldt.leJOSEV3Builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.lejos.ev3.ldt.leJOSEV3Nature</nature>
+>>>>>>> d2a59ec3920e8f48aa20991d230a80268ffbc8ea
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
 </projectDescription>
