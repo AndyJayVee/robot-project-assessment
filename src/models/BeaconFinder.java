@@ -4,6 +4,10 @@ import lejos.hardware.Button;
 import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3IRSensor;
 import lejos.hardware.sensor.SensorMode;
+import models.Driving;
+import models.Pilot;
+
+
 
 public class BeaconFinder {
 	private boolean beaconFound = false;
@@ -16,7 +20,7 @@ public class BeaconFinder {
 		this.beaconFound = beaconFound;
 	}
 
-	Driving drive;
+	
 	private static final int MAXIMUM_RANGE_IR_SENSOR = 150; // de maximum range is tussen de 100~200 centimeter
 	// afhankelijk van de bron
 
@@ -27,6 +31,10 @@ public class BeaconFinder {
 	float[] sample = new float[seek.sampleSize()]; // maakt array met sample informatie
 
 	public void findBeacon() {
+		// @aut Loek: edit: instantiate Pilot and Driving
+		Pilot pilot = new Pilot();
+		Driving drive = new Driving(pilot.getPilot());
+		
 		while (Button.ESCAPE.isUp()) {
 			seek.fetchSample(sample, 0);
 			int bearing = (int) sample[0];
