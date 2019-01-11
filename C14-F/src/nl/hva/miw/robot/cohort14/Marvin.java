@@ -10,13 +10,8 @@ import lejos.hardware.Button;
 import lejos.hardware.Key;
 import lejos.hardware.ev3.LocalEV3;
 import lejos.hardware.lcd.TextLCD;
-import lejos.hardware.port.SensorPort;
-import lejos.hardware.sensor.EV3ColorSensor;
 import lejos.utility.Delay;
-import models.Driving;
 import models.LineFollower;
-import models.Pilot;
-
 
 public class Marvin {
 
@@ -32,17 +27,10 @@ public class Marvin {
 		// initialize a Marvin object
 		Marvin marvin = new Marvin();
 
-		// instantiate LineFollower
-		LineFollower lineFollower = new LineFollower();
-
 		// run method
 		marvin.runEnter();
-
-
-
-	}
-
-
+		
+    } 
 
 	/** This method waits for Enter key
 	 *  After Enter it will invoke followLine()
@@ -67,35 +55,4 @@ public class Marvin {
 			Delay.msDelay(100);
 		}
 	}
-	
-	/**
-	 * TEST method to print EV3Sensor on Foxtrot display
-	 */
-
-		// private void readAndPrintSample() {
-			// TODO Auto-generated method stub
-
-//			TextLCD display = brick.getTextLCD();
-//			display.drawString("Press Enter", 0, 3);
-//			display.drawString("Team Foxtrot", 0, 4);
-//			waitForKey(Button.ENTER);
-//			// initialize array to fetch sample in
-//			float[] scannedColor = new float[1];
-//			sensor.setCurrentMode("Red");
-	//
-//			while (Button.DOWN.isUp()) {
-//				// fetch sample
-//				sensor.fetchSample(scannedColor, 0);
-//			SensorAndFilterSample sensorAndFilterSample = new SensorAndFilterSample();
-//			sensorAndFilterSample.getLatestSample();
-//			SensorAndFilterSample sensorAndFilter = new SensorAndFilterSample();
-//				if (scannedColor[0] < .20) {
-//					display.drawString("Donker", 0, 4);
-//				} else {
-//					display.drawString("Licht", 0, 4);
-	//
-//				}
-//			}
-	//
-//		}
 }
