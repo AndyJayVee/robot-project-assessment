@@ -86,8 +86,7 @@ public class BeaconFinderLoek {
 		// start actions if in range (turn and straight)
 			inRange();
 		}
-	}
-
+	
 	/**
 	 * Puts robot in mode to turn towards beacon and drive towards it
 	 */
