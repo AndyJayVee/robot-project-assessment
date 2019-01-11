@@ -20,7 +20,11 @@ public class BeaconFinder {
 		this.beaconFound = beaconFound;
 	}
 
-	
+	// edit Loek
+	// initialize the Pilot and Driving in a correct manner
+	Driving drive = new Driving();
+	Pilot pilot = new Pilot();
+
 	private static final int MAXIMUM_RANGE_IR_SENSOR = 150; // de maximum range is tussen de 100~200 centimeter
 	// afhankelijk van de bron
 

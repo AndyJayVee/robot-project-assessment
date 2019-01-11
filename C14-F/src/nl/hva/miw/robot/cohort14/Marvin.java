@@ -11,7 +11,12 @@ import lejos.hardware.Key;
 import lejos.hardware.ev3.LocalEV3;
 import lejos.hardware.lcd.TextLCD;
 import lejos.utility.Delay;
+import models.BeaconFinder;
+import models.Driving;
 import models.LineFollower;
+import models.LineFollowerFrank;
+import models.Pilot;
+
 
 public class Marvin {
 
@@ -27,10 +32,26 @@ public class Marvin {
 		// initialize a Marvin object
 		Marvin marvin = new Marvin();
 
-		// run method
-		marvin.runEnter();
+		// instantiate LineFollower
+		LineFollower lineFollower = new LineFollower();
 		
-    } 
+		// instantiate LineFollowerFrank
+		LineFollowerFrank lineFolloweFrank = new LineFollowerFrank();
+		
+		// instantiate BeaconFinder
+		BeaconFinder beaconFinder = new BeaconFinder();
+
+		// run method to ask for Enter key (this will invoke lineFollower())
+		// marvin.runEnter();
+
+		// run method LineFollowerFrank()
+		// lineFollowerFrank.followLine();
+		
+		// run method BeaconFinder()
+		beaconFinder.findBeacon();
+
+	}
+
 
 	/** This method waits for Enter key
 	 *  After Enter it will invoke followLine()
