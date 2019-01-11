@@ -16,8 +16,7 @@ import lejos.utility.Delay;
 import models.Driving;
 import models.LineFollower;
 import models.Pilot;
-import models.SensorAndFilter;
-import models.SensorAndFilterSample;
+
 
 public class Marvin {
 
