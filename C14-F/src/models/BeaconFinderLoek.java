@@ -45,18 +45,24 @@ public class BeaconFinderLoek {
 	 * Tests whether in range (moves to beacon or not in range (roam)
 	 */
 	public void findBeacon() {
-		// not sure why Exitkey is needed?
+		// TODO not sure why exitkey is needed?
 		while (Button.ESCAPE.isUp()) {
-			// Fetch measurement
+			// Fetch an initial measurement for distance and store this value
+			seek.fetchSample(sample, 0);
 			int distance = (int) sample[1];
 			System.out.println("1st while distance: " + distance);
-			// if not in Range, bearing == 0 && distance == infinite
-			while (distance > 200) {
+
+			// Here's where the magic happens
+			// if not in Range, fetch distance will give infinite
+			// so while distance is inifite keep roaming
+			if (distance > 500) {
 				roamMode();
+			} else {// when
+				inRange();
 			}
-			inRange();
 		}
 	}
+	// TODO decide if we need this (or on another spot??)
 	// ir.close();
 
 	/**
@@ -66,18 +72,16 @@ public class BeaconFinderLoek {
 		// roam
 		drive.roam(beaconFound); // begin met roam
 
-		// fetch measurement
+		// fetch measurement and store the value
 		seek.fetchSample(sample, 0);
-		// overwrite distance with lastest fetch
 		distance = (int) sample[1];
 		System.out.println("Roaming: distance: " + distance);
 
-		// if latest distance fetch == within range, stop roaming
+		// TODO if latest distance fetch == within range, stop roaming
 		// and start phase2
 		if (distance < 70) {
-			// Drive needs a stop command/method
-			// drive.stop();
-			drive.turn(bearing);
+			// proceed with inRange actions
+			inRange();
 		}
 	}
 
@@ -99,6 +103,8 @@ public class BeaconFinderLoek {
 		drive.straight(distance); // gaat de robot rechtuit rijden gedurende afstand "distance"
 		seek.fetchSample(sample, 0);
 		distance = (int) sample[1];
-
+		if (distance == 0) {
+			// TODO stop when it hits something || last distance fetch == 0??
+		}
 	}
 }
