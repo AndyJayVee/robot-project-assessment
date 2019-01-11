@@ -97,16 +97,17 @@ public class BeaconFinderLoek {
 		System.out.println("inRange, bearing: " + bearing);
 		drive.turn(bearing);
 
-		// do another fetch (in a perfect world would be 0 after latest fetch&turn)
+		// do another fetch (in a perfect world bearing would be 0 after latest fetch&turn)
 		seek.fetchSample(sample, 0);
-
 		bearing = (int) sample[0];
+		distance = (int) sample[1];
 		
         // drive the distance as fetched
 		drive.straight(distance);
 		// fetch again and adjust bearing/distance if needed
 		seek.fetchSample(sample, 0);
 		distance = (int) sample[1];
+		
 		if (distance == 0) {
 			// TODO stop when it hits something || last distance fetch == 0??
 		}
