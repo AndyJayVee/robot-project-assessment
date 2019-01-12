@@ -60,7 +60,7 @@ public class BeaconFinderLoek {
 				drive.roam(beaconFound);
 				// during roam keep fetching and updating local distance variable
 				// this to break out of this while()
-				distance = getDistance();
+				distance = fetchDistance();
 			}
 			// TODO do we need a driving.stopRoam to prevent eternal roaming??
 			
@@ -72,7 +72,7 @@ public class BeaconFinderLoek {
 				// If Marvin has arrived at beacon, it should break from this while
 				// following line will ensure that it breaks from current while loop
 				// at least when it measures distance smaller than the 0 
-				distance = getDistance();
+				distance = fetchDistance();
 			}
 			// TODO do we need a command to let Marvin stop? 
 		}
@@ -103,14 +103,14 @@ public class BeaconFinderLoek {
 		distance = (int) sample[1];
 	}
 
-	public int getBearing() {
+	public int fetchBearing() {
 		// fetch measurement and store the value
 		seek.fetchSample(sample, 0);
 		bearing = (int) sample[0];
 		return bearing;
 	}
 
-	public int getDistance() {
+	public int fetchDistance() {
 		// fetch measurement and store the value
 		seek.fetchSample(sample, 0);
 		distance = (int) sample[1];
