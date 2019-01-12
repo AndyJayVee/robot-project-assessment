@@ -52,39 +52,39 @@ public class BeaconFinderLoek {
 			distance = (int) sample[1];
 			System.out.println("1st while distance: " + distance);
 
-			// Here's where the magic happens
 			// if not in Range, fetch distance will give infinite
-			// so while distance is inifite keep roaming, after distance gets low break out start inRange()
-			while (distance > 500) {
-				distance = roamMode(); // gives a new value for distance each loop
-				System.out.println("Roaming: distance: " + distance);
-				// TODO stop.roam() or something needed??
+			// so: while (distance is inifite keep roaming), after distance becomes lower,
+			// break out while, and start inRange()
+			while (distance > 150) {
+				// start roam
+				drive.roam(beaconFound);
+				// during roam keep fetching and updating local distance variable
+				// this to break out of this while()
+				distance = getDistance();
 			}
-			inRange();
+			// TODO do we need a driving.stopRoam to prevent eternal roaming??
+			
+			// now status == beaconFound(true) as we're in range of sensor
+			// while not at beacon yet keep doing inRange()
+			while (distance > 0) {
+				inRange();
+				
+				// If Marvin has arrived at beacon, it should break from this while
+				// following line will ensure that it breaks from current while loop
+				// at least when it measures distance smaller than the 0 
+				distance = getDistance();
+			}
+			// TODO do we need a command to let Marvin stop? 
 		}
+			// TODO or needs te stop command come here, when Excape key is pressed?
 	}
-	// TODO decide if we need this (or on another spot??)
-	// ir.close();
-
-	/**
-	 * Sets robot in roam mode
-	 * Returns the distance while roaming TODO is my assumption correct?
-	 */
-	private int roamMode() {
-		// TODO is this the correct way to start roam??
-		drive.roam(beaconFound); // start roam
-
-		// fetch measurement and store the value
-		seek.fetchSample(sample, 0);
-		distance = (int) sample[1];
-		return distance;
-	}
-
 	/**
 	 * Puts robot in mode to turn towards beacon and drive towards it
 	 */
 	private void inRange() {
-		// this will let other classes read the latest boolean value
+		// this will let other classes read the latest status of whether
+		// distance/bearing are known or not
+		// by now bearing and distance are measured == known == found(true)
 		setBeaconFound(true);
 
 		System.out.println("inRange() bearing: " + bearing);
@@ -101,9 +101,31 @@ public class BeaconFinderLoek {
 		// fetch again and adjust bearing/distance if needed
 		seek.fetchSample(sample, 0);
 		distance = (int) sample[1];
-		if (distance == 3) {
-			// TODO stop when it hits something || last distance fetch == 3?? 
-		}
+	}
+
+	public int getBearing() {
+		// fetch measurement and store the value
+		seek.fetchSample(sample, 0);
+		bearing = (int) sample[0];
+		return bearing;
+	}
+
+	public int getDistance() {
+		// fetch measurement and store the value
+		seek.fetchSample(sample, 0);
+		distance = (int) sample[1];
+		return distance;
 	}
 }
 
+/** After update redundant, keeping it for now
+ * Sets robot in roam mode
+ */
+
+//public void roamMode() {
+//	drive.roam(beaconFound); // start roam
+//
+//	// fetch measurement and store the value
+//	seek.fetchSample(sample, 0);
+//	distance = (int) sample[1];
+//}
