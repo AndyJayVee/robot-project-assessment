@@ -49,44 +49,37 @@ public class BeaconFinderLoek {
 		while (Button.ESCAPE.isUp()) {
 			// Fetch an initial measurement for distance and store this value
 			seek.fetchSample(sample, 0);
-			int distance = (int) sample[1];
+			distance = (int) sample[1];
 			System.out.println("1st while distance: " + distance);
 
 			// Here's where the magic happens
 			// if not in Range, fetch distance will give infinite
-			// so while distance is inifite keep roaming
-			if (distance > 500) {
-				roamMode();
-			} else {
-				inRange();
+			// so while distance is inifite keep roaming, after distance gets low break out start inRange()
+			while (distance > 500) {
+				distance = roamMode(); // gives a new value for distance each loop
+				System.out.println("Roaming: distance: " + distance);
+				// TODO stop.roam() or something needed??
 			}
+			inRange();
 		}
 	}
 	// TODO decide if we need this (or on another spot??)
 	// ir.close();
 
 	/**
-	 * Puts the robot in roamingmode. Roaming is defined in Driving
+	 * Sets robot in roam mode
+	 * Returns the distance while roaming TODO is my assumption correct?
 	 */
-	private void roamMode() {
+	private int roamMode() {
 		// TODO is this the correct way to start roam??
 		drive.roam(beaconFound); // start roam
-        
+
 		// fetch measurement and store the value
 		seek.fetchSample(sample, 0);
 		distance = (int) sample[1];
-		System.out.println("Roaming: distance: " + distance);
-		
-		while (distance > 500){
-		    drive.roam();
-		}
-		// TODO this is a place where my code might not work
-        // as soon as distance < 500 start inRange() method
-		// TODO if latest distance fetch == within range, stop roaming
-		// start actions if in range (turn and straight)
-			inRange();
-		}
-	
+		return distance;
+	}
+
 	/**
 	 * Puts robot in mode to turn towards beacon and drive towards it
 	 */
@@ -94,22 +87,23 @@ public class BeaconFinderLoek {
 		// this will let other classes read the latest boolean value
 		setBeaconFound(true);
 
-		System.out.println("inRange, bearing: " + bearing);
+		System.out.println("inRange() bearing: " + bearing);
 		drive.turn(bearing);
 
-		// do another fetch (in a perfect world bearing would be 0 after latest fetch&turn)
+		// do another fetch (in a perfect world bearing would be 0 after latest
+		// fetch&turn)
 		seek.fetchSample(sample, 0);
 		bearing = (int) sample[0];
 		distance = (int) sample[1];
-		
-        // drive the distance as fetched
+
+		// drive the distance as fetched
 		drive.straight(distance);
 		// fetch again and adjust bearing/distance if needed
 		seek.fetchSample(sample, 0);
 		distance = (int) sample[1];
-		
-		if (distance == 0) {
-			// TODO stop when it hits something || last distance fetch == 0??
+		if (distance == 3) {
+			// TODO stop when it hits something || last distance fetch == 3?? 
 		}
 	}
 }
+
