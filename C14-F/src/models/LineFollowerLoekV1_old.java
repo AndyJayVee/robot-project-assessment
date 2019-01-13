@@ -10,12 +10,12 @@ import lejos.hardware.sensor.EV3ColorSensor;
 import models.Driving;
 import models.Pilot;
 
-public class LineFollowerLoek {
+public class LineFollowerLoekV1_old {
 
 	static Brick brick;
 	static EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S2);
 
-	public LineFollowerLoek() {
+	public LineFollowerLoekV1_old() {
 		super();
 	}
 	/**
