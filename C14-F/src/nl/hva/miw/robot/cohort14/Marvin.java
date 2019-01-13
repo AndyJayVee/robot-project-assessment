@@ -29,14 +29,14 @@ public class Marvin {
 	}
 
 	public static void main(String[] args) {
+				
 		// initialize a Marvin object
 		Marvin marvin = new Marvin();
 
-		// instantiate LineFollower
+		// instantiate LineFollower in a thread
 		LineFollower lineFollower = new LineFollower();
-		
 		// instantiate LineFollowerFrank
-		LineFollowerFrank lineFolloweFrank = new LineFollowerFrank();
+		LineFollowerFrank lineFollowerFrank = new LineFollowerFrank();
 		
 		// instantiate BeaconFinder
 		BeaconFinder beaconFinder = new BeaconFinder();
@@ -63,6 +63,7 @@ public class Marvin {
 		display.drawString(" Press Enter for Line", 0, 4);
 		waitForKey(Button.ENTER);
 		// initialize LineFollower
+		
 		LineFollower lineFollower = new LineFollower();
 		lineFollower.followLine();
 	}

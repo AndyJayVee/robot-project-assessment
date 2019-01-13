@@ -7,7 +7,7 @@ import models.Driving;
 import models.Pilot;
 
 
-public class LineFollower {
+public class LineFollower{ //implements Runnable {
 
 //	private LineFollower lineFollower = new LineFollower();
 //	static Brick brick;
@@ -44,8 +44,18 @@ public class LineFollower {
 			} else { // grey
 				drive.straight(-10);
 			}
-
 		}
 	}
+
+
+//	@Override
+//	public void run() {
+//		try {
+//			
+//
+//		} catch (Exception e) {
+//			System.out.println("Oops, something went wrong with the linefollower");
+//		}
+//	}
 
 }
