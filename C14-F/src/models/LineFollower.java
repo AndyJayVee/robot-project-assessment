@@ -10,8 +10,6 @@ import lejos.hardware.sensor.EV3ColorSensor;
 //import lejos.utility.Delay;
 import models.Driving;
 import models.Pilot;
-import models.SensorAndFilter;
-import models.SensorAndFilterSample;
 
 public class LineFollower {
 
