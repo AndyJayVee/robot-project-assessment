@@ -48,8 +48,7 @@ public class BeaconFinderLoek {
 		// TODO not sure why exitkey is needed?
 		while (Button.ESCAPE.isUp()) {
 			// Fetch an initial measurement for distance and store this value
-			seek.fetchSample(sample, 0);
-			distance = (int) sample[1];
+			distance = fetchDistance();
 			System.out.println("1st while distance: " + distance);
 
 			// if not in Range, fetch distance will give infinite
@@ -92,24 +91,28 @@ public class BeaconFinderLoek {
 
 		// do another fetch (in a perfect world bearing would be 0 after latest
 		// fetch&turn)
-		seek.fetchSample(sample, 0);
-		bearing = (int) sample[0];
-		distance = (int) sample[1];
-
+		bearing = fetchBearing();
+		distance = fetchDistance();
+		
 		// drive the distance as fetched
 		drive.straight(distance);
 		// fetch again and adjust bearing/distance if needed
-		seek.fetchSample(sample, 0);
-		distance = (int) sample[1];
+		bearing = fetchBearing();
+		distance = fetchDistance();
 	}
 
+	/**
+	 * @return latest fetch of bearing measurement from Sensor (int)
+	 */
 	public int fetchBearing() {
 		// fetch measurement and store the value
 		seek.fetchSample(sample, 0);
 		bearing = (int) sample[0];
 		return bearing;
 	}
-
+	/**
+	 * @return latest fetch of distance measurement from Sensor (int)
+	 */
 	public int fetchDistance() {
 		// fetch measurement and store the value
 		seek.fetchSample(sample, 0);
