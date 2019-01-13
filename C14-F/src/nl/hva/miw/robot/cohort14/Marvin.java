@@ -17,6 +17,10 @@ import models.LineFollower;
 import models.LineFollowerFrank;
 import models.Pilot;
 
+//import models.GameLauncher;
+import models.LineFollower;
+// import models.LineFollowerFrank;
+import models.Pilot;
 
 public class Marvin {
 
@@ -37,12 +41,28 @@ public class Marvin {
 		LineFollower lineFollower = new LineFollower();
 		// instantiate LineFollowerFrank
 		LineFollowerFrank lineFollowerFrank = new LineFollowerFrank();
+		// initialize a Marvin object
+		Marvin marvin = new Marvin();
+
+//		GameLauncher newGame = new GameLauncher();
+//		newGame.welcomeMenu();
+		// newGame.launchGame();
+		
+		
+		
+		
+		// instantiate LineFollower
+		LineFollower lineFollower = new LineFollower();
+		
+		// instantiate LineFollowerFrank
+//		LineFollowerFrank lineFollowerFrank = new LineFollowerFrank();
 		
 		// instantiate BeaconFinder
 		BeaconFinder beaconFinder = new BeaconFinder();
 
 		// run method to ask for Enter key (this will invoke lineFollower())
 		// marvin.runEnter();
+//		 marvin.runEnter();
 
 		// run method LineFollowerFrank()
 		// lineFollowerFrank.followLine();
@@ -55,6 +75,11 @@ public class Marvin {
 
 	/** This method waits for Enter key
 	 *  After Enter it will invoke followLine()
+	
+	}
+
+	/** This method waits for Enter key
+	 * After Enter it will invoke followLine()
 	 */
 
 	private void runEnter() {

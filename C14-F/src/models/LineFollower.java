@@ -1,6 +1,11 @@
 package models;
 
 import lejos.hardware.Button;
+import lejos.hardware.Brick;
+import lejos.hardware.Button;
+import lejos.hardware.Key;
+import lejos.hardware.ev3.LocalEV3;
+import lejos.hardware.lcd.TextLCD;
 import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3ColorSensor;
 import models.Driving;
@@ -11,6 +16,9 @@ public class LineFollower{ //implements Runnable {
 
 //	private LineFollower lineFollower = new LineFollower();
 //	static Brick brick;
+public class LineFollower {
+
+	static Brick brick;
 	static EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S2);
 
 	public LineFollower() {

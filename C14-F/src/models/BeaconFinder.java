@@ -50,6 +50,10 @@ public class BeaconFinder {
 			while (bearing != 0 && distance != 0) {
 
 				if (distance > MAXIMUM_RANGE_IR_SENSOR) {
+					// dit werkt niet omdat roam alleen begint als bearing !=0
+					// echter if (niet-in-range) dan geldt bearing ==0;
+					// dus roam start nooit omdat bearing altijd 0 is.
+
 					System.out.println("in de tweede while loop");
 					drive.roam(beaconFound); // begin met roam
 					System.out.println("Start roaming");
@@ -69,3 +73,4 @@ public class BeaconFinder {
 	//	ir.close();
 	}
 }
+
