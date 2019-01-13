@@ -41,37 +41,37 @@ public class LineFollowerLoek {
 		// Counter for #laps. Lap1 means 'now driving in lap 1, 0 completed'.
 		int lapCount = 0;
 		// declare array to store lapTime
-		// TODO ??? int[] lapTime = n
+		// TODO ??? int[] lapTime = new int[2];
 		// while not pressed continue
-		while (Button.DOWN.isUp()) {
-			// start fetching. Assumed it keeps fetching and updating so it will run correct while()
+		while (Button.DOWN.isUp()) { // TODO (&& lapCount < 3) ???
+			// start fetching. Assumed it keeps fetching and updating so it will run correct
 			sensor.fetchSample(lastFetchedValue, 0);
-			while (lastFetchedValue[0] >= .20 && lastFetchedValue[0] <= .60) {	// while grey
-				drive.drive(); 													// drive straight
+			while (lastFetchedValue[0] >= .20 && lastFetchedValue[0] <= .60) { // while grey
+				drive.drive(); // drive straight
 				lastFetchedColor = "Grey";
 				System.out.println(lastFetchedColor);
 			}
 			while (lastFetchedValue[0] > .60) { // while white
-				drive.turn(-5);					// turn left
+				drive.turn(-5); // turn left
 				lastFetchedColor = "White";
 				System.out.println(lastFetchedColor);
 			}
 			while (lastFetchedValue[0] < .20) { // while black
-				drive.turn(5); 					// turn right
+				drive.turn(5); // turn right
 				lastFetchedColor = "Black";
 				System.out.println(lastFetchedColor);
 			}
 			// TODO
 			// if (sensor measures red finish line && lapCount == 0) {
-			//	start.timer
-			//	lapCount++; 
+			// start.timer
+			// lapCount++;
 			// } else if (sensor measures red finish line && lapCount > 0) {
-			// 	stop.timer();
-			// 	lapTime[lapCount] = getLapTime();
-			// 	reset.timer();
-			//	lapCount++;
+			// stop.timer();
+			// lapTime[lapCount] = getLapTime();
+			// reset.timer();
+			// lapCount++;
 			// }
-			// 	print ("Lap "lapCount + " " + lapTime[lapCount - 1]) ??
+			// print ("Lap "lapCount + " " + lapTime[lapCount - 1]) ??
 
 		}
 	}
