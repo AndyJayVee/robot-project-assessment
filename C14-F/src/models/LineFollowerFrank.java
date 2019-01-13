@@ -19,24 +19,24 @@ public class LineFollowerFrank {
 
 		// while not pressed continue
 		while (Button.DOWN.isUp()) {
-			drive.pilot.forward();
+			drive.getPilot().forward();
 			float gray = currentGray();
 
 			while (gray >= .20 && gray <= .60) {
-				drive.pilot.forward(); // Continuous driving if average measurement is between specified values (0.2
+				drive.getPilot().forward(); // Continuous driving if average measurement is between specified values (0.2
 										// and 0.6)
 				gray = currentGray(); // updating gray value with current gray value.
 			}
-			drive.pilot.stop();
+			drive.getPilot().stop();
 			if (gray < .20) {
 				while (gray < .45) { // black (need to turn right).
-					drive.pilot.rotateRight(); // turns robot right
+					drive.getPilot().rotateRight(); // turns robot right
 					gray = currentGray(); // updates gray value
 				}
 			}
 			if (gray > .60) {
 				while (gray > .45) { // white (need to turn left).
-					drive.pilot.rotateLeft(); // turns robot left
+					drive.getPilot().rotateLeft(); // turns robot left
 					gray = currentGray(); // updates gray value
 				}
 			}

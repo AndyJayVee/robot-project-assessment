@@ -3,15 +3,18 @@ package models;
 import lejos.hardware.Sound;
 import lejos.robotics.navigation.MovePilot;
 
-public class Driving {
+public class Driving implements Runnable{
 	
 	private int travelDistance;
 	private int rotation;
 //	private static final int POSITIVE_INFINITY = 1/0;
-	
-	MovePilot pilot;
-	
+	private MovePilot pilot;
+	private boolean lookingForBeacon;
 		
+	public void setBeaconIsFound(boolean lookingForBeacon) {
+		this.lookingForBeacon = lookingForBeacon;
+	}
+
 	public Driving() {
 		super();
 	}
@@ -20,6 +23,21 @@ public class Driving {
 		pilot = p;
 	}
 	
+	public Driving(MovePilot pilot, boolean beaconIsFound) {
+		super();
+		this.pilot = pilot;
+		this.lookingForBeacon = beaconIsFound;
+	}
+
+		
+	public MovePilot getPilot() {
+		return pilot;
+	}
+
+	public void setPilot(MovePilot pilot) {
+		this.pilot = pilot;
+	}
+
 	public int getTravelDistance() {
 		return travelDistance;
 	}
@@ -67,9 +85,7 @@ public class Driving {
 			for (int i = 0; i < 11; i++) {
 			for (int j = 0; j < 4; j++) {
 					pilot.travel(100); //2000 is de hoogte van de ster, dus eventueel de lengte (of breedte) van het te zoeken gebied. 
-					if (beaconFound) {
-						break;
-						}
+					
 					}
 				pilot.rotate(160); //De ster heeft scherpe hoeken (punten) van 20 graden. Hiervoor moet de robot 160 graden draaien.
 				if (beaconFound) {
@@ -78,7 +94,20 @@ public class Driving {
 			}
 		}
 				
-			
+		@Override
+		public void run() {
+			try {
+				while (lookingForBeacon) {
+					for (int i = 0; i < 11; i++) {
+						pilot.travel(100);
+						pilot.rotate(160);
+					}
+				}
+					
+			} catch (Exception e) {
+				System.out.println("Oops, something went wrong with roaming");
+			}
+		}
 		
 		
 		

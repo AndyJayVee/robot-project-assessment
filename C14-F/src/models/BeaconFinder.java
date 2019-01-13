@@ -10,11 +10,10 @@ import models.Pilot;
 public class BeaconFinder {
 
 	private static final int MAXIMUM_RANGE_IR_SENSOR = 150; // de maximum range is tussen de 100~200 centimeter
-	// afhankelijk van de bron
-
-	EV3IRSensor ir = new EV3IRSensor(SensorPort.S4); // activeert een nieuwe IR-sensor op poort S4
-	SensorMode seek = ir.getSeekMode(); // activeert de Seek modus
-	float[] sample = new float[seek.sampleSize()]; // maakt array met sample informatie
+															// afhankelijk van de bron
+	EV3IRSensor ir = new EV3IRSensor(SensorPort.S4); 		// activeert een nieuwe IR-sensor op poort S4
+	SensorMode seek = ir.getSeekMode(); 					// activeert de Seek modus
+	float[] sample = new float[seek.sampleSize()]; 			// maakt array met sample informatie
 	// edit Loek
 	// initialize the Pilot and Driving in a correct manner
 	Driving drive = new Driving();
@@ -66,11 +65,10 @@ public class BeaconFinder {
 					drive.straight(distance); // gaat de robot rechtuit rijden gedurende afstand "distance"
 					seek.fetchSample(sample, 0);
 					distance = (int) sample[1];
-			}
+				}
 
 			}
 		}
-	//	ir.close();
+		// ir.close();
 	}
 }
-
