@@ -1,3 +1,5 @@
+// As of Sunday the primary experimental Class for LineFollower improvements
+
 package models;
 
 import lejos.hardware.Brick;
