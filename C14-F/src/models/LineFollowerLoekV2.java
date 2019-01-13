@@ -68,6 +68,7 @@ public class LineFollowerLoekV2 {
 			// 	lapTime[lapCount] = getLapTime();
 			// 	reset.timer();
 			//	lapCount++;
+			// }
 			// 	print ("Lap "lapCount + " " + lapTime[lapCount - 1]) ??
 
 		}
