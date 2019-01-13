@@ -4,17 +4,15 @@ import lejos.hardware.Brick;
 import lejos.hardware.Button;
 import lejos.hardware.Key;
 import lejos.hardware.ev3.LocalEV3;
-//import lejos.hardware.lcd.TextLCD;
+import lejos.hardware.lcd.TextLCD;
 import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3ColorSensor;
-//import lejos.utility.Delay;
 import models.Driving;
 import models.Pilot;
 
 public class LineFollower {
 
-//	private LineFollower lineFollower = new LineFollower();
-//	static Brick brick;
+	static Brick brick;
 	static EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S2);
 
 	public LineFollower() {
@@ -34,9 +32,6 @@ public class LineFollower {
 		// initialize array to fetch sample in
 		float[] scannedColor = new float[1];
 		sensor.setCurrentMode("Red");
-//		double radius = 50;
-//		double angleRight = 7;
-//		double angleLeft = 7;
 		// while not pressed continue
 		while (Button.DOWN.isUp()) {
 			sensor.fetchSample(scannedColor, 0);
@@ -48,7 +43,6 @@ public class LineFollower {
 			} else { // grey
 				drive.straight(-10);
 			}
-
 		}
 	}
 

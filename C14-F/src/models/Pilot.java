@@ -15,7 +15,7 @@ public class Pilot {
 	
 	//Wheel diameter and offset (half track with) is set in mm.
 	private static final double WHEEL_DIAMETER = 43.2;
-	private static final double TRACK_WIDTH = 148.0;
+	private static final double TRACK_WIDTH = 114.0;
 	private double linearSpeed = MAX_LINEAR_SPEED;
 	private double angularSpeed = 350;
 	
