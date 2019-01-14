@@ -35,7 +35,7 @@ public class Marvin {
 
 //		GameLauncher newGame = new GameLauncher();
 //		newGame.welcomeMenu();
-		// newGame.launchGame();
+//		newGame.launchGame();
 		
 		
 		
@@ -47,16 +47,16 @@ public class Marvin {
 //		LineFollowerFrank lineFollowerFrank = new LineFollowerFrank();
 		
 		// instantiate BeaconFinder
-		BeaconFinder beaconFinder = new BeaconFinder();
+//		BeaconFinder beaconFinder = new BeaconFinder();
 
 		// run method to ask for Enter key (this will invoke lineFollower())
-//		 marvin.runEnter();
+		 marvin.runEnter();
 
 		// run method LineFollowerFrank()
 		// lineFollowerFrank.followLine();
 		
 		// run method BeaconFinder()
-		beaconFinder.findBeacon();
+//		beaconFinder.findBeacon();
 	
 	}
 
