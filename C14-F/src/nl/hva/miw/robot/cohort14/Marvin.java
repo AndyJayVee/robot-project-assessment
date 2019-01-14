@@ -17,6 +17,7 @@ import models.Driving;
 //import models.GameLauncher;
 import models.LineFollower;
 import models.LineFollowerLoek;
+import models.MoveBeacon;
 // import models.LineFollowerFrank;
 import models.Pilot;
 
@@ -79,6 +80,11 @@ public class Marvin {
 //		BeaconFinderLoek beaconFinderLoek = new BeaconFinderLoek();
 		// Run method
 //		beaconFinderLoek.findBeacon();
+		
+		// instantiate object from Class that needs to run
+//		MoveBeacon moveBeacon = new MoveBeacon();
+		// Run method
+//		moveBeacon.BeaconMove();
 	}
 
 	

@@ -69,7 +69,7 @@ public class Driving {
 	public void roam(boolean beaconFound) {
 		for (int i = 0; i < 11; i++) {
 			for (int j = 0; j < 4; j++) {
-				pilot.travel(100); // 2000 is de hoogte van de ster, dus eventueel de lengte (of breedte) van het
+				pilot.travel(75); // 2000 is de hoogte van de ster, dus eventueel de lengte (of breedte) van het
 									// te zoeken gebied.
 				if (beaconFound) {
 					break;

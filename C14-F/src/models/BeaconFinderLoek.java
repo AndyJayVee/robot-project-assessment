@@ -50,18 +50,18 @@ public class BeaconFinderLoek {
 			//System.out.println("1st while. Bearing: " + bearing);
 			distance = fetchDistance();
 			System.out.println("1st while. Distance: " + distance);
-			while (distance < 3) { // IRSensor is not perfect, so assuming distance < 3 means Marvin reached beacon
-				if (distance > 21474836) {
+			while (distance > 0) {
+				while (distance > 21474836) {
 					setBeaconFound(false);
 					
 					bearing = fetchBearing();
 					distance = fetchDistance();
-					System.out.println("2. Roam | Distance: " + distance);
-					System.out.println("2. Roam | Bearing: " + bearing);
-					drive.straight(30);
-					seek.fetchSample(sample, 0);
+					System.out.println("2. Roaming | Distance: " + distance);
+					System.out.println("2. Roaming | Bearing: " + bearing);
+					drive.roam(beaconFound);
 					distance = fetchDistance();
-				} else if (distance < 250) { // inRange --> turn and drive to beacon
+				}
+				while (distance < 21474836) { // inRange --> turn and drive to beacon
 					setBeaconFound(true);
 					bearing = fetchBearing();	
 					distance = fetchDistance();
