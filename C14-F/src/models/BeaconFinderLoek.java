@@ -61,6 +61,7 @@ public class BeaconFinderLoek {
 				// this to break out of this while()
 				distance = fetchDistance();
 			}
+			
 			// TODO do we need a driving.stopRoam to prevent eternal roaming??
 			
 			// now status == beaconFound(true) as we're in range of sensor
