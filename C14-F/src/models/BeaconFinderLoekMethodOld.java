@@ -12,7 +12,7 @@ import lejos.hardware.sensor.SensorMode;
 import models.Driving;
 import models.Pilot;
 
-public class BeaconFinderLoek {
+public class BeaconFinderLoekMethodOld {
 
 	private static final int MAXIMUM_RANGE_IR_SENSOR = 150;
 
@@ -36,7 +36,7 @@ public class BeaconFinderLoek {
 		this.beaconFound = beaconFound;
 	}
 
-	public BeaconFinderLoek() { // no args constructor
+	public BeaconFinderLoekMethodOld() { // no args constructor
 		super();
 	}
 

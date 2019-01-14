@@ -23,6 +23,9 @@ public class BeaconFinderLoek {
 	Driving drive = new Driving();
 	Pilot pilot = new Pilot();
 	private boolean beaconFound = false;
+	
+	private int bearing;
+	private int distance;
 
 	public boolean isBeaconFound() {
 		return beaconFound;
@@ -45,38 +48,60 @@ public class BeaconFinderLoek {
 
 		while (Button.ESCAPE.isUp()) {
 			seek.fetchSample(sample, 0);
-			int bearing;
+			
 			//System.out.println("1st while. Bearing: " + bearing);
-			int distance = (int) sample[1];
+			distance = (int) sample[1];
 			System.out.println("1st while. Distance: " + distance);
-			while (distance != 0) {
+			while (distance < 3) { // IRSensor is not perfect, so assuming distance < 3 means Marvin reached beacon
 				if (distance > 21474836) {
+					setBeaconFound(false);
 					seek.fetchSample(sample, 0);
 					bearing = (int) sample[0];
 					distance = (int) sample[1];
-					// drive.roam(beaconFound); // begin met roam
+					// drive.roam(beaconFound); // start roam
 					System.out.println("2. Roam | Distance: " + distance);
 					System.out.println("2. Roam | Bearing: " + bearing);
 					drive.straight(30);
 					seek.fetchSample(sample, 0);
 					distance = (int) sample[1];
-				} else { // maximum range IR sensor
+				} else { // inRange --> turn and drive to beacon
 					setBeaconFound(true);
 					seek.fetchSample(sample, 0);
 					bearing = (int) sample[0];
 					distance = (int) sample[1];
 					System.out.println("2. inRange | Distance: " + distance);
 					System.out.println("2. inRange | Bearing: " + bearing);
-
-					drive.turn(bearing); // gaat de robot in de richting van het beacon roteren met "bearing" graden
+					// turn with bearing
+					drive.turn(bearing); 
 					seek.fetchSample(sample, 0);
 					bearing = (int) sample[0];
-					drive.straight(distance); // gaat de robot rechtuit rijden gedurende afstand "distance"
+					// drive distance to beacon
+					drive.straight(distance);
+					// fetch another sample to test if movement was sufficient
 					seek.fetchSample(sample, 0);
 					distance = (int) sample[1];
 				}
 			}
 		}
 		// ir.close();
+	}
+	
+	/**
+	 * @return latest fetch of bearing measurement from Sensor (int)
+	 */
+	public int fetchBearing() {
+		// fetch measurement and store the value
+		seek.fetchSample(sample, 0);
+		bearing = (int) sample[0];
+		return bearing;
+	}
+	/**
+	 * @return latest fetch of distance measurement from Sensor (int)
+	 */
+	public int fetchDistance() {
+		// fetch measurement and store the value
+		seek.fetchSample(sample, 0);
+		distance = (int) sample[1];
+		return distance;
 	}
 }
