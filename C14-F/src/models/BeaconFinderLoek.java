@@ -56,7 +56,8 @@ public class BeaconFinderLoek {
 			// break out while, and start inRange()
 			while (distance > 150) {
 				// start roam
-				drive.roam(beaconFound);
+				// drive.roam(beaconFound);
+				System.out.println("ROAM");
 				// during roam keep fetching and updating local distance variable
 				// this to break out of this while()
 				distance = fetchDistance();
@@ -87,7 +88,7 @@ public class BeaconFinderLoek {
 		// by now bearing and distance are measured == known == found(true)
 		// setBeaconFound(true);
 
-		System.out.println("inRange() bearing: " + bearing);
+		System.out.println("inRange(), bearing: " + bearing);
 		drive.turn(bearing);
 
 		// do another fetch (in a perfect world bearing would be 0 after latest
