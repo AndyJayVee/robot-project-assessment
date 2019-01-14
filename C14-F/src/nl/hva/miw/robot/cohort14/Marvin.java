@@ -1,7 +1,6 @@
-
 /**
  * @author loek 
- * Main Class including followLine
+ * Main Class. runEnter needs to be adjusted to let Marvin choose Game
  */
 
 package nl.hva.miw.robot.cohort14;
@@ -46,7 +45,8 @@ public class Marvin {
 	}
 
 	/** This method waits for Enter key
-	 * After Enter it will invoke followLine()
+	 * After Enter it will invoke the method from Class which is UNCOMMENTED
+	 * NOTE: comment other methods to refrain Marvin to run other Classes
 	 */
 
 	private void runEnter() {
@@ -56,9 +56,9 @@ public class Marvin {
 		waitForKey(Button.ENTER);
 
 		// instantiate object from Class that needs to run
-//		LineFollower lineFollower = new LineFollower();
+		LineFollower lineFollower = new LineFollower();
 		// Run method
-//		lineFollower.followLine();
+		lineFollower.followLine();
 		
 		// instantiate object from Class that needs to run
 //		LineFollowerLoek lineFollowerLoek = new LineFollowerLoek();
@@ -76,9 +76,9 @@ public class Marvin {
 //		beaconFinder.findBeacon();
 		
 		// instantiate object from Class that needs to run
-		BeaconFinderLoek beaconFinderLoek = new BeaconFinderLoek();
+//		BeaconFinderLoek beaconFinderLoek = new BeaconFinderLoek();
 		// Run method
-		beaconFinderLoek.findBeacon();
+//		beaconFinderLoek.findBeacon();
 	}
 
 	
