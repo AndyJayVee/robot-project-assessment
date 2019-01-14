@@ -1,7 +1,6 @@
-
 /**
  * @author loek 
- * Main Class including followLine
+ * Main Class. runEnter needs to be adjusted to let Marvin choose Game
  */
 
 package nl.hva.miw.robot.cohort14;
