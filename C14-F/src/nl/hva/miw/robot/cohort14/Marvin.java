@@ -12,12 +12,9 @@ import lejos.hardware.ev3.LocalEV3;
 import lejos.hardware.lcd.TextLCD;
 import lejos.utility.Delay;
 import models.BeaconFinder;
-import models.BeaconFinderLoek;
 import models.Driving;
 //import models.GameLauncher;
 import models.LineFollower;
-import models.LineFollowerLoek;
-// import models.LineFollowerFrank;
 import models.Pilot;
 
 public class Marvin {
