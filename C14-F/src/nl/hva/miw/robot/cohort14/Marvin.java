@@ -1,3 +1,4 @@
+
 /**
  * @author loek 
  * Main Class including followLine
@@ -12,13 +13,11 @@ import lejos.hardware.ev3.LocalEV3;
 import lejos.hardware.lcd.TextLCD;
 import lejos.utility.Delay;
 import models.BeaconFinder;
+import models.BeaconFinderLoek;
 import models.Driving;
-import models.LineFollower;
-import models.LineFollowerFrank;
-import models.Pilot;
-
 //import models.GameLauncher;
 import models.LineFollower;
+import models.LineFollowerLoek;
 // import models.LineFollowerFrank;
 import models.Pilot;
 
@@ -33,41 +32,16 @@ public class Marvin {
 	}
 
 	public static void main(String[] args) {
-				
 		// initialize a Marvin object
 		Marvin marvin = new Marvin();
 
-		// instantiate LineFollower in a thread
-		LineFollower lineFollower = new LineFollower();
-		
-		// instantiate LineFollowerFrank
-		LineFollowerFrank lineFollowerFrank = new LineFollowerFrank();
-		
 //		GameLauncher newGame = new GameLauncher();
 //		newGame.welcomeMenu();
-		// newGame.launchGame();
-		
-		// instantiate LineFollowerFrank
-//		LineFollowerFrank lineFollowerFrank = new LineFollowerFrank();
-		
-		// instantiate BeaconFinder
-		BeaconFinder beaconFinder = new BeaconFinder();
+//		newGame.launchGame();
+
 
 		// run method to ask for Enter key (this will invoke lineFollower())
-		// marvin.runEnter();
-//		 marvin.runEnter();
-
-		// run method LineFollowerFrank()
-		// lineFollowerFrank.followLine();
-		
-		// run method BeaconFinder()
-		beaconFinder.findBeacon();
-
-	}
-
-
-	/** This method waits for Enter key
-	 *  After Enter it will invoke followLine()
+		marvin.runEnter();
 	
 	}
 
@@ -78,12 +52,33 @@ public class Marvin {
 	private void runEnter() {
 		TextLCD display = brick.getTextLCD();
 		display.drawString(" Foxtrot ", 0, 3);
-		display.drawString(" Press Enter for Line", 0, 4);
+		display.drawString(" Press Enter", 0, 4);
 		waitForKey(Button.ENTER);
-		// initialize LineFollower
+
+		// instantiate object from Class that needs to run
+//		LineFollower lineFollower = new LineFollower();
+		// Run method
+//		lineFollower.followLine();
 		
-		LineFollower lineFollower = new LineFollower();
-		lineFollower.followLine();
+		// instantiate object from Class that needs to run
+//		LineFollowerLoek lineFollowerLoek = new LineFollowerLoek();
+		// Run method
+//		lineFollowerLoek.followLine();
+		
+		// instantiate object from Class that needs to run
+//		LineFollowerFrank lineFollowerFrank = new LineFollowerLoek();
+		// Run method
+//		lineFollowerFrank.followLine();
+		
+		// instantiate object from Class that needs to run
+//		BeaconFinder beaconFinder = new BeaconFinder();
+		// Run method
+//		beaconFinder.findBeacon();
+		
+		// instantiate object from Class that needs to run
+		BeaconFinderLoek beaconFinderLoek = new BeaconFinderLoek();
+		// Run method
+		beaconFinderLoek.findBeacon();
 	}
 
 	
