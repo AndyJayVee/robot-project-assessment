@@ -45,20 +45,26 @@ public class BeaconFinderLoek {
 
 		while (Button.ESCAPE.isUp()) {
 			seek.fetchSample(sample, 0);
-			int bearing = (int) sample[0];
-			System.out.println("1st while. Bearing: " + bearing);
+			int bearing;
+			//System.out.println("1st while. Bearing: " + bearing);
 			int distance = (int) sample[1];
 			System.out.println("1st while. Distance: " + distance);
 			while (distance != 0) {
-				if (distance > 2147483646) {
+				if (distance > 21474836) {
+					seek.fetchSample(sample, 0);
+					bearing = (int) sample[0];
+					distance = (int) sample[1];
 					// drive.roam(beaconFound); // begin met roam
 					System.out.println("2. Roam | Distance: " + distance);
 					System.out.println("2. Roam | Bearing: " + bearing);
 					drive.straight(30);
 					seek.fetchSample(sample, 0);
 					distance = (int) sample[1];
-				} else if (distance < 2147483646) { // maximum range IR sensor
+				} else { // maximum range IR sensor
 					setBeaconFound(true);
+					seek.fetchSample(sample, 0);
+					bearing = (int) sample[0];
+					distance = (int) sample[1];
 					System.out.println("2. inRange | Distance: " + distance);
 					System.out.println("2. inRange | Bearing: " + bearing);
 
