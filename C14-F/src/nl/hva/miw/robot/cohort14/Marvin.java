@@ -1,3 +1,4 @@
+
 /**
  * @author loek 
  * Main Class including followLine
@@ -39,13 +40,14 @@ public class Marvin {
 //		newGame.launchGame();
 
 
-		// run method to ask for Enter key (comment/uncomment the lines in method to run)
+		// run method to ask for Enter key (this will invoke lineFollower())
 		marvin.runEnter();
 	
 	}
 
 	/** This method waits for Enter key
-	 * After Enter it will invoke followLine()
+	 * After Enter it will invoke the method from Class which is UNCOMMENTED
+	 * NOTE: comment other methods to refrain Marvin to run other Classes
 	 */
 
 	private void runEnter() {
@@ -55,9 +57,9 @@ public class Marvin {
 		waitForKey(Button.ENTER);
 
 		// instantiate object from Class that needs to run
-//		LineFollower lineFollower = new LineFollower();
+		LineFollower lineFollower = new LineFollower();
 		// Run method
-//		lineFollower.followLine();
+		lineFollower.followLine();
 		
 		// instantiate object from Class that needs to run
 //		LineFollowerLoek lineFollowerLoek = new LineFollowerLoek();
@@ -75,9 +77,9 @@ public class Marvin {
 //		beaconFinder.findBeacon();
 		
 		// instantiate object from Class that needs to run
-		BeaconFinderLoek beaconFinderLoek = new BeaconFinderLoek();
+//		BeaconFinderLoek beaconFinderLoek = new BeaconFinderLoek();
 		// Run method
-		beaconFinderLoek.findBeacon();
+//		beaconFinderLoek.findBeacon();
 	}
 
 	
