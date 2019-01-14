@@ -38,7 +38,9 @@ public class BeaconFinder {
 	}
 
 	/**
-	 * If placed within range, will turn and drive towards
+	 * When placed in area with beacon, it will roam untill sensor will measure it (inRange)
+	 * When inRsange it should switch to: turn&drive towards beacon.
+	 * NOTE: sensor is slow. Works, but it's not pretty
 	 */
 	public void findBeacon() {
 		Pilot pilot = new Pilot();
