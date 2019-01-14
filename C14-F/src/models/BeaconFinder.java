@@ -45,9 +45,6 @@ public class BeaconFinder {
 		Driving drive = new Driving(pilot.getPilot());
 
 		while (Button.ESCAPE.isUp()) {
-			// TODO seek.fetchSample(sample, 0); 
-			
-			//System.out.println("1st while. Bearing: " + bearing);
 			distance = fetchDistance();
 			System.out.println("1st while. Distance: " + distance);
 			while (distance > 0) {
@@ -78,6 +75,7 @@ public class BeaconFinder {
 				}
 			}
 		}
+		// TODO is this needed?
 		ir.close();
 	}
 	/*
