@@ -1,4 +1,3 @@
-
 /**
  * @author loek 
  * Main Class including followLine
@@ -40,7 +39,7 @@ public class Marvin {
 //		newGame.launchGame();
 
 
-		// run method to ask for Enter key (this will invoke lineFollower())
+		// run method to ask for Enter key (comment/uncomment the lines in method to run)
 		marvin.runEnter();
 	
 	}
