@@ -50,16 +50,20 @@ public class LineFollowerLoek {
 				drive.drive(); // drive straight
 				lastFetchedColor = "Grey";
 				System.out.println(lastFetchedColor);
+				sensor.fetchSample(lastFetchedValue, 0);
 			}
 			while (lastFetchedValue[0] > .60) { // while white
 				drive.turn(-5); // turn left
 				lastFetchedColor = "White";
 				System.out.println(lastFetchedColor);
+				sensor.fetchSample(lastFetchedValue, 0);
+
 			}
 			while (lastFetchedValue[0] < .20) { // while black
 				drive.turn(5); // turn right
 				lastFetchedColor = "Black";
 				System.out.println(lastFetchedColor);
+				sensor.fetchSample(lastFetchedValue, 0);
 			}
 			// TODO
 			// if (sensor measures red finish line && lapCount == 0) {
