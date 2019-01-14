@@ -24,8 +24,6 @@ public class Pilot {
 	pilot = new MovePilot(chassis);
 	pilot.setLinearSpeed(linearSpeed);
 	pilot.setAngularSpeed(angularSpeed);
-	pilot.stop();
-	pilot.forward();
 	}
 	
 	public void setLinearSpeed(double linearSpeed) {
