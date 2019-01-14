@@ -1,3 +1,6 @@
+/**
+ * MONDAY Working version, checks if needs to roam or turn/drive	
+ */
 package models;
 
 import lejos.hardware.Button;
@@ -8,6 +11,8 @@ import models.Driving;
 import models.Pilot;
 
 public class BeaconFinder {
+
+	private static final int ROAM_DISTANCE = 21474836;
 
 	private static final int MAXIMUM_RANGE_IR_SENSOR = 150; // based on max range Sensor
 
@@ -36,38 +41,45 @@ public class BeaconFinder {
 	 * If placed within range, will turn and drive towards
 	 */
 	public void findBeacon() {
-		// Instantiate Pilot and Driving
 		Pilot pilot = new Pilot();
 		Driving drive = new Driving(pilot.getPilot());
 
 		while (Button.ESCAPE.isUp()) {
-			bearing = fetchBearing();
+			// TODO seek.fetchSample(sample, 0); 
+			
+			//System.out.println("1st while. Bearing: " + bearing);
 			distance = fetchDistance();
-			System.out.println("1. Bearing/Distance: " + bearing + " " + distance);
-			while (distance != 0) {
-
-				if (distance > MAXIMUM_RANGE_IR_SENSOR) {
-
-					System.out.println("2. Roam");
-					drive.roam(beaconFound); // begin met roam
-					System.out.println("2. R | Bearing/Distance: " + bearing + " " + distance);
-				} else if (distance <= MAXIMUM_RANGE_IR_SENSOR) { // maximum range IR sensor
-					setBeaconFound(true);
-					System.out.println("2. IR | before turn bearing: " + bearing);
-					drive.turn(bearing); // gaat de robot in de richting van het beacon roteren met "bearing" graden
+			System.out.println("1st while. Distance: " + distance);
+			while (distance > 0) {
+				while (distance >= ROAM_DISTANCE) {
+					setBeaconFound(false);
+					
 					bearing = fetchBearing();
 					distance = fetchDistance();
-					System.out.println("2. IR | after turn drive distance: " + distance);
-					drive.straight(distance); // gaat de robot rechtuit rijden gedurende afstand "distance"
+					System.out.println("2. Roaming | Distance: " + distance);
+					System.out.println("2. Roaming | Bearing: " + bearing);
+					drive.roam(beaconFound);
 					distance = fetchDistance();
-					System.out.println("2. IR | after drive bearing: " + bearing);
-					System.out.println("2. IR | after drive distance: " + distance);
+				}
+				while (distance < ROAM_DISTANCE) { // inRange --> turn and drive to beacon
+					setBeaconFound(true);
+					bearing = fetchBearing();	
+					distance = fetchDistance();
+					System.out.println("2. inRange | Distance: " + distance);
+					System.out.println("2. inRange | Bearing: " + bearing);
+					// turn with bearing
+					drive.turn(bearing); 	
+					distance = fetchDistance();	
+					// drive distance to beacon
+					drive.straight(distance);
+					// fetch another sample to test if movement was sufficient
+					distance = fetchDistance();
+					bearing = fetchBearing();
 				}
 			}
 		}
-		// ir.close();
+		ir.close();
 	}
-
 	/*
 	 * @return Fetch of bearing measurement from Sensor
 	 */
@@ -77,7 +89,6 @@ public class BeaconFinder {
 		bearing = (int) sample[0];
 		return bearing;
 	}
-
 	/**
 	 * @return Fetch of distance measurement from Senso
 	 */
