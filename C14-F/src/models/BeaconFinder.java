@@ -9,13 +9,15 @@ import models.Pilot;
 
 public class BeaconFinder {
 
-	private static final int MAXIMUM_RANGE_IR_SENSOR = 150; // de maximum range is tussen de 100~200 centimeter
-	// afhankelijk van de bron
+	private static final int MAXIMUM_RANGE_IR_SENSOR = 150; // based on max range Sensor
 
-	private EV3IRSensor ir = new EV3IRSensor(SensorPort.S4); // activeert een nieuwe IR-sensor op poort S4
-	private SensorMode seek = ir.getSeekMode(); // activeert de Seek modus
-	private float[] sample = new float[seek.sampleSize()]; // maakt array met sample informatie
+	private EV3IRSensor ir = new EV3IRSensor(SensorPort.S4); // use port S4 for IR Sensor
+	private SensorMode seek = ir.getSeekMode(); // initiate seekmode
+	private float[] sample = new float[seek.sampleSize()]; // declare array to store samples form Sensor
 	private boolean beaconFound = false;
+
+	private int bearing;
+	private int distance;
 
 	public boolean isBeaconFound() {
 		return beaconFound;
@@ -25,7 +27,8 @@ public class BeaconFinder {
 		this.beaconFound = beaconFound;
 	}
 
-	public BeaconFinder() { // no args constructor
+	// no args cons
+	public BeaconFinder() {
 		super();
 	}
 
@@ -38,14 +41,11 @@ public class BeaconFinder {
 		Driving drive = new Driving(pilot.getPilot());
 
 		while (Button.ESCAPE.isUp()) {
-			seek.fetchSample(sample, 0);
-			int bearing = (int) sample[0];
-			int distance = (int) sample[1];
+			bearing = fetchBearing();
+			distance = fetchDistance();
 			System.out.println("1. Bearing/Distance: " + bearing + " " + distance);
-			while (bearing != 0 && distance != 0) {
-				// while (bearing != 0 && distance != 0) will never be the condition to roam.
-				// Roaming should happen
-				// while (bearing = 0 && distance != 0) OR while (distance > 100000)
+			while (distance != 0) {
+
 				if (distance > MAXIMUM_RANGE_IR_SENSOR) {
 
 					System.out.println("2. Roam");
@@ -55,17 +55,36 @@ public class BeaconFinder {
 					setBeaconFound(true);
 					System.out.println("2. IR | before turn bearing: " + bearing);
 					drive.turn(bearing); // gaat de robot in de richting van het beacon roteren met "bearing" graden
-					seek.fetchSample(sample, 0);
-					bearing = (int) sample[0];
+					bearing = fetchBearing();
+					distance = fetchDistance();
 					System.out.println("2. IR | after turn drive distance: " + distance);
 					drive.straight(distance); // gaat de robot rechtuit rijden gedurende afstand "distance"
-					seek.fetchSample(sample, 0);
-					distance = (int) sample[1];
+					distance = fetchDistance();
 					System.out.println("2. IR | after drive bearing: " + bearing);
 					System.out.println("2. IR | after drive distance: " + distance);
 				}
 			}
 		}
 		// ir.close();
+	}
+
+	/*
+	 * @return Fetch of bearing measurement from Sensor
+	 */
+	public int fetchBearing() {
+		// fetch measurement and store the value
+		seek.fetchSample(sample, 0);
+		bearing = (int) sample[0];
+		return bearing;
+	}
+
+	/**
+	 * @return Fetch of distance measurement from Senso
+	 */
+	public int fetchDistance() {
+		// fetch measurement and store the value
+		seek.fetchSample(sample, 0);
+		distance = (int) sample[1];
+		return distance;
 	}
 }
