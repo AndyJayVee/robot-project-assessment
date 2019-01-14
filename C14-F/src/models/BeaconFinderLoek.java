@@ -67,8 +67,8 @@ public class BeaconFinderLoek {
 			// now status == beaconFound(true) as we're in range of sensor
 			// while not at beacon yet keep doing inRange()
 			while (distance > 0) {
+				setBeaconFound(true);
 				inRange();
-				
 				// If Marvin has arrived at beacon, it should break from this while
 				// following line will ensure that it breaks from current while loop
 				// at least when it measures distance smaller than the 0 
@@ -85,7 +85,7 @@ public class BeaconFinderLoek {
 		// this will let other classes read the latest status of whether
 		// distance/bearing are known or not
 		// by now bearing and distance are measured == known == found(true)
-		setBeaconFound(true);
+		// setBeaconFound(true);
 
 		System.out.println("inRange() bearing: " + bearing);
 		drive.turn(bearing);

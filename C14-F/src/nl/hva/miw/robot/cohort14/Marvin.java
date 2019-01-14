@@ -56,9 +56,9 @@ public class Marvin {
 		waitForKey(Button.ENTER);
 
 		// instantiate object from Class that needs to run
-		LineFollower lineFollower = new LineFollower();
+//		LineFollower lineFollower = new LineFollower();
 		// Run method
-		lineFollower.followLine();
+//		lineFollower.followLine();
 		
 		// instantiate object from Class that needs to run
 //		LineFollowerLoek lineFollowerLoek = new LineFollowerLoek();
@@ -76,9 +76,9 @@ public class Marvin {
 //		beaconFinder.findBeacon();
 		
 		// instantiate object from Class that needs to run
-//		BeaconFinderLoek beaconFinderLoek = new BeaconFinderLoek();
+		BeaconFinderLoek beaconFinderLoek = new BeaconFinderLoek();
 		// Run method
-//		beaconFinderLoek.findBeacon();
+		beaconFinderLoek.findBeacon();
 	}
 
 	
