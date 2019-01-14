@@ -16,7 +16,7 @@ public class BeaconFinderLoek {
 
 	private static final int MAXIMUM_RANGE_IR_SENSOR = 150;
 
-	EV3IRSensor ir = new EV3IRSensor(SensorPort.S4);
+	private EV3IRSensor ir = new EV3IRSensor(SensorPort.S4);
 	SensorMode seek = ir.getSeekMode(); // TODO small explanation seekmode?
 	Driving drive = new Driving();
 	Pilot pilot = new Pilot();
@@ -56,10 +56,12 @@ public class BeaconFinderLoek {
 			// break out while, and start inRange()
 			while (distance > 150) {
 				// start roam
-				drive.roam(beaconFound);
+				drive.straight(100);
 				// during roam keep fetching and updating local distance variable
 				// this to break out of this while()
 				distance = fetchDistance();
+				System.out.println("Roam | Distance: " + distance);
+
 			}
 			// TODO do we need a driving.stopRoam to prevent eternal roaming??
 			
@@ -72,6 +74,7 @@ public class BeaconFinderLoek {
 				// following line will ensure that it breaks from current while loop
 				// at least when it measures distance smaller than the 0 
 				distance = fetchDistance();
+//				System.out.println("Found | Distance: " + distance);
 			}
 			// TODO do we need a command to let Marvin stop? 
 		}
@@ -86,14 +89,15 @@ public class BeaconFinderLoek {
 		// by now bearing and distance are measured == known == found(true)
 		setBeaconFound(true);
 
-		System.out.println("inRange() bearing: " + bearing);
+		System.out.println("inRange() | Bearing: " + bearing);
+		System.out.println("inRange() | Distance: " + distance);
+		
+		bearing = fetchBearing();
 		drive.turn(bearing);
 
 		// do another fetch (in a perfect world bearing would be 0 after latest
 		// fetch&turn)
-		bearing = fetchBearing();
-		distance = fetchDistance();
-		
+		bearing = fetchBearing();		
 		// drive the distance as fetched
 		drive.straight(distance);
 		// fetch again and adjust bearing/distance if needed
