@@ -20,7 +20,7 @@ public class LiftArm {
 
 	public void liftUp() { // rotates the motor at a set speed and number of rotations
 		liftArm.setSpeed(25); // initial speed set @25
-		liftArm.rotate(90); // initial degrees of rotations set @45
+		liftArm.rotate(90); // initial degrees of rotations set @90
 	}
 
 	public void moveBeacon() { // moves vehicle
@@ -34,6 +34,6 @@ public class LiftArm {
 
 	public void liftDown() { // rotates the motor at a set speed and number of rotations
 		liftArm.setSpeed(25); // initial speed set @25
-		liftArm.rotate(-90); // initial degrees of rotations set @-45
+		liftArm.rotate(-90); // initial degrees of rotations set @-90
 	}
 }

@@ -14,7 +14,7 @@ public class MoveBeacon {
 		
 		arm.liftUp(); // lifts beacon up
 		System.out.println("lifted up");
-		arm.moveBeacon(); // moves beacon according to LiftArm.java specifications
+		arm.moveBeacon(); // moves beacon (according to LiftArm.java specifications) in a circle (approximately)
 		System.out.println("moved beacon");
 		arm.liftDown(); // puts beacon down
 		System.out.println("put down");
