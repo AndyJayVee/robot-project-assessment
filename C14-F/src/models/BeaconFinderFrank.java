@@ -25,7 +25,7 @@ public class BeaconFinderFrank implements Runnable {
 	public void run() {
 		try {
 			roamThread.start();
-			while (bearing == 0) {
+			while (distance > 150) {
 				fetchingBearingAndDistance();
 				Thread.sleep(1000);
 				System.out.printf("Bearing: %d\nDistance: %d\n", bearing, distance);
@@ -43,9 +43,8 @@ public class BeaconFinderFrank implements Runnable {
 	private void driveToBeacon() throws InterruptedException { // TODO: Deze methode werkt misschien niet.
 		while (distance > 5) {
 			fetchingBearingAndDistance();
-			pilot.getPilot().rotate(-bearing);
+			pilot.getPilot().rotate(bearing);
 			pilot.getPilot().travel(distance);
-			Thread.sleep(250);
 		}
 	}
 

@@ -38,7 +38,7 @@ public class Marvin {
 		Marvin marvin = new Marvin();
 
 		// instantiate LineFollower in a thread
-		LineFollowerFrank lineFollowerFrank = new LineFollowerFrank();
+
 
 //		GameLauncher newGame = new GameLauncher();
 //		newGame.welcomeMenu();
@@ -48,23 +48,23 @@ public class Marvin {
 		
 		
 		// instantiate LineFollower
-		LineFollower lineFollower = new LineFollower();
+//		LineFollower lineFollower = new LineFollower();
 		
 		// instantiate LineFollowerFrank
 //		LineFollowerFrank lineFollowerFrank = new LineFollowerFrank();
 		
 		// instantiate BeaconFinder
-		BeaconFinder beaconFinder = new BeaconFinder();
+//		BeaconFinder beaconFinder = new BeaconFinder();
 
 		// run method to ask for Enter key (this will invoke lineFollower())
-		// marvin.runEnter();
-//		 marvin.runEnter();
+		 marvin.runEnter();
+
 
 		// run method LineFollowerFrank()
 		// lineFollowerFrank.followLine();
 		
 		// run method BeaconFinder()
-		beaconFinder.findBeacon();
+//		beaconFinder.findBeacon();
 
 	}
 
@@ -83,10 +83,10 @@ public class Marvin {
 		display.drawString(" Foxtrot ", 0, 3);
 		display.drawString(" Press Enter for Line", 0, 4);
 		waitForKey(Button.ENTER);
-		// initialize LineFollower
-		
-		LineFollower lineFollower = new LineFollower();
-		lineFollower.followLine();
+		// initialize LineFollower in a thread
+		LineFollowerFrank lineFollowerFrank = new LineFollowerFrank();
+		Thread lineFollowerThread = new Thread(lineFollowerFrank);
+		lineFollowerThread.start();
 	}
 
 	

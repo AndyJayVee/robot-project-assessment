@@ -5,7 +5,7 @@ import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3ColorSensor;
 import models.Pilot;
 
-public class LineFollowerFrank {
+public class LineFollowerFrank implements Runnable{
 
 	static EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S2);
 	Pilot pilot = new Pilot();
@@ -16,29 +16,39 @@ public class LineFollowerFrank {
 		super();
 	}
 
-	public void followLine() {
-		while (Button.DOWN.isUp()) {
-			pilot.getPilot().forward();
-			gray = currentGray();
-			while (gray >= .20 && gray <= .60) {
-				pilot.getPilot().forward(); // Continuous driving if average measurement is between specified values
-											// (0.2 and 0.6)
-				gray = currentGray(); // updating gray value with current gray value.
-			}
-			pilot.getPilot().stop();
-			if (gray < .20) {
-				while (gray < .45) { // black (need to turn right).
-					pilot.getPilot().rotateRight(); // turns robot right
-					gray = currentGray(); // updates gray value
+	@Override
+	public void run() {
+		try {
+			while (Button.DOWN.isUp()) {
+				pilot.getPilot().forward();
+				gray = currentGray();
+				while (gray >= .20 && gray <= .60) {
+					pilot.getPilot().forward(); // Continuous driving if average measurement is between specified values
+												// (0.2 and 0.6)
+					gray = currentGray(); // updating gray value with current gray value.
+				}
+				pilot.getPilot().stop();
+				if (gray < .20) {
+					while (gray < .45) { // black (need to turn right).
+						pilot.getPilot().rotateRight(); // turns robot right
+						gray = currentGray(); // updates gray value
+					}
+				}
+				if (gray > .60) {
+					while (gray > .45) { // white (need to turn left).
+						pilot.getPilot().rotateLeft(); // turns robot left
+						gray = currentGray(); // updates gray value
+					}
 				}
 			}
-			if (gray > .60) {
-				while (gray > .45) { // white (need to turn left).
-					pilot.getPilot().rotateLeft(); // turns robot left
-					gray = currentGray(); // updates gray value
-				}
-			}
+
+		} catch (Exception e) {
+			System.out.printf("Oops, something went wrong\n with the line follower");
 		}
+	}
+	
+	public void followLine() {
+		
 	}
 
 	public float currentGray() {
