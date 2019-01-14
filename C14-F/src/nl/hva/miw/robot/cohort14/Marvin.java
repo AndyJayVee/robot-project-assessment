@@ -5,7 +5,6 @@
 
 package nl.hva.miw.robot.cohort14;
 
-import ColorSensorAndy.SensorAndFilter;
 import lejos.hardware.Brick;
 import lejos.hardware.Button;
 import lejos.hardware.Key;
@@ -34,31 +33,19 @@ public class Marvin {
 	public static void main(String[] args) {
 		// initialize a Marvin object
 		Marvin marvin = new Marvin();
-<<<<<<< HEAD
-		marvin.run();
-		SensorAndFilter sensor = new SensorAndFilter();
-		sensor.getLatestSample();
-		 for (int i = 0; i < 100000; i++) {
-		        System.out.print(sensor.getLatestSample());
-		        System.out.println();     
-		 }
-		      
-	}
-=======
 
 //		GameLauncher newGame = new GameLauncher();
 //		newGame.welcomeMenu();
 //		newGame.launchGame();
 
-
-		// run method to ask for Enter key (comment/uncomment the lines in method to run)
+		// run method to ask for Enter key (comment/uncomment the lines in method to
+		// run)
 		marvin.runEnter();
->>>>>>> master
-	
+
 	}
 
-	/** This method waits for Enter key
-	 * After Enter it will invoke followLine()
+	/**
+	 * This method waits for Enter key After Enter it will invoke followLine()
 	 */
 
 	private void runEnter() {
@@ -67,33 +54,52 @@ public class Marvin {
 		display.drawString(" Press Enter", 0, 4);
 		waitForKey(Button.ENTER);
 
+		display.clear(4);
+		display.drawString(" Press up for linefollower", 0, 4);
+		display.drawString(" Press down for beaconfinder", 0, 5);
+
+		display.clear(4);
+		display.clear(5);
+		if (Button.waitForAnyEvent() == Button.ID_UP) { // 1 = button up
+
+			display.drawString(" Linefollower started", 0, 4);
+			// LineFollower lineFollower = new LineFollower();
+			// lineFollower.followLine();
+
+		} else if (Button.waitForAnyEvent() == Button.ID_DOWN) {// 1 = button down
+
+			display.drawString(" Beaconfinder started", 0, 4);
+			// BeaconFinder beaconFinder = new BeaconFinder();
+			// beaconFinder.findBeacon();
+
+		}
+
 		// instantiate object from Class that needs to run
 //		LineFollower lineFollower = new LineFollower();
 		// Run method
 //		lineFollower.followLine();
-		
+
 		// instantiate object from Class that needs to run
 //		LineFollowerLoek lineFollowerLoek = new LineFollowerLoek();
 		// Run method
 //		lineFollowerLoek.followLine();
-		
+
 		// instantiate object from Class that needs to run
 //		LineFollowerFrank lineFollowerFrank = new LineFollowerLoek();
 		// Run method
 //		lineFollowerFrank.followLine();
-		
+
 		// instantiate object from Class that needs to run
 //		BeaconFinder beaconFinder = new BeaconFinder();
 		// Run method
 //		beaconFinder.findBeacon();
-		
+
 		// instantiate object from Class that needs to run
-		BeaconFinderLoek beaconFinderLoek = new BeaconFinderLoek();
+//		BeaconFinderLoek beaconFinderLoek = new BeaconFinderLoek();
 		// Run method
-		beaconFinderLoek.findBeacon();
+//		beaconFinderLoek.findBeacon();
 	}
 
-	
 	public void waitForKey(Key key) {
 		while (key.isUp()) {
 			Delay.msDelay(100);
