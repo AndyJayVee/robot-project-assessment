@@ -69,13 +69,13 @@ public class Driving {
 	public void roam(boolean beaconFound) {
 		for (int i = 0; i < 11; i++) {
 			for (int j = 0; j < 4; j++) {
-				pilot.travel(75); // 2000 is de hoogte van de ster, dus eventueel de lengte (of breedte) van het
+				pilot.travel(25); // 2000 is de hoogte van de ster, dus eventueel de lengte (of breedte) van het
 									// te zoeken gebied.
 				if (beaconFound) {
 					break;
 				}
 			}
-			pilot.rotate(160); // De ster heeft scherpe hoeken (punten) van 20 graden. Hiervoor moet de robot
+			pilot.rotate(45); // De ster heeft scherpe hoeken (punten) van 20 graden. Hiervoor moet de robot
 								// 160 graden draaien.
 			if (beaconFound) {
 				break;
