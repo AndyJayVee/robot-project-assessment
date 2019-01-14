@@ -16,7 +16,6 @@ public class LineFollower{ //implements Runnable {
 
 //	private LineFollower lineFollower = new LineFollower();
 //	static Brick brick;
-public class LineFollower {
 
 	static Brick brick;
 	static EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S2);

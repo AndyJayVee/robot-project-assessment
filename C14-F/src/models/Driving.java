@@ -3,17 +3,15 @@ package models;
 import lejos.hardware.Sound;
 import lejos.robotics.navigation.MovePilot;
 
-public class Driving implements Runnable{
+public class Driving {
 	
 	private int travelDistance;
 	private int rotation;
 //	private static final int POSITIVE_INFINITY = 1/0;
 	private MovePilot pilot;
-	private boolean lookingForBeacon;
+
 		
-	public void setBeaconIsFound(boolean lookingForBeacon) {
-		this.lookingForBeacon = lookingForBeacon;
-	}
+	
 
 	public Driving() {
 		super();
@@ -23,12 +21,6 @@ public class Driving implements Runnable{
 		pilot = p;
 	}
 	
-	public Driving(MovePilot pilot, boolean beaconIsFound) {
-		super();
-		this.pilot = pilot;
-		this.lookingForBeacon = beaconIsFound;
-	}
-
 		
 	public MovePilot getPilot() {
 		return pilot;
@@ -94,20 +86,7 @@ public class Driving implements Runnable{
 			}
 		}
 				
-		@Override
-		public void run() {
-			try {
-				while (lookingForBeacon) {
-					for (int i = 0; i < 11; i++) {
-						pilot.travel(100);
-						pilot.rotate(160);
-					}
-				}
-					
-			} catch (Exception e) {
-				System.out.println("Oops, something went wrong with roaming");
-			}
-		}
+
 		
 		
 		

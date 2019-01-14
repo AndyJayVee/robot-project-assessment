@@ -8,8 +8,10 @@ import lejos.robotics.navigation.MovePilot;
 
 public class Pilot {
 
-	MovePilot pilot;
-	Driving drive;
+	private MovePilot pilot;
+	private Wheel leftWheel = WheeledChassis.modelWheel(Motor.A, WHEEL_DIAMETER).offset(-0.5 * TRACK_WIDTH);
+	private Wheel rightWheel = WheeledChassis.modelWheel(Motor.D, WHEEL_DIAMETER).offset(0.5 * TRACK_WIDTH);
+	private Chassis chassis = new WheeledChassis(new Wheel[] {leftWheel, rightWheel}, WheeledChassis.TYPE_DIFFERENTIAL);
 	private static final double MAX_LINEAR_SPEED = 350;
 //	private static final double MAX_ANGULAR_SPEED = 0;
 	private static final double WHEEL_DIAMETER = 43.2; // Wheel diameter and offset (half track width) is set in mm.
@@ -18,13 +20,12 @@ public class Pilot {
 	private double angularSpeed = 350;
 	
 	//Pilot constructor
-	public Pilot() {
-	Wheel leftWheel = WheeledChassis.modelWheel(Motor.A, WHEEL_DIAMETER).offset(-0.5 * TRACK_WIDTH);
-	Wheel rightWheel = WheeledChassis.modelWheel(Motor.D, WHEEL_DIAMETER).offset(0.5 * TRACK_WIDTH);
-	Chassis chassis = new WheeledChassis(new Wheel[] {leftWheel, rightWheel}, WheeledChassis.TYPE_DIFFERENTIAL);
+	public Pilot() {	
 	pilot = new MovePilot(chassis);
 	pilot.setLinearSpeed(linearSpeed);
 	pilot.setAngularSpeed(angularSpeed);
+	pilot.stop();
+	pilot.forward();
 	}
 	
 	public void setLinearSpeed(double linearSpeed) {

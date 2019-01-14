@@ -38,11 +38,7 @@ public class Marvin {
 		Marvin marvin = new Marvin();
 
 		// instantiate LineFollower in a thread
-		LineFollower lineFollower = new LineFollower();
-		// instantiate LineFollowerFrank
 		LineFollowerFrank lineFollowerFrank = new LineFollowerFrank();
-		// initialize a Marvin object
-		Marvin marvin = new Marvin();
 
 //		GameLauncher newGame = new GameLauncher();
 //		newGame.welcomeMenu();

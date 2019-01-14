@@ -36,9 +36,6 @@ public class BeaconFinder {
 
 	public void findBeacon() {
 		// @aut Loek: edit: instantiate Pilot and Driving
-		Pilot pilot = new Pilot();
-		Driving drive = new Driving(pilot.getPilot());
-
 		while (Button.ESCAPE.isUp()) {
 			seek.fetchSample(sample, 0);
 			int bearing = (int) sample[0];
