@@ -14,8 +14,10 @@ import models.Pilot;
 
 public class LineFollowerLoek {
 
-	static Brick brick;
-	static EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S2);
+	private static Brick brick;
+	private static EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S2);
+	private static Pilot pilot = new Pilot();
+	private static Driving drive = new Driving(pilot.getPilot());
 
 	public LineFollowerLoek() {
 		super();
@@ -27,10 +29,6 @@ public class LineFollowerLoek {
 	 */
 
 	public void followLine() {
-		// start with driving straight
-		Pilot pilot = new Pilot();
-		Driving drive = new Driving(pilot.getPilot());
-
 		// set Sensor mode
 		sensor.setCurrentMode("Red");
 
