@@ -5,6 +5,7 @@
 package models;
 
 import lejos.hardware.motor.EV3LargeRegulatedMotor;
+import lejos.hardware.motor.UnregulatedMotor;
 import lejos.hardware.port.MotorPort;
 import lejos.utility.Delay;
 
@@ -18,23 +19,23 @@ public class MarvinMover {
 		super();
 	}
 	
-	public void turnRightOnBlack() {
-		motorA.setSpeed(-140);
-		motorB.setSpeed(50);
+		public void turnRightOnBlack() {
+		motorA.setSpeed(-300);
+		motorB.setSpeed(5);
 		motorA.backward();
-		motorB.forward();
+		motorB.backward();
 	}
 
 	public void turnLeftOnWhite() {
-		motorA.setSpeed(80);
-		motorB.setSpeed(-300);
+		motorA.setSpeed(0);
+		motorB.setSpeed(-270);
 		motorA.forward();
 		motorB.backward();
 	}
 
 	public void driveStraightOnGrey() {
-		motorA.setSpeed(-350);
-		motorB.setSpeed(-350);
+		motorA.setSpeed(-280);
+		motorB.setSpeed(-280);
 		motorA.backward();
 		motorB.backward();
 	}
@@ -70,20 +71,6 @@ public class MarvinMover {
 		motorA.setSpeed(200);
 		motorA.forward();
 		Delay.msDelay(8000);
-	}	
+	}
 	
-	public void driveSquare() { // drives vehicle forward
-		driveStraightOnGrey();
-		Delay.msDelay(4000);
-		turn90DegreesRight();
-		driveStraightOnGrey();
-		Delay.msDelay(4000);
-		turn90DegreesRight();
-		driveStraightOnGrey();
-		Delay.msDelay(4000);
-		turn90DegreesRight();
-		driveStraightOnGrey();
-		Delay.msDelay(4000);
-		turn90DegreesRight();
-	}	
 }

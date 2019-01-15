@@ -55,7 +55,7 @@ public class BeaconFinder {
 					distance = fetchDistance();
 					System.out.println("2. Roaming | Distance: " + distance);
 					System.out.println("2. Roaming | Bearing: " + bearing);
-					marvinMover.driveSquare();
+					drive.roam(beaconFound);
 					distance = fetchDistance();
 				}
 				while (distance < DISTANCE_TRESHOLD_ROAM) { // inRange --> turn and drive to beacon
