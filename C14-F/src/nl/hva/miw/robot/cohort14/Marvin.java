@@ -13,6 +13,7 @@ import lejos.hardware.lcd.TextLCD;
 import lejos.utility.Delay;
 import models.BeaconFinder;
 import models.Driving;
+import models.GameLauncher;
 //import models.GameLauncher;
 import models.LineFollower;
 import models.Pilot;
@@ -48,36 +49,15 @@ public class Marvin {
 
 	private void runEnter() {
 		TextLCD display = brick.getTextLCD();
-		display.drawString(" Foxtrot ", 0, 3);
-		display.drawString(" Press Enter", 0, 4);
+		display.drawString("     Foxtrot ", 0, 3);
+		display.drawString("   Press Enter", 0, 4);
 		waitForKey(Button.ENTER);
 
-		// instantiate object from Class that needs to run
-		LineFollower lineFollower = new LineFollower();
-		// Run method
-		lineFollower.followLine();
-		
-		// instantiate object from Class that needs to run
-//		LineFollowerLoek lineFollowerLoek = new LineFollowerLoek();
-		// Run method
-//		lineFollowerLoek.followLine();
-		
-		// instantiate object from Class that needs to run
-//		LineFollowerFrank lineFollowerFrank = new LineFollowerLoek();
-		// Run method
-//		lineFollowerFrank.followLine();
-		
-		// instantiate object from Class that needs to run
-//		BeaconFinder beaconFinder = new BeaconFinder();
-		// Run method
-//		beaconFinder.findBeacon();
-		
-		// instantiate object from Class that needs to run
-//		BeaconFinderLoek beaconFinderLoek = new BeaconFinderLoek();
-		// Run method
-//		beaconFinderLoek.findBeacon();
-	}
+		display.clear();
 
+		GameLauncher newGame = new GameLauncher();
+		newGame.launchGame();
+	}
 	
 	public void waitForKey(Key key) {
 		while (key.isUp()) {

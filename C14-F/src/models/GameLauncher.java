@@ -56,13 +56,16 @@ public class GameLauncher {
 				display.clear();
 				display.drawString("   Beacongrabber  ", 0, 1);
 				gameStopped();
-			} else
+			} else if (pressedButton == Button.ID_LEFT || pressedButton == Button.ID_RIGHT) {
 				display.clear();
 //		display.drawString("123456789987654321", 0, 1); ruler comment
 			display.drawString("   Wrong button   ", 0, 1);
 			display.drawString(" Press any key to ", 0, 2);
 			display.drawString("   Choose again   ", 0, 3);
 			Delay.msDelay(3000);
+			} else if (pressedButton == Button.ID_ESCAPE) {
+				repeat = false;
+			}
 		}
 	}
 
