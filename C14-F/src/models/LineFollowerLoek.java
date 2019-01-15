@@ -1,22 +1,27 @@
-// As of Sunday the primary experimental Class for LineFollower improvements
-
 package models;
 
+import lejos.hardware.Button;
 import lejos.hardware.Brick;
 import lejos.hardware.Button;
 import lejos.hardware.Key;
 import lejos.hardware.ev3.LocalEV3;
 import lejos.hardware.lcd.TextLCD;
+import lejos.hardware.motor.UnregulatedMotor;
+import lejos.hardware.port.MotorPort;
 import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3ColorSensor;
 import models.Driving;
 import models.Pilot;
 
-public class LineFollowerLoek {
+
+public class LineFollowerLoek { //implements Runnable {
 
 	static Brick brick;
 	static EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S2);
 
+	static UnregulatedMotor motorA = new UnregulatedMotor(MotorPort.A);
+    static UnregulatedMotor motorB = new UnregulatedMotor(MotorPort.D);
+    
 	public LineFollowerLoek() {
 		super();
 	}
@@ -27,56 +32,22 @@ public class LineFollowerLoek {
 	 */
 
 	public void followLine() {
-		// start with driving straight
-		Pilot pilot = new Pilot();
-		Driving drive = new Driving(pilot.getPilot());
-
-		// set Sensor mode
+		// initialize array to fetch sample in
+		float[] scannedColor = new float[1];
 		sensor.setCurrentMode("Red");
 
-		// initialize array to fetch sample in
-		float[] lastFetchedValue = new float[1];
-		// Declare String that describes color of last-fetched Sensor float
-		String lastFetchedColor;
-		// Counter for #laps. Lap1 means 'now driving in lap 1, 0 completed'.
-		int lapCount = 0;
-		// declare array to store lapTime
-		// TODO ??? int[] lapTime = new int[2];
-		// while not pressed continue
-		while (Button.DOWN.isUp()) { // TODO (&& lapCount < 3) ???
-			// start fetching. Assumed it keeps fetching and updating so it will run correct
-			sensor.fetchSample(lastFetchedValue, 0);
-			while (lastFetchedValue[0] >= .20 && lastFetchedValue[0] <= .60) { // while grey
-				drive.drive(); // drive straight
-				lastFetchedColor = "Grey";
-				System.out.println(lastFetchedColor);
-				sensor.fetchSample(lastFetchedValue, 0);
+		while (Button.DOWN.isUp()) {
+			sensor.fetchSample(scannedColor, 0);
+			if (scannedColor[0] > .60) { // white
+				motorA.setPower(-4);
+                motorB.setPower(-44);
+			} else if (scannedColor[0] < .20) { // black
+				motorA.setPower(-48);
+                motorB.setPower(0);
+			} else { // grey
+		        motorA.setPower(-45);
+		        motorB.setPower(-45);
 			}
-			while (lastFetchedValue[0] > .60) { // while white
-				drive.turn(-5); // turn left
-				lastFetchedColor = "White";
-				System.out.println(lastFetchedColor);
-				sensor.fetchSample(lastFetchedValue, 0);
-
-			}
-			while (lastFetchedValue[0] < .20) { // while black
-				drive.turn(5); // turn right
-				lastFetchedColor = "Black";
-				System.out.println(lastFetchedColor);
-				sensor.fetchSample(lastFetchedValue, 0);
-			}
-			// TODO
-			// if (sensor measures red finish line && lapCount == 0) {
-			// start.timer
-			// lapCount++;
-			// } else if (sensor measures red finish line && lapCount > 0) {
-			// stop.timer();
-			// lapTime[lapCount] = getLapTime();
-			// reset.timer();
-			// lapCount++;
-			// }
-			// print ("Lap "lapCount + " " + lapTime[lapCount - 1]) ??
-
 		}
 	}
 }
