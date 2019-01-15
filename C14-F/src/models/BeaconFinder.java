@@ -9,6 +9,7 @@ import lejos.hardware.sensor.EV3IRSensor;
 import lejos.hardware.sensor.SensorMode;
 import models.Driving;
 import models.Pilot;
+import models.MarvinMover;
 
 public class BeaconFinder {
 
@@ -18,6 +19,8 @@ public class BeaconFinder {
 
 	private EV3IRSensor ir = new EV3IRSensor(SensorPort.S4); // use port S4 for IR Sensor
 	private SensorMode seek = ir.getSeekMode(); // initiate seekmode
+	private MarvinMover marvinMover = new MarvinMover();
+
 	private float[] sample = new float[seek.sampleSize()]; // declare array to store samples form Sensor
 	private boolean beaconFound = false;
 
@@ -43,6 +46,8 @@ public class BeaconFinder {
 	public void findBeacon() {
 		Pilot pilot = new Pilot();
 		Driving drive = new Driving(pilot.getPilot());
+		MarvinMover marvinMover = new MarvinMover();
+
 
 		while (Button.DOWN.isUp()) {
 			// TODO seek.fetchSample(sample, 0); 
@@ -56,7 +61,7 @@ public class BeaconFinder {
 					distance = fetchDistance();
 					System.out.println("2. Roaming | Distance: " + distance);
 					System.out.println("2. Roaming | Bearing: " + bearing);
-					drive.roam(beaconFound);
+					marvinMover.roam(beaconFound);
 					distance = fetchDistance();
 				}
 				while (distance < ROAM_DISTANCE) { // inRange --> turn and drive to beacon
