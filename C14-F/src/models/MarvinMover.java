@@ -9,56 +9,73 @@ import lejos.hardware.port.MotorPort;
 import lejos.utility.Delay;
 
 public class MarvinMover {
-	
+
 	static EV3LargeRegulatedMotor motorA = new EV3LargeRegulatedMotor(MotorPort.A);
-    static EV3LargeRegulatedMotor motorB = new EV3LargeRegulatedMotor(MotorPort.D);
+	static EV3LargeRegulatedMotor motorB = new EV3LargeRegulatedMotor(MotorPort.D);
 
-    public void turnRightOnBlack() {
-		motorA.setSpeed(-48);
-        motorB.setSpeed(0);
-    }
-    
-    public void turnLeftOnWhite() {
-		motorA.setSpeed(-4);
-        motorB.setSpeed(-44);
-    }
-    
-    public void driveStraightOnGrey() {
-		motorA.setSpeed(-45);
-        motorB.setSpeed(-45);
-    }
-    
-    public void turn90DegreesLeft() { // turns vehicle
-		motorB.setSpeed(200); // 90 degrees left
-		motorB.rotate(500);
+	public MarvinMover() {
+		super();
 	}
 
-	public void turn90DegreesRight() { // turns vehicle
-		motorA.setSpeed(200); // 90 degrees right
-		motorA.rotate(500);
-	}
-
-	public void turn45DegreesLeft() { // turns vehicle
-		motorB.setSpeed(200); // 45 degrees left
-		motorB.rotate(250);
-	}
-	
-	public void turn45DegreesRight() { // turns vehicle
-		motorA.setSpeed(200); // 45 degrees right
-		motorA.rotate(250);
-	}
-
-	public void turn180Degrees() { // turns vehicle
-		motorA.setSpeed(200); // 180 degrees right
-		motorA.rotate(1000);
-	}
-
-	public void driveForward() { // drives vehicle forward
-		motorA.setSpeed(300);
-		motorA.forward();
-		motorB.setSpeed(300);
+	public void turnRightOnBlack() {
+		motorA.setSpeed(-140);
+		motorB.setSpeed(50);
+		motorA.backward();
 		motorB.forward();
-		Delay.msDelay(1500);
 	}
-}
 
+	public void turnLeftOnWhite() {
+		motorA.setSpeed(80);
+		motorB.setSpeed(-300);
+		motorA.forward();
+		motorB.backward();
+	}
+
+	public void driveStraightOnGrey() {
+		motorA.setSpeed(-350);
+		motorB.setSpeed(-350);
+		motorA.backward();
+		motorB.backward();
+	}
+
+	public void turn90DegreesRight() { // turns vehicle 90 degrees right
+		motorB.setSpeed(80);
+		motorA.setSpeed(-300);
+		motorB.forward();
+		motorA.backward();
+		Delay.msDelay(1400);
+	}
+
+	public void turn90DegreesLeft() { // turns vehicle 90 degrees left
+		motorA.setSpeed(80);
+		motorB.setSpeed(-300);
+		motorA.forward();
+		motorB.backward();
+		Delay.msDelay(1400);
+	}
+
+	public void turn180Degrees() { // turns vehicle 180 degrees left hand side
+		motorA.setSpeed(80);
+		motorB.setSpeed(-300);
+		motorA.forward();
+		motorB.backward();
+		Delay.msDelay(2600);
+	}
+
+	public void shortLeg() { // drives vehicle forward
+		motorA.setSpeed(400);
+		motorA.forward();
+		motorB.setSpeed(400);
+		motorB.forward();
+		Delay.msDelay(1400);
+	}
+
+	public void longLeg() { // drives vehicle forward
+		motorA.setSpeed(400);
+		motorA.forward();
+		motorB.setSpeed(400);
+		motorB.forward();
+		Delay.msDelay(2600);
+	}
+
+}

@@ -49,9 +49,9 @@ public class Marvin {
 		waitForKey(Button.ENTER);
 
 		// instantiate object from Class that needs to run
-		// LineFollower lineFollower = new LineFollower();
+//		 LineFollower lineFollower = new LineFollower();
 		// Run method
-		// lineFollower.followLine();
+//		 lineFollower.followLine();
 
 		// instantiate object from Class that needs to run
 //		LineFollowerLoek lineFollowerLoek = new LineFollowerLoek();
@@ -78,6 +78,8 @@ public class Marvin {
 
 		// run method grabBeacon
 		moveBeacon.grabBeacon();
+		
+		
 	}
 
 	public void waitForKey(Key key) {
