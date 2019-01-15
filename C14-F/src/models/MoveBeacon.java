@@ -15,9 +15,9 @@ public class MoveBeacon {
 
 	// method to grab the beacon, move it in an F-shape, and put it down
 	public void grabBeacon() {
-//		Driving drive = new Driving(); TODO: please test what this code does.
-//		drive.driveRectangle(500);
-		
+//	 Driving drive = new Driving();  TODO: graag testen en kijken wat deze methode doet.
+//	 drive.driveRectangle(500);
+//	 
 		Button.LEDPattern(4); // flash green led and
 		Sound.beepSequenceUp(); // make sound when ready.
 		arm.liftUp(); // lifts beacon up

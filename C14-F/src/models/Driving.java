@@ -1,24 +1,14 @@
 package models;
 
 import lejos.hardware.Sound;
-import lejos.robotics.navigation.MovePilot;
+
 
 public class Driving {
 	
 	private int travelDistance;
 	private int rotation;
-//	private static final int POSITIVE_INFINITY = 1/0;
 	
-	MovePilot pilot;
-	
-		
-	public Driving() {
-		super();
-	}
-
-	public Driving (MovePilot p) {
-		pilot = p;
-	}
+	Pilot pilot;
 	
 	public int getTravelDistance() {
 		return travelDistance;
@@ -40,27 +30,7 @@ public class Driving {
 			pilot.rotate(rotation);
 		}
 		
-	//methode om bepaald stuk rechtuit te rijden.
-		public void straight(int distance) {
-			pilot.travel(distance);
-		}
-		
-	//methode om rechtuit te rijden.
-		public void drive() {
-			pilot.forward();
-		}
-		
-	//methode om te roteren. 
-		public void turn (int bearing) {
-			pilot.rotate(-bearing);
-		}
 	
-	//methode om te roteren tot een stopsignaal. 
-				public void turning (boolean lineFound) {
-					pilot.rotate(-90, lineFound);
-				}
-			
-		
 	//methode om een enneagram te rijden (9 puntige ster) voor het zoeken van het beacon.
 		//Na iedere 500 mm rijden of na het keren wordt gecontroleerd of het beacon gevonden is.
 		public void roam(boolean beaconFound) {
@@ -77,11 +47,8 @@ public class Driving {
 				}
 			}
 		}
-				
-			
-		
-		
-		
+	
+
 	//methode om een vierkant te rijden en dit daarna ook te vieren!
 		public void driveRectangle(int distance) {
 			for (int i = 0; i<4; i++) {
@@ -96,16 +63,4 @@ public class Driving {
 			Sound.beepSequenceUp();
 			
 		}
-
-		public void driveCurve(double radius, double angle) {
-			// code die een bochtje draait
-			 pilot.arc(radius, angle);
-			
-			// TODO Auto-generated method stub
-			
-		}
-
-
-		
-			
-		}
+	}
