@@ -7,33 +7,27 @@ public class LiftArm {
 
 	private EV3LargeRegulatedMotor liftArm = new EV3LargeRegulatedMotor(MotorPort.B);// instantiate the connection of
 																						// the liftArm to port B
+//	private EV3LargeRegulatedMotor motorA = new EV3LargeRegulatedMotor(MotorPort.A);// instantiate the left motor
+//
+//	private EV3LargeRegulatedMotor motorB = new EV3LargeRegulatedMotor(MotorPort.D);// instantiate the right motor
 
-	// constructor
-	public LiftArm(EV3LargeRegulatedMotor liftArm) {
+	// no args constructor
+	public LiftArm() {
 		super();
-		this.liftArm = liftArm;
-	}
-
-	// getter
-	public EV3LargeRegulatedMotor getLiftArm() {
-		return liftArm;
-	}
-
-	// setter
-	public void setLiftArm(EV3LargeRegulatedMotor liftArm) {
-		this.liftArm = liftArm;
 	}
 
 	// methods for moving the LiftArm
 
 	public void liftUp() { // rotates the motor at a set speed and number of rotations
-		liftArm.setSpeed(1000); // initial speed set at 1,000 degrees per second
-		liftArm.rotate(3600); // initial number of rotations set at 10 (10 * 360)
+		liftArm.setSpeed(25); // initial speed set @25
+		liftArm.rotate(120); // initial degrees of rotations set @90
 	}
 
 	public void liftDown() { // rotates the motor at a set speed and number of rotations
-		liftArm.setSpeed(-1000); // initial speed set at -1,000 degrees per second
-		liftArm.rotate(3600); // initial number of rotations set at 10 (10 * 360)
+		liftArm.setSpeed(15); // initial speed set @15
+		liftArm.rotate(-120); // initial degrees of rotations set @-70
 	}
+	
+	// methods for moving the vehicle were moved to MarvinMover.java
 
 }

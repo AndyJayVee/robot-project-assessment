@@ -12,6 +12,7 @@ import models.Pilot;
 
 public class BeaconFinder {
 
+<<<<<<< HEAD
 	private static final int MAXIMUM_RANGE_IR_SENSOR = 150; // de maximum range is tussen de 100~200 centimeter
 															// afhankelijk van de bron
 	private EV3IRSensor ir = new EV3IRSensor(SensorPort.S4); 		// activeert een nieuwe IR-sensor op poort S4
@@ -21,6 +22,13 @@ public class BeaconFinder {
 	// initialize the Pilot and Driving in a correct manner
 	private Driving drive = new Driving();
 	private static final int ROAM_DISTANCE = 21474836;
+=======
+	private static final int DISTANCE_TRESHOLD_ROAM = 21474836;
+	
+	private EV3IRSensor ir = new EV3IRSensor(SensorPort.S4); // use port S4 for IR Sensor
+	private SensorMode seek = ir.getSeekMode(); // initiate seekmode
+	private float[] sample = new float[seek.sampleSize()]; // declare array to store samples form Sensor
+>>>>>>> 9e2e9884232eca8f141f9f6f355e6e35279a0df8
 	private boolean beaconFound = false;
 	private int bearing;
 	private int distance;
@@ -40,10 +48,11 @@ public class BeaconFinder {
 	// vanaf hier is de IR-sensorcode:
 
 	/**
-	 * When placed in area with beacon, it will roam untill sensor will measure it (inRange)
+	 * When placed in area with beacon, it will roam until sensor will measure it (inRange)
 	 * When inRsange it should switch to: turn&drive towards beacon.
 	 * NOTE: sensor is slow. Works, but it's not pretty
 	 */
+<<<<<<< HEAD
 	public void findBeacon() {
 		// @aut Loek: edit: instantiate Pilot and Driving
 		while (Button.ESCAPE.isUp()) {
@@ -67,12 +76,20 @@ public class BeaconFinder {
 					System.out.println("Start roaming");
 				} else if (distance <= MAXIMUM_RANGE_IR_SENSOR) { // maximum range IR sensor
 		while (Button.ESCAPE.isUp()) {
+=======
+		public void findBeacon() {
+		Pilot pilot = new Pilot();
+		Driving drive = new Driving(pilot.getPilot());
+
+		while (Button.DOWN.isUp()) {
+			// TODO seek.fetchSample(sample, 0); 
+			
+			//System.out.println("1st while. Bearing: " + bearing);
+>>>>>>> 9e2e9884232eca8f141f9f6f355e6e35279a0df8
 			distance = fetchDistance();
 			System.out.println("1st while. Distance: " + distance);
 			while (distance > 0) {
-				while (distance >= ROAM_DISTANCE) {
-					setBeaconFound(false);
-					
+				while (distance >= DISTANCE_TRESHOLD_ROAM) {					
 					bearing = fetchBearing();
 					distance = fetchDistance();
 					System.out.println("2. Roaming | Distance: " + distance);
@@ -80,7 +97,7 @@ public class BeaconFinder {
 					drive.roam(beaconFound);
 					distance = fetchDistance();
 				}
-				while (distance < ROAM_DISTANCE) { // inRange --> turn and drive to beacon
+				while (distance < DISTANCE_TRESHOLD_ROAM) { // inRange --> turn and drive to beacon
 					setBeaconFound(true);
 					System.out.println("Beacon found, going to beacon");
 					drive.turn(bearing); // gaat de robot in de richting van het beacon roteren met "bearing" graden
@@ -109,11 +126,10 @@ public class BeaconFinder {
 				}
 			}
 		}
-		// TODO is this needed?
 		ir.close();
 	}
 	/*
-	 * @return Fetch of bearing measurement from Sensor
+	 * @return Fetch bearing measurement from Sensor
 	 */
 	public int fetchBearing() {
 		// fetch measurement and store the value
@@ -122,7 +138,7 @@ public class BeaconFinder {
 		return bearing;
 	}
 	/**
-	 * @return Fetch of distance measurement from Senso
+	 * @return Fetch distance measurement from Sensor
 	 */
 	public int fetchDistance() {
 		// fetch measurement and store the value
