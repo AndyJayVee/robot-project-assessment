@@ -1,27 +1,29 @@
-// As of Sunday the primary experimental Class for LineFollower improvements
-
 package models;
 
+import lejos.hardware.Button;
 import lejos.hardware.Brick;
 import lejos.hardware.Button;
 import lejos.hardware.Key;
 import lejos.hardware.ev3.LocalEV3;
 import lejos.hardware.lcd.TextLCD;
+import lejos.hardware.port.MotorPort;
 import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3ColorSensor;
 import models.Driving;
 import models.Pilot;
+import models.MarvinMover;
 
-public class LineFollowerLoek {
+public class LineFollowerLoek { //implements Runnable {
 
-	private static Brick brick;
-	private static EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S2);
-	private static Pilot pilot = new Pilot();
-	private static Driving drive = new Driving(pilot.getPilot());
-
+	static Brick brick;
+	static EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S2);
+    static MarvinMover marvinMover;
+    
 	public LineFollowerLoek() {
 		super();
 	}
+	
+	LineFollowerLoek lineFollowerLoek = new LineFollowerLoek();
 
 	/**
 	 * method to follow a line / this works best if the marvin is placed on the
@@ -29,52 +31,19 @@ public class LineFollowerLoek {
 	 */
 
 	public void followLine() {
-		// set Sensor mode
+		// initialize array to fetch sample in
+		float[] scannedColor = new float[1];
 		sensor.setCurrentMode("Red");
 
-		// initialize array to fetch sample in
-		float[] lastFetchedValue = new float[1];
-		// Declare String that describes color of last-fetched Sensor float
-		String lastFetchedColor;
-		// Counter for #laps. Lap1 means 'now driving in lap 1, 0 completed'.
-		int lapCount = 0;
-		// declare array to store lapTime
-		// TODO ??? int[] lapTime = new int[2];
-		// while not pressed continue
-		while (Button.DOWN.isUp()) { // TODO (&& lapCount < 3) ???
-			// start fetching. Assumed it keeps fetching and updating so it will run correct
-			sensor.fetchSample(lastFetchedValue, 0);
-			while (lastFetchedValue[0] >= .20 && lastFetchedValue[0] <= .60) { // while grey
-				drive.drive(); // drive straight
-				lastFetchedColor = "Grey";
-				System.out.println(lastFetchedColor);
-				sensor.fetchSample(lastFetchedValue, 0);
+		while (Button.DOWN.isUp()) {
+			sensor.fetchSample(scannedColor, 0);
+			if (scannedColor[0] > .60) { // white
+				marvinMover.turnLeftOnWhite();
+			} else if (scannedColor[0] < .20) { // black
+				marvinMover.turnRightOnBlack();
+			} else { // grey
+		        marvinMover.driveStraightOnGrey();
 			}
-			while (lastFetchedValue[0] > .60) { // while white
-				drive.turn(-5); // turn left
-				lastFetchedColor = "White";
-				System.out.println(lastFetchedColor);
-				sensor.fetchSample(lastFetchedValue, 0);
-
-			}
-			while (lastFetchedValue[0] < .20) { // while black
-				drive.turn(5); // turn right
-				lastFetchedColor = "Black";
-				System.out.println(lastFetchedColor);
-				sensor.fetchSample(lastFetchedValue, 0);
-			}
-			// TODO
-			// if (sensor measures red finish line && lapCount == 0) {
-			// start.timer
-			// lapCount++;
-			// } else if (sensor measures red finish line && lapCount > 0) {
-			// stop.timer();
-			// lapTime[lapCount] = getLapTime();
-			// reset.timer();
-			// lapCount++;
-			// }
-			// print ("Lap "lapCount + " " + lapTime[lapCount - 1]) ??
-
 		}
 	}
 }

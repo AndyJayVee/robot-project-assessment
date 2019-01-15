@@ -6,6 +6,8 @@ import lejos.hardware.Button;
 import lejos.hardware.Key;
 import lejos.hardware.ev3.LocalEV3;
 import lejos.hardware.lcd.TextLCD;
+import lejos.hardware.motor.UnregulatedMotor;
+import lejos.hardware.port.MotorPort;
 import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3ColorSensor;
 import models.Driving;
@@ -21,6 +23,9 @@ public class LineFollower { //implements Runnable {
 	static Brick brick;
 	static EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S2);
 
+	static UnregulatedMotor motorA = new UnregulatedMotor(MotorPort.A);
+    static UnregulatedMotor motorB = new UnregulatedMotor(MotorPort.D);
+    
 	public LineFollower() {
 		super();
 	}
@@ -32,8 +37,8 @@ public class LineFollower { //implements Runnable {
 
 	public void followLine() {
 		// start with driving straight
-		Pilot pilot = new Pilot();
-		Driving drive = new Driving(pilot.getPilot());
+//		Pilot pilot = new Pilot();
+//		Driving drive = new Driving(pilot.getPilot());
 
 		// initialize array to fetch sample in
 		float[] scannedColor = new float[1];
@@ -45,12 +50,14 @@ public class LineFollower { //implements Runnable {
 		while (Button.DOWN.isUp()) {
 			sensor.fetchSample(scannedColor, 0);
 			if (scannedColor[0] > .60) { // white
-				drive.turn(-6);
+				motorA.setPower(-4);
+                motorB.setPower(-44);
 			} else if (scannedColor[0] < .20) { // black
-				drive.turn(6);
-//				drive.straight(Distance);
+				motorA.setPower(-48);
+                motorB.setPower(0);
 			} else { // grey
-				drive.straight(-10);
+		        motorA.setPower(-45);
+		        motorB.setPower(-45);
 			}
 		}
 	}
