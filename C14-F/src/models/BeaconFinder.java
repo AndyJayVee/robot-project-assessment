@@ -44,6 +44,8 @@ public class BeaconFinder {
 		Pilot pilot = new Pilot();
 		Driving drive = new Driving(pilot.getPilot());
 
+		//TODO loop never ends.
+		
 		while (Button.DOWN.isUp()) {
 			// TODO seek.fetchSample(sample, 0); 
 			
@@ -66,18 +68,18 @@ public class BeaconFinder {
 					System.out.println("2. inRange | Distance: " + distance);
 					System.out.println("2. inRange | Bearing: " + bearing);
 					// turn with bearing
-					drive.turn(bearing); 	
+					drive.pilot.rotate(-bearing); 	
 					distance = fetchDistance();	
 					// drive distance to beacon
-					drive.straight(distance);
+					drive.pilot.travel(distance*10);
 					// fetch another sample to test if movement was sufficient
 					distance = fetchDistance();
 					bearing = fetchBearing();
-				}
+				} 
 			}
 		}
 		ir.close();
-	}
+	} 
 	/*
 	 * @return Fetch bearing measurement from Sensor
 	 */
