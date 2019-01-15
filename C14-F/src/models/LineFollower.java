@@ -14,8 +14,8 @@ import models.Pilot;
 
 public class LineFollower { //implements Runnable {
 
-	static Brick brick;
-	static EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S2);
+//	static Brick brick;
+	private EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S2);
 	private MarvinMover marvinMover = new MarvinMover();
 
 	public LineFollower() {
@@ -28,6 +28,7 @@ public class LineFollower { //implements Runnable {
 	 */
 
 		public void followLine() {
+		System.out.println("followLine started");
 		// initialize array to fetch sample in
 		float[] scannedColor = new float[1];
 		sensor.setCurrentMode("Red");
@@ -35,11 +36,14 @@ public class LineFollower { //implements Runnable {
 		while (Button.DOWN.isUp()) {
 			sensor.fetchSample(scannedColor, 0);
 			if (scannedColor[0] > .60) { // white
+				System.out.println("White");
 				marvinMover.turnLeftOnWhite();
 			} else if (scannedColor[0] < .20) { // black
+				System.out.println("Black");
 				marvinMover.turnRightOnBlack();
 			} else { // grey
-		        marvinMover.driveStraightOnGrey();
+				System.out.println("Grey");
+				marvinMover.driveStraightOnGrey();
 			}
 		}
 	}

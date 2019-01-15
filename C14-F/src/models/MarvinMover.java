@@ -5,7 +5,6 @@
 package models;
 
 import lejos.hardware.motor.EV3LargeRegulatedMotor;
-import lejos.hardware.motor.UnregulatedMotor;
 import lejos.hardware.port.MotorPort;
 import lejos.utility.Delay;
 
@@ -30,8 +29,8 @@ public class MarvinMover {
 	}
 
 	public void driveStraightOnGrey() {
-		motorA.setSpeed(-75);
-		motorB.setSpeed(-75);
+		motorA.setSpeed(-65);
+		motorB.setSpeed(-65);
 	}
 
 	public void turn90DegreesLeft() { // turns vehicle
