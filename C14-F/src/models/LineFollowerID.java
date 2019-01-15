@@ -8,13 +8,7 @@ import lejos.utility.Delay;
 public class LineFollowerID {
 
 	private EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S2);
-	private MarvinMover marvinMover = new MarvinMover();
-	
-	// calibrated/tested with ColorSensor ID mode
-	private final static int black = 7;
-//  private final static int grey;
-	private final static int red = 0;
-	private final static int white = 6;
+	private MarvinMover marvinMover = new MarvinMover();	
 
 	public LineFollowerID() {
 		super();
@@ -27,20 +21,24 @@ public class LineFollowerID {
 
 	public void followLine() {
 		System.out.println("followLine started");
-		// initialize array to fetch sample in
-		float[] scannedColor = new float[3];
+		// initialize stopwatch
 		Stopwatch stopwatch = new Stopwatch(true);
 		Thread stopwatchThread = new Thread(stopwatch);
 		stopwatchThread.start();
-		// set sensor to 3 colors mode, gives int as color
+		// set sensor to colorID mode, gives int as color
 		sensor.setCurrentMode("ColorID");
 		int currentColor = sensor.getColorID();
+		// calibrated/tested with ColorSensor ID mode
+		final int black = 7;
+		final int red = 0;
+		final int white = 6;
+//		final int grey;
 
 		while (Button.DOWN.isUp()) {
 	
 			int lapCount = 0; // initialize on 0
 			if (currentColor == red && lapCount == 0) {
-				marvinMover.driveStraightOnGrey();
+				marvinMover.cruise(); // cruise is a bit slower to avoid crossing line too fast
 //				start.timer
 //					lapCount++;
 //				 } else if (currentColor == red && lapCount > 0) {
@@ -58,7 +56,7 @@ public class LineFollowerID {
 //				 start.timer();
 			} else if (currentColor == white) {
 				marvinMover.turnLeftOnWhite();
-			} else if (currentColor == black) { // black
+			} else if (currentColor == black) {
 				marvinMover.turnRightOnBlack();
 			} else { // all other values are considered grey
 				marvinMover.driveStraightOnGrey();
