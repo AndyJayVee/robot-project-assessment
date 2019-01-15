@@ -66,4 +66,19 @@ public class MarvinMover {
 		motorA.forward();
 		Delay.msDelay(8000);
 	}	
+	
+	public void driveSquare() { // drives vehicle forward
+		driveStraightOnGrey();
+		Delay.msDelay(4000);
+		turn90DegreesRight();
+		driveStraightOnGrey();
+		Delay.msDelay(4000);
+		turn90DegreesRight();
+		driveStraightOnGrey();
+		Delay.msDelay(4000);
+		turn90DegreesRight();
+		driveStraightOnGrey();
+		Delay.msDelay(4000);
+		turn90DegreesRight();
+	}	
 }

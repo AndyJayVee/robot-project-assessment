@@ -18,6 +18,7 @@ public class BeaconFinder {
 	private SensorMode seek = ir.getSeekMode(); // initiate seekmode
 	private float[] sample = new float[seek.sampleSize()]; // declare array to store samples form Sensor
 	private boolean beaconFound = false;
+	private MarvinMover marvinMover = new MarvinMover();
 
 	private int bearing;
 	private int distance;
@@ -54,7 +55,7 @@ public class BeaconFinder {
 					distance = fetchDistance();
 					System.out.println("2. Roaming | Distance: " + distance);
 					System.out.println("2. Roaming | Bearing: " + bearing);
-					drive.roam(beaconFound);
+					marvinMover.driveSquare();
 					distance = fetchDistance();
 				}
 				while (distance < DISTANCE_TRESHOLD_ROAM) { // inRange --> turn and drive to beacon
