@@ -2,15 +2,9 @@ package models;
 
 import lejos.hardware.Button;
 import lejos.hardware.Brick;
-import lejos.hardware.Button;
-import lejos.hardware.Key;
-import lejos.hardware.ev3.LocalEV3;
-import lejos.hardware.lcd.TextLCD;
-import lejos.hardware.port.MotorPort;
 import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3ColorSensor;
-import models.Driving;
-import models.Pilot;
+
 import models.MarvinMover;
 
 public class LineFollowerLoek { //implements Runnable {
