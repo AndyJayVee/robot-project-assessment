@@ -17,7 +17,6 @@ public class Stopwatch implements Runnable {
 	private Brick brick = LocalEV3.get();
 	private TextLCD display = brick.getTextLCD();
 	private String output1;
-	private String output2;
 
 	public Stopwatch(boolean running) {
 		super();
