@@ -23,10 +23,10 @@ public class LiftArm {
 		liftArm.rotate(90); // initial degrees of rotations set @90
 	}
 
-	public void moveBeacon() { // moves vehicle
-		for (int i = 0; i < 6; i++) { // drive a right-hand circle (left motor rotates twice as much and twice as fast as right motor)
+	public void driveWithBeacon() { // moves vehicle
+		for (int i = 0; i < 5; i++) { // drive a left-hand circle (left motor rotates twice as much and twice as fast as right motor)
 			leftMotor.setSpeed(200);
-			leftMotor.rotate(60);
+			leftMotor.rotate(220);
 			rightMotor.setSpeed(100);
 			rightMotor.rotate(30);
 		}
