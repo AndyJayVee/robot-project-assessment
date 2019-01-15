@@ -11,7 +11,7 @@ import models.MoveBeacon;
 
 public class GameLauncher {
 	private Brick brick = LocalEV3.get();
-	private TextLCD display = brick.getTextLCD();
+	private TextLCD display = brick.getTextLCD();   //TODO Eclipse zegt dat dit niet gebruikt wordt.
 
 	public GameLauncher() {
 		super();

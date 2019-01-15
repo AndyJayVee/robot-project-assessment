@@ -54,7 +54,7 @@ public class Menu {
 				display.drawString(" Press any key to ", 0, 2);
 				display.drawString("   Choose again   ", 0, 3);
 				display.drawString("or escape to stop ", 0, 6);
-Delay.msDelay(3000);
+				Delay.msDelay(3000);
 			} else if (pressedButton == Button.ID_ESCAPE) {
 				repeat = false;
 				currentGame = "nogame";
