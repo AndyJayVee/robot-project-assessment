@@ -52,11 +52,12 @@ public class Marvin {
 		display.drawString("     Foxtrot ", 0, 3);
 		display.drawString("   Press Enter", 0, 4);
 		waitForKey(Button.ENTER);
-
-		display.clear();
-
-		GameLauncher newGame = new GameLauncher();
-		newGame.launchGame();
+		LineFollower lineFollower = new LineFollower();
+		lineFollower.followLine();
+//		display.clear();
+//
+//		GameLauncher newGame = new GameLauncher();
+//		newGame.launchGame();
 	}
 	
 	public void waitForKey(Key key) {

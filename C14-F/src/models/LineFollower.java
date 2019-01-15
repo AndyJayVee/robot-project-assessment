@@ -1,12 +1,15 @@
 package models;
 
+import lejos.hardware.Brick;
 import lejos.hardware.Button;
 import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3ColorSensor;
+import lejos.utility.Delay;
 import models.MarvinMover;
 
 public class LineFollower {
 
+	static Brick brick;
 	private static EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S2);
 	private MarvinMover marvinMover = new MarvinMover();
 	private Stopwatch stopwatch = new Stopwatch(true);
@@ -35,7 +38,6 @@ public class LineFollower {
 			}
 		}
 		stopwatch.setNotStopped(false);
-		while (Button.ESCAPE.isUp()) {
-		}
+		Delay.msDelay(10000);
 	}
 }
