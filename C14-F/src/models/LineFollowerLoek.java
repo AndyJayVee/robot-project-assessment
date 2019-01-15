@@ -11,13 +11,13 @@ public class LineFollowerLoek { //implements Runnable {
 
 	static Brick brick;
 	static EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S2);
-    static MarvinMover marvinMover;
+    static MarvinMover marvinMover = new MarvinMover();
+	
+	LineFollowerLoek lineFollowerLoek = new LineFollowerLoek();
     
 	public LineFollowerLoek() {
 		super();
 	}
-	
-	LineFollowerLoek lineFollowerLoek = new LineFollowerLoek();
 
 	/**
 	 * method to follow a line / this works best if the marvin is placed on the

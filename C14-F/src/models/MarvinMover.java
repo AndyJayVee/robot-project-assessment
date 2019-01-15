@@ -14,6 +14,11 @@ public class MarvinMover {
 	static EV3LargeRegulatedMotor motorA = new EV3LargeRegulatedMotor(MotorPort.A);
 	static EV3LargeRegulatedMotor motorB = new EV3LargeRegulatedMotor(MotorPort.D);
 
+	
+	public MarvinMover() {
+		super();
+	}
+	
 	public void turnRightOnBlack() {
 		motorA.setSpeed(-48);
 		motorB.setSpeed(0);
@@ -61,4 +66,5 @@ public class MarvinMover {
 		motorA.forward();
 		Delay.msDelay(8000);
 	}
+	
 }
