@@ -45,7 +45,7 @@ public class BeaconFinder {
 		Pilot pilot = new Pilot();
 		Driving drive = new Driving(pilot.getPilot());
 
-		while (Button.ESCAPE.isUp()) {
+		while (Button.DOWN.isUp()) {
 			distance = fetchDistance();
 			System.out.println("1st while. Distance: " + distance);
 			while (distance > 0) {
