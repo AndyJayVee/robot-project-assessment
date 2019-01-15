@@ -51,13 +51,13 @@ public class LineFollower { //implements Runnable {
 			sensor.fetchSample(scannedColor, 0);
 			if (scannedColor[0] > .60) { // white
 				motorA.setPower(-4);
-                motorB.setPower(-60);
+                motorB.setPower(-55);
 			} else if (scannedColor[0] < .20) { // black
-				motorA.setPower(-70);
+				motorA.setPower(-60);
                 motorB.setPower(0);
 			} else { // grey
-		        motorA.setPower(-90);
-		        motorB.setPower(-90);
+		        motorA.setPower(-70);
+		        motorB.setPower(-70);
 			}
 		}
 	}
