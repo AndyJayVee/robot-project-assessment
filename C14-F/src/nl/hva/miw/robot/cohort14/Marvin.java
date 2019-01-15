@@ -2,7 +2,7 @@
  * @author loek 
  * Main Class. runEnter needs to be adjusted to let Marvin choose Game
  */
-
+	
 package nl.hva.miw.robot.cohort14;
 
 import lejos.hardware.Brick;
@@ -11,14 +11,15 @@ import lejos.hardware.Key;
 import lejos.hardware.ev3.LocalEV3;
 import lejos.hardware.lcd.TextLCD;
 import lejos.utility.Delay;
+import models.BeaconFinder;
 //import models.GameLauncher;
 import models.LineFollower;
+import models.LineFollowerRGB;
 
 
 public class Marvin {
 
 	Brick brick;
-//	static EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S2);
 
 	public Marvin() {
 		super();
@@ -51,9 +52,9 @@ public class Marvin {
 		waitForKey(Button.ENTER);
 
 		// instantiate object from Class that needs to run
-		LineFollower lineFollower = new LineFollower();
+//		LineFollower lineFollower = new LineFollower();
 		// Run method
-		lineFollower.followLine();
+//		lineFollower.followLine();
 		
 		// instantiate object from Class that needs to run
 //		LineFollowerLoek lineFollowerLoek = new LineFollowerLoek();
@@ -61,9 +62,9 @@ public class Marvin {
 //		lineFollowerLoek.followLine();
 		
 		// instantiate object from Class that needs to run
-//		LineFollowerFrank lineFollowerFrank = new LineFollowerLoek();
+		LineFollowerRGB lineFollowerRGB = new LineFollowerRGB();
 		// Run method
-//		lineFollowerFrank.followLine();
+		lineFollowerRGB.followLine();
 		
 		// instantiate object from Class that needs to run
 //		BeaconFinder beaconFinder = new BeaconFinder();
