@@ -53,7 +53,8 @@ public class Menu {
 				display.drawString("   Wrong button   ", 0, 1);
 				display.drawString(" Press any key to ", 0, 2);
 				display.drawString("   Choose again   ", 0, 3);
-				Delay.msDelay(3000);
+				display.drawString("or escape to stop ", 0, 6);
+Delay.msDelay(3000);
 			} else if (pressedButton == Button.ID_ESCAPE) {
 				repeat = false;
 				currentGame = "nogame";
@@ -72,10 +73,13 @@ public class Menu {
 
 	public String gameStopped(String gameName) {
 		String currentGame;
+		display.clear();
 		display.drawString("  " + gameName, 0, 1);
 		display.drawString("     stopped      ", 0, 2);
 		display.drawString("  Press any key   ", 0, 3);
 		display.drawString("    continue      ", 0, 4);
+		display.drawString("or escape to stop ", 0, 6);
+
 		int pressedButton = Button.waitForAnyPress();
 		if (pressedButton == Button.ID_ESCAPE) {
 			currentGame = "nogame";
