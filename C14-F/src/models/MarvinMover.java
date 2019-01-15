@@ -5,8 +5,8 @@
 package models;
 
 import lejos.hardware.motor.EV3LargeRegulatedMotor;
-import lejos.hardware.motor.UnregulatedMotor;
 import lejos.hardware.port.MotorPort;
+import lejos.utility.Delay;
 
 public class MarvinMover {
 	
@@ -27,5 +27,38 @@ public class MarvinMover {
 		motorA.setSpeed(-45);
         motorB.setSpeed(-45);
     }
+    
+    public void turn90DegreesLeft() { // turns vehicle
+		motorA.setSpeed(200); // 90 degrees left
+		motorA.rotate(500);
+	}
+
+	public void turn90DegreesRight() { // turns vehicle
+		motorB.setSpeed(200); // 90 degrees right
+		motorB.rotate(500);
+	}
+
+	public void turn45DegreesLeft() { // turns vehicle
+		motorA.setSpeed(200); // 45 degrees left
+		motorA.rotate(250);
+	}
+	
+	public void turn45DegreesRight() { // turns vehicle
+		motorB.setSpeed(200); // 45 degrees right
+		motorB.rotate(250);
+	}
+
+	public void turn180Degrees() { // turns vehicle
+		motorB.setSpeed(200); // 180 degrees right
+		motorB.rotate(1000);
+	}
+
+	public void driveForward() { // drives vehicle forward
+		motorB.setSpeed(200);
+		motorB.forward();
+		motorA.setSpeed(200);
+		motorA.forward();
+		Delay.msDelay(8000);
+	}
 }
 

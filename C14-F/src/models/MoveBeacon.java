@@ -1,11 +1,9 @@
 package models;
 
-import lejos.hardware.Button;
-import lejos.hardware.Sound;
-
 public class MoveBeacon {
 
 	private LiftArm arm = new LiftArm();
+	private MarvinMover mover = new MarvinMover();
 
 	// no args constructor
 	public MoveBeacon() {
@@ -19,34 +17,34 @@ public class MoveBeacon {
 		arm.liftUp(); // lifts beacon up
 		System.out.println("lifted up");
 
-		arm.driveForward(); // leg 1a. moves beacon (according to LiftArm.java specifications)
+		mover.driveForward(); // leg 1a. moves beacon (according to LiftArm.java specifications)
 		System.out.println("drove forward");
 
-		arm.driveForward(); // leg 1b. moves beacon (according to LiftArm.java specifications)
+		mover.driveForward(); // leg 1b. moves beacon (according to LiftArm.java specifications)
 		System.out.println("drove forward");
 
-		arm.turn90DegreesRight(); // leg 2. moves beacon (according to LiftArm.java specifications)
+		mover.turn90DegreesRight(); // leg 2. moves beacon (according to LiftArm.java specifications)
 		System.out.println("turned right");
 
-		arm.driveForward(); // leg 2. moves beacon (according to LiftArm.java specifications)
+		mover.driveForward(); // leg 2. moves beacon (according to LiftArm.java specifications)
 		System.out.println("drove forward");
 
-		arm.turn180Degrees(); // leg 3. moves beacon (according to LiftArm.java specifications)
+		mover.turn180Degrees(); // leg 3. moves beacon (according to LiftArm.java specifications)
 		System.out.println("turned 180 degrees");
 
-		arm.driveForward(); // leg 3. moves beacon (according to LiftArm.java specifications)
+		mover.driveForward(); // leg 3. moves beacon (according to LiftArm.java specifications)
 		System.out.println("drove forward");
 
-		arm.turn90DegreesLeft(); // leg 4. moves beacon (according to LiftArm.java specifications)
+		mover.turn90DegreesLeft(); // leg 4. moves beacon (according to LiftArm.java specifications)
 		System.out.println("turned left");
 
-		arm.driveForward(); // leg 4. moves beacon (according to LiftArm.java specifications)
+		mover.driveForward(); // leg 4. moves beacon (according to LiftArm.java specifications)
 		System.out.println("drove forward");
 
-		arm.turn90DegreesLeft(); // leg 5. moves beacon (according to LiftArm.java specifications)
+		mover.turn90DegreesLeft(); // leg 5. moves beacon (according to LiftArm.java specifications)
 		System.out.println("turned left");
 
-		arm.driveForward(); // leg 5. moves beacon (according to LiftArm.java specifications)
+		mover.driveForward(); // leg 5. moves beacon (according to LiftArm.java specifications)
 		System.out.println("drove forward");
 
 		arm.liftDown(); // puts beacon down
