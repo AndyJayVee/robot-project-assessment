@@ -11,10 +11,8 @@ public class LineFollowerLoek { //implements Runnable {
 
 	static Brick brick;
 	static EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S2);
-    static MarvinMover marvinMover = new MarvinMover();
+    private MarvinMover marvinMover = new MarvinMover();
 	
-	LineFollowerLoek lineFollowerLoek = new LineFollowerLoek();
-    
 	public LineFollowerLoek() {
 		super();
 	}
