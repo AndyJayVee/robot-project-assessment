@@ -37,14 +37,6 @@ public class Pilot {
 	Wheel rightWheel = WheeledChassis.modelWheel(Motor.D, WHEEL_DIAMETER).offset(0.5 * TRACK_WIDTH);
 	Chassis chassis = new WheeledChassis(new Wheel[] {leftWheel, rightWheel}, WheeledChassis.TYPE_DIFFERENTIAL);
 	pilot = new MovePilot(chassis);
-	
-	drive = new Driving(pilot);
-	drive.travelAndRotate();
-	
-		pilot.setLinearSpeed(linearSpeed);
-		pilot.setAngularSpeed(angularSpeed);
-	
-	pilot.stop();
 	}
 }
     

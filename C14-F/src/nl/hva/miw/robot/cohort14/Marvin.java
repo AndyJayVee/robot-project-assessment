@@ -38,24 +38,23 @@ public class Marvin {
 		// run method to ask for Enter key (comment/uncomment the lines in method to
 		// run)
 		marvin.runEnter();
-
 	}
 
 	/**
-	 * This method waits for Enter key After Enter it will invoke followLine()
+	 * This method waits for Enter key
 	 */
 
 	private void runEnter() {
 		TextLCD display = brick.getTextLCD();
-		display.drawString("    Foxtrot ", 0, 3);
-		display.drawString("  Press Enter", 0, 4);
+//		display.drawString("123456789987654321", 0, 1); ruler string
+		display.drawString("      Foxtrot     ", 0, 3);
+		display.drawString("    Press Enter   ", 0, 4);
 		waitForKey(Button.ENTER);
 
 		display.clear();
 
 		GameLauncher newGame = new GameLauncher();
 		newGame.launchGame();
-
 	}
 
 	public void waitForKey(Key key) {
