@@ -1,6 +1,6 @@
 /**
  * @author loek 
- * Main Class including followLine
+ * Main Class. runEnter needs to be adjusted to let Marvin choose Game
  */
 
 package nl.hva.miw.robot.cohort14;
@@ -13,13 +13,8 @@ import lejos.hardware.lcd.TextLCD;
 import lejos.utility.Delay;
 import models.BeaconFinder;
 import models.Driving;
-import models.LineFollower;
-import models.LineFollowerFrank;
-import models.Pilot;
-
 //import models.GameLauncher;
 import models.LineFollower;
-// import models.LineFollowerFrank;
 import models.Pilot;
 
 public class Marvin {
@@ -33,59 +28,54 @@ public class Marvin {
 	}
 
 	public static void main(String[] args) {
-				
 		// initialize a Marvin object
 		Marvin marvin = new Marvin();
 
-		// instantiate LineFollower in a thread
-
-
 //		GameLauncher newGame = new GameLauncher();
 //		newGame.welcomeMenu();
-		// newGame.launchGame();
-		
-		
-		
-		
-		// instantiate LineFollower
-//		LineFollower lineFollower = new LineFollower();
-		
-		// instantiate LineFollowerFrank
-//		LineFollowerFrank lineFollowerFrank = new LineFollowerFrank();
-		
-		// instantiate BeaconFinder
-//		BeaconFinder beaconFinder = new BeaconFinder();
+//		newGame.launchGame();
+
 
 		// run method to ask for Enter key (this will invoke lineFollower())
-		 marvin.runEnter();
-
-
-		// run method LineFollowerFrank()
-		// lineFollowerFrank.followLine();
-		
-		// run method BeaconFinder()
-//		beaconFinder.findBeacon();
-
-	}
-
-
-	/** This method waits for Enter key
-	 *  After Enter it will invoke followLine()
+		marvin.runEnter();
 	
 	}
 
 	/** This method waits for Enter key
-	 * After Enter it will invoke followLine()
+	 * After Enter it will invoke the method from Class which is UNCOMMENTED
+	 * NOTE: comment other methods to refrain Marvin to run other Classes
 	 */
 
 	private void runEnter() {
 		TextLCD display = brick.getTextLCD();
 		display.drawString(" Foxtrot ", 0, 3);
-		display.drawString(" Press Enter for Line", 0, 4);
+		display.drawString(" Press Enter", 0, 4);
 		waitForKey(Button.ENTER);
-		// initialize LineFollower in a threadi
-		Thread linefollerThread = new Thread(new LineFollowerFrank());
-		linefollerThread.start();
+
+		// instantiate object from Class that needs to run
+		LineFollower lineFollower = new LineFollower();
+		// Run method
+		lineFollower.followLine();
+		
+		// instantiate object from Class that needs to run
+//		LineFollowerLoek lineFollowerLoek = new LineFollowerLoek();
+		// Run method
+//		lineFollowerLoek.followLine();
+		
+		// instantiate object from Class that needs to run
+//		LineFollowerFrank lineFollowerFrank = new LineFollowerLoek();
+		// Run method
+//		lineFollowerFrank.followLine();
+		
+		// instantiate object from Class that needs to run
+//		BeaconFinder beaconFinder = new BeaconFinder();
+		// Run method
+//		beaconFinder.findBeacon();
+		
+		// instantiate object from Class that needs to run
+//		BeaconFinderLoek beaconFinderLoek = new BeaconFinderLoek();
+		// Run method
+//		beaconFinderLoek.findBeacon();
 	}
 
 	
