@@ -31,34 +31,24 @@ public class Stopwatch implements Runnable {
 	@Override
 	public void run() {
 		try {
-			display.clear();
+			startTime = System.currentTimeMillis();
 			while (running) {
-				startTime = System.currentTimeMillis();
-				while (elapsedTime < 100) {
-					currentTime = System.currentTimeMillis();
-					elapsedTime = currentTime - startTime;
-				}
-				tenthOfSeconds++;
-				elapsedTime = 0;
-				if (tenthOfSeconds > 9) {
-					tenthOfSeconds = 0;
-					seconds++;
-				}
-				if (seconds > 59) {
-					seconds = 0;
-					minutes++;
-				}
-				if (minutes > 59) {
-					minutes = 0;
-					hours++;
-				}
 				output1 = String.format("\n%d : %d : %d.%d", hours, minutes, seconds, tenthOfSeconds);
-				display.drawString((output1),3, 3);
+				display.drawString((output1), 3, 3);
+				Thread.sleep(100);
+				display.clear();
+				currentTime = System.currentTimeMillis();
+				elapsedTime = currentTime - startTime;
+				hours = (int) elapsedTime / (1000 * 60 * 60);
+				minutes = (int) elapsedTime % (1000 * 60 * 60) / (1000 * 60);
+				seconds = (int) elapsedTime % (1000 * 60) / 1000;
+				tenthOfSeconds = (int) elapsedTime % (1000) / 100;
 			}
-			output2 = String.format("%d : %d : %d.%d", hours, minutes, seconds, tenthOfSeconds);
-			display.drawString(("Final time:"),4, 2);
-			display.drawString((output2),3, 3);
-			
+			output1 = String.format("\n%d : %d : %d.%d", hours, minutes, seconds, tenthOfSeconds);
+			display.drawString((output1), 3, 3);
+
+			display.drawString(("Final time:"), 3, 2);
+	
 		} catch (Exception e) {
 			System.out.println("Oops, something went wrong with the stopwatch");
 		}

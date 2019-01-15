@@ -11,11 +11,11 @@ import lejos.hardware.Key;
 import lejos.hardware.ev3.LocalEV3;
 import lejos.hardware.lcd.TextLCD;
 import lejos.utility.Delay;
-import models.BeaconFinder;
-import models.Driving;
+//import models.BeaconFinder;
+//import models.Driving;
 //import models.GameLauncher;
 import models.LineFollower;
-import models.Pilot;
+//import models.Pilot;
 
 public class Marvin {
 
@@ -53,9 +53,13 @@ public class Marvin {
 		waitForKey(Button.ENTER);
 
 		// instantiate object from Class that needs to run
-		LineFollower lineFollower = new LineFollower();
+//		LineFollower lineFollower = new LineFollower();
 		// Run method
+//		lineFollower.followLine();
+
+		LineFollower lineFollower = new LineFollower();
 		lineFollower.followLine();
+		
 		
 		// instantiate object from Class that needs to run
 //		LineFollowerLoek lineFollowerLoek = new LineFollowerLoek();

@@ -14,22 +14,14 @@ public class BeaconFinder {
 
 	private static final int MAXIMUM_RANGE_IR_SENSOR = 150; // de maximum range is tussen de 100~200 centimeter
 															// afhankelijk van de bron
-	EV3IRSensor ir = new EV3IRSensor(SensorPort.S4); 		// activeert een nieuwe IR-sensor op poort S4
-	SensorMode seek = ir.getSeekMode(); 					// activeert de Seek modus
-	float[] sample = new float[seek.sampleSize()]; 			// maakt array met sample informatie
+	private EV3IRSensor ir = new EV3IRSensor(SensorPort.S4); 		// activeert een nieuwe IR-sensor op poort S4
+	private SensorMode seek = ir.getSeekMode(); 					// activeert de Seek modus
+	private float[] sample = new float[seek.sampleSize()]; 			// maakt array met sample informatie
 	// edit Loek
 	// initialize the Pilot and Driving in a correct manner
-	Driving drive = new Driving();
-	Pilot pilot = new Pilot();
+	private Driving drive = new Driving();
 	private static final int ROAM_DISTANCE = 21474836;
-
-	private static final int MAXIMUM_RANGE_IR_SENSOR = 150; // based on max range Sensor
-
-	private EV3IRSensor ir = new EV3IRSensor(SensorPort.S4); // use port S4 for IR Sensor
-	private SensorMode seek = ir.getSeekMode(); // initiate seekmode
-	private float[] sample = new float[seek.sampleSize()]; // declare array to store samples form Sensor
 	private boolean beaconFound = false;
-
 	private int bearing;
 	private int distance;
 
@@ -41,8 +33,6 @@ public class BeaconFinder {
 		this.beaconFound = beaconFound;
 	}
 
-	public BeaconFinder() { // no args constructor
-	// no args cons
 	public BeaconFinder() {
 		super();
 	}

@@ -6,55 +6,23 @@ import lejos.robotics.chassis.Wheel;
 import lejos.robotics.chassis.WheeledChassis;
 import lejos.robotics.navigation.MovePilot;
 
-public class Pilot {
+public class Pilot extends MovePilot{
 
-	private MovePilot pilot;
-	private Wheel leftWheel = WheeledChassis.modelWheel(Motor.A, WHEEL_DIAMETER).offset(-0.5 * TRACK_WIDTH);
-	private Wheel rightWheel = WheeledChassis.modelWheel(Motor.D, WHEEL_DIAMETER).offset(0.5 * TRACK_WIDTH);
-	private Chassis chassis = new WheeledChassis(new Wheel[] {leftWheel, rightWheel}, WheeledChassis.TYPE_DIFFERENTIAL);
-	private static final double MAX_LINEAR_SPEED = 350;
-//	private static final double MAX_ANGULAR_SPEED = 0;
 	private static final double WHEEL_DIAMETER = 43.2; // Wheel diameter and offset (half track width) is set in mm.
 	private static final double TRACK_WIDTH = 114.0;
-	private double linearSpeed = MAX_LINEAR_SPEED;
-	private double angularSpeed = 350;
-	private boolean turning = true;
-	private double radius;
-	private double angle;
-	
-	//Pilot constructor
-	public Pilot() {	
-	pilot = new MovePilot(chassis);
-	pilot.setLinearSpeed(linearSpeed);
-	pilot.setAngularSpeed(angularSpeed);
-	}
 		
-
-	public void setTurning(boolean turning) {
-		this.turning = turning;
-	}
-
-
-	public void setRadius(double radius) {
-		this.radius = radius;
-	}
-
-	public void setAngle(double angle) {
-		this.angle = angle;
-	}
-
-
-	public void setLinearSpeed(double linearSpeed) {
-		this.linearSpeed = linearSpeed;
-	}
-
-	public void setAngularSpeed(double angularSpeed) {
-		this.angularSpeed = angularSpeed;
-	}
 	
-	public MovePilot getPilot() {
-		return pilot;
+	public Pilot(Chassis chassis) {
+		super(chassis);
 	}
+
+	public Pilot() {	
+		super(new WheeledChassis(
+				new Wheel[] {WheeledChassis.modelWheel(Motor.A, WHEEL_DIAMETER).offset(-0.5 * TRACK_WIDTH), 
+							WheeledChassis.modelWheel(Motor.D, WHEEL_DIAMETER).offset(0.5 * TRACK_WIDTH)}, 
+				WheeledChassis.TYPE_DIFFERENTIAL));
+	}	
+}
 	
 	
     
