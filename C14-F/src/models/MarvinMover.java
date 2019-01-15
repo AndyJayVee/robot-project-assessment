@@ -32,7 +32,7 @@ public class MarvinMover {
 	public void driveStraightOnGrey() {
 		motorA.setSpeed(-75);
 		motorB.setSpeed(-75);
-	
+	}
 
 	public void turn90DegreesLeft() { // turns vehicle
 		motorA.setSpeed(200); // 90 degrees left
