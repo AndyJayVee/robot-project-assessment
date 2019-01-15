@@ -30,13 +30,10 @@ public class LineFollower {
 		while (Button.DOWN.isUp()) {
 			sensor.fetchSample(scannedColor, 0);
 			if (scannedColor[0] > .60) { // white
-				System.out.println("White");
 				marvinMover.turnLeftOnWhite();
 			} else if (scannedColor[0] < .20) { // black
-				System.out.println("Black");
 				marvinMover.turnRightOnBlack();
 			} else { // grey
-				System.out.println("Grey");
 				marvinMover.driveStraightOnGrey();
 			}
 		}
