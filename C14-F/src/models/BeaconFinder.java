@@ -40,16 +40,18 @@ public class BeaconFinder {
 	 * When inRsange it should switch to: turn&drive towards beacon.
 	 * NOTE: sensor is slow. Works, but it's not pretty
 	 */
-	public void findBeacon() {
+		public void findBeacon() {
 		Pilot pilot = new Pilot();
 		Driving drive = new Driving(pilot.getPilot());
 
-		while (Button.ESCAPE.isUp()) {
+		while (Button.DOWN.isUp()) {
+			// TODO seek.fetchSample(sample, 0); 
+			
+			//System.out.println("1st while. Bearing: " + bearing);
 			distance = fetchDistance();
 			System.out.println("1st while. Distance: " + distance);
 			while (distance > 0) {
-				while (distance >= DISTANCE_TRESHOLD_ROAM) {
-					setBeaconFound(false);
+				while (distance >= ROAM_DISTANCE) {					
 					bearing = fetchBearing();
 					distance = fetchDistance();
 					System.out.println("2. Roaming | Distance: " + distance);
@@ -57,7 +59,7 @@ public class BeaconFinder {
 					drive.roam(beaconFound);
 					distance = fetchDistance();
 				}
-				while (distance < DISTANCE_TRESHOLD_ROAM) { // inRange --> turn and drive to beacon
+				while (distance < ROAM_DISTANCE) { // inRange --> turn and drive to beacon
 					setBeaconFound(true);
 					bearing = fetchBearing();	
 					distance = fetchDistance();
@@ -74,7 +76,6 @@ public class BeaconFinder {
 				}
 			}
 		}
-		// TODO is this needed?
 		ir.close();
 	}
 	/*
