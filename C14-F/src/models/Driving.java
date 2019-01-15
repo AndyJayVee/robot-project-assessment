@@ -8,7 +8,7 @@ public class Driving {
 	private int travelDistance;
 	private int rotation;
 	
-	Pilot pilot;
+	Pilot pilot = new Pilot();
 	
 	public int getTravelDistance() {
 		return travelDistance;
