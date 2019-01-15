@@ -16,10 +16,6 @@ import models.Pilot;
 
 public class LineFollower { //implements Runnable {
 
-//	private LineFollower lineFollower = new LineFollower();
-//	static Brick brick;
-
-
 	static Brick brick;
 	static EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S2);
 	private MarvinMover marvinMover = new MarvinMover();
