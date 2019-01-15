@@ -55,12 +55,14 @@ public class BeaconFinder {
 			Roaming roaming = new Roaming(beaconFound);
 			Thread roamThread = new Thread(roaming);
 			while (distance > 0) {
+				if (distance >= DISTANCE_TRESHOLD_ROAM) {
+					roamThread.start();
+				}
 				while (distance >= DISTANCE_TRESHOLD_ROAM) {					
 					bearing = fetchBearing();
 					distance = fetchDistance();
 					System.out.println("2. Roaming | Distance: " + distance);
 					System.out.println("2. Roaming | Bearing: " + bearing);
-					roamThread.start();
 					distance = fetchDistance();
 				}
 				roaming.setBeaconFound(true);
