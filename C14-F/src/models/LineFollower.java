@@ -23,9 +23,9 @@ public class LineFollower {
 		System.out.println("followLine started");
 		// initialize array to fetch sample in
 		float[] scannedColor = new float[1];
-		Stopwatch stopwatch = new Stopwatch();
-		Thread stopwatchThread = new Thread(stopwatch);
-		stopwatchThread.start();
+	//	Stopwatch stopwatch = new Stopwatch();
+	//	Thread stopwatchThread = new Thread(stopwatch);
+	//	stopwatchThread.start();
 		sensor.setCurrentMode("Red");
 		while (Button.DOWN.isUp()) {
 			sensor.fetchSample(scannedColor, 0);
@@ -37,7 +37,7 @@ public class LineFollower {
 				marvinMover.driveStraightOnGrey();
 			}
 		}
-		stopwatch.setNotStopped(false);
-		Delay.msDelay(10000);
+	//	stopwatch.setNotStopped(false);
+	//	Delay.msDelay(10000);
 	}
 }
