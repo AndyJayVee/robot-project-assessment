@@ -12,10 +12,8 @@ import models.Pilot;
 
 public class BeaconFinder {
 
-	private static final int ROAM_DISTANCE = 21474836;
-
-	private static final int MAXIMUM_RANGE_IR_SENSOR = 150; // based on max range Sensor
-
+	private static final int DISTANCE_TRESHOLD_ROAM = 21474836;
+	
 	private EV3IRSensor ir = new EV3IRSensor(SensorPort.S4); // use port S4 for IR Sensor
 	private SensorMode seek = ir.getSeekMode(); // initiate seekmode
 	private float[] sample = new float[seek.sampleSize()]; // declare array to store samples form Sensor
@@ -38,7 +36,7 @@ public class BeaconFinder {
 	}
 
 	/**
-	 * When placed in area with beacon, it will roam untill sensor will measure it (inRange)
+	 * When placed in area with beacon, it will roam until sensor will measure it (inRange)
 	 * When inRsange it should switch to: turn&drive towards beacon.
 	 * NOTE: sensor is slow. Works, but it's not pretty
 	 */
@@ -50,9 +48,8 @@ public class BeaconFinder {
 			distance = fetchDistance();
 			System.out.println("1st while. Distance: " + distance);
 			while (distance > 0) {
-				while (distance >= ROAM_DISTANCE) {
+				while (distance >= DISTANCE_TRESHOLD_ROAM) {
 					setBeaconFound(false);
-					
 					bearing = fetchBearing();
 					distance = fetchDistance();
 					System.out.println("2. Roaming | Distance: " + distance);
@@ -60,7 +57,7 @@ public class BeaconFinder {
 					drive.roam(beaconFound);
 					distance = fetchDistance();
 				}
-				while (distance < ROAM_DISTANCE) { // inRange --> turn and drive to beacon
+				while (distance < DISTANCE_TRESHOLD_ROAM) { // inRange --> turn and drive to beacon
 					setBeaconFound(true);
 					bearing = fetchBearing();	
 					distance = fetchDistance();
@@ -81,7 +78,7 @@ public class BeaconFinder {
 		ir.close();
 	}
 	/*
-	 * @return Fetch of bearing measurement from Sensor
+	 * @return Fetch bearing measurement from Sensor
 	 */
 	public int fetchBearing() {
 		// fetch measurement and store the value
@@ -90,7 +87,7 @@ public class BeaconFinder {
 		return bearing;
 	}
 	/**
-	 * @return Fetch of distance measurement from Senso
+	 * @return Fetch distance measurement from Sensor
 	 */
 	public int fetchDistance() {
 		// fetch measurement and store the value
