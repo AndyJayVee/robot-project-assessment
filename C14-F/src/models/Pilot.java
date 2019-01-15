@@ -18,6 +18,9 @@ public class Pilot {
 	private static final double TRACK_WIDTH = 114.0;
 	private double linearSpeed = MAX_LINEAR_SPEED;
 	private double angularSpeed = 350;
+	private boolean turning = true;
+	private double radius;
+	private double angle;
 	
 	//Pilot constructor
 	public Pilot() {	
@@ -25,7 +28,22 @@ public class Pilot {
 	pilot.setLinearSpeed(linearSpeed);
 	pilot.setAngularSpeed(angularSpeed);
 	}
-	
+		
+
+	public void setTurning(boolean turning) {
+		this.turning = turning;
+	}
+
+
+	public void setRadius(double radius) {
+		this.radius = radius;
+	}
+
+	public void setAngle(double angle) {
+		this.angle = angle;
+	}
+
+
 	public void setLinearSpeed(double linearSpeed) {
 		this.linearSpeed = linearSpeed;
 	}
@@ -38,8 +56,7 @@ public class Pilot {
 		return pilot;
 	}
 	
-
-}
+	
     
     
 

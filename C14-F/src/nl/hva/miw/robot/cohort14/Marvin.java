@@ -51,7 +51,7 @@ public class Marvin {
 //		LineFollower lineFollower = new LineFollower();
 		
 		// instantiate LineFollowerFrank
-		LineFollowerFrank lineFollowerFrank = new LineFollowerFrank();
+//		LineFollowerFrank lineFollowerFrank = new LineFollowerFrank();
 		
 		// instantiate BeaconFinder
 //		BeaconFinder beaconFinder = new BeaconFinder();
@@ -83,10 +83,9 @@ public class Marvin {
 		display.drawString(" Foxtrot ", 0, 3);
 		display.drawString(" Press Enter for Line", 0, 4);
 		waitForKey(Button.ENTER);
-		// initialize LineFollower in a thread
-//		LineFollowerFrank lineFollowerFrank = new LineFollowerFrank();
-//		Thread lineFollowerThread = new Thread(lineFollowerFrank);
-//		lineFollowerThread.start();
+		// initialize LineFollower in a threadi
+		Thread linefollerThread = new Thread(new LineFollowerFrank());
+		linefollerThread.start();
 	}
 
 	

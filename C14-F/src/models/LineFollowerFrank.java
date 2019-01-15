@@ -5,67 +5,86 @@ import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3ColorSensor;
 import models.Pilot;
 
-public class LineFollowerFrank implements Runnable{
+public class LineFollowerFrank implements Runnable {
 
-	static EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S2);
-	Pilot pilot = new Pilot();
-	float gray;
-	float sumOfMeasurements = 0;
-
+	private static EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S2);
+	private Pilot pilot = new Pilot();
+	private Stopwatch stopwatch = new Stopwatch(true);
+	private boolean driving = true;
+	private boolean turning = true;
+	private Forward drive = new Forward(driving);
+	private Thread stopwatchThread = new Thread(stopwatch);
+	private Thread turningThread = new Thread(pilot);
+	private Thread forwardDriveThread = new Thread(drive);
+	private float[] scannedColor = new float[1];
+	private static final double ANGLE_LEFT = 135;
+	private static final double ANGLE_RIGHT = -135;
+	private static final double RADIUS = 50;
+	
+	
 	public LineFollowerFrank() {
 		super();
 	}
-
+ 	
+	
 	@Override
 	public void run() {
 		try {
-			while (Button.DOWN.isUp()) {
-				pilot.getPilot().forward();
-				gray = currentGray();
-				while (gray >= .20 && gray <= .60) {
-					pilot.getPilot().forward(); // Continuous driving if average measurement is between specified values
-												// (0.2 and 0.6)
-					gray = currentGray(); // updating gray value with current gray value.
-				}
-				pilot.getPilot().stop();
-				if (gray < .20) {
-					while (gray < .45) { // black (need to turn right).
-						pilot.getPilot().rotateRight(); // turns robot right
-						gray = currentGray(); // updates gray value
+			sensor.setCurrentMode("Red");
+			stopwatchThread.start();
+			pilot.setLinearSpeed(50);
+			pilot.setAngularSpeed(50);
+			System.out.println("A");
+			while (Button.ENTER.isUp()) {
+				sensor.fetchSample(scannedColor, 0);
+				System.out.println("B"+ scannedColor[0]);
+				if (scannedColor[0] > .65) {	
+				while (scannedColor[0] > .60) {
+						pilot.setAngle(ANGLE_LEFT);
+						pilot.setRadius(RADIUS);
+						pilot.setTurning(turning);
+						pilot.setAngularSpeed(50);
+						turningThread.start();
+						sensor.fetchSample(scannedColor, 0); // updates gray value
+						System.out.println("C" + scannedColor[0]);
 					}
+					turning = false;
+					pilot.setTurning(turning);
+					
 				}
-				if (gray > .60) {
-					while (gray > .45) { // white (need to turn left).
-						pilot.getPilot().rotateLeft(); // turns robot left
-						gray = currentGray(); // updates gray value
+				if (scannedColor[0] < .2) {
+					while (scannedColor[0] < .35) {
+						// black (need to turn right).
+						pilot.setAngle(ANGLE_RIGHT);
+						pilot.setRadius(RADIUS);
+						pilot.setTurning(turning);
+						pilot.setAngularSpeed(50);
+						turningThread.start();
+						sensor.fetchSample(scannedColor, 0); // updates gray value
+						System.out.println("D" + scannedColor[0]);
 					}
-				}
+					turning = false;
+					pilot.setTurning(turning);
+					
+					
+				} else
+					while (scannedColor[0] <= 0.6 && scannedColor[0] >= 0.2) {
+						pilot.setLinearSpeed(50);
+						forwardDriveThread.start(); // Continuous driving if average measurement is between specified
+													// values (0.2 and 0.6).
+						sensor.fetchSample(scannedColor, 0);
+						System.out.println("E" + scannedColor[0]);
+					}
+				driving = false;
+				drive.setContinueDriving(driving);
+				
 			}
+			stopwatch.setNotStopped(false);
+			Thread.sleep(10000);
+
 
 		} catch (Exception e) {
-			System.out.printf("Oops, something went wrong\n with the line follower");
+			System.out.printf("Oops, line follower");
 		}
-	}
-	
-	public void followLine() {
-		
-	}
-
-	public float currentGray() {
-		// initialize array to fetch sample in
-		float[] scannedColor = new float[1];
-		float[] averagedScan = new float[5]; // Making new float array to put 5 values from scannedColor in.
-		sensor.setCurrentMode("Red");
-		sensor.fetchSample(scannedColor, 0);
-
-		for (int i = 0; i < averagedScan.length; i++) { // filling the array.
-			averagedScan[i] = scannedColor[0];
-			i++;
-		}
-		for (float measurement : averagedScan) { // For each loop summing the 5 values from the array
-			sumOfMeasurements += measurement;
-		}
-		float averageMeasurement = sumOfMeasurements / averagedScan.length; // calculating average
-		return averageMeasurement;
 	}
 }
