@@ -28,6 +28,6 @@ public class LiftArm {
 		liftArm.rotate(-90); // initial degrees of rotations set @-90
 	}
 	
-	// methods for moving the vehicle
+	// methods for moving the vehicle were moved to MarvinMover.java
 
 }
