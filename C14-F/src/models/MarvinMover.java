@@ -7,7 +7,6 @@ package models;
 import lejos.hardware.motor.EV3LargeRegulatedMotor;
 import lejos.hardware.motor.UnregulatedMotor;
 import lejos.hardware.port.MotorPort;
-<<<<<<< HEAD
 import lejos.utility.Delay;
 
 public class MarvinMover {

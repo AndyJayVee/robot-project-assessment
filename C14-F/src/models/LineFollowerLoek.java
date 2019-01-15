@@ -1,6 +1,6 @@
 package models;
 
-<<<<<<< HEAD
+
 import lejos.hardware.Button;
 import lejos.hardware.Brick;
 import lejos.hardware.port.SensorPort;
@@ -8,7 +8,6 @@ import lejos.hardware.sensor.EV3ColorSensor;
 
 import models.MarvinMover;
 
-=======
 import lejos.hardware.Button;
 import lejos.hardware.Brick;
 import lejos.hardware.Button;
@@ -24,27 +23,17 @@ import models.Driving;
 import models.Pilot;
 import models.MarvinMover;
 
->>>>>>> c863642dcbf953f83eb2a39123ee4593f3113c6c
-public class LineFollowerLoek { //implements Runnable {
+
+public class LineFollowerLoek {
 
 	static Brick brick;
 	static EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S2);
-<<<<<<< HEAD
-    private MarvinMover marvinMover = new MarvinMover();
-	
-=======
 
-	static EV3LargeRegulatedMotor motorA = new EV3LargeRegulatedMotor(MotorPort.A);
-    static EV3LargeRegulatedMotor motorB = new EV3LargeRegulatedMotor(MotorPort.D);
-    
-    static MarvinMover marvinMover;
-    
->>>>>>> c863642dcbf953f83eb2a39123ee4593f3113c6c
+    private MarvinMover marvinMover = new MarvinMover();
+
 	public LineFollowerLoek() {
 		super();
 	}
-	
-	LineFollowerLoek lineFollowerLoek = new LineFollowerLoek();
 
 	/**
 	 * method to follow a line / this works best if the marvin is placed on the
