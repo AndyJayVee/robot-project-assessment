@@ -12,7 +12,7 @@ public class Roaming extends Driving implements Runnable{
 	public void setBeaconFound(boolean beaconFound) {
 		BeaconFound = beaconFound;
 	}
- 
+
 	public void run() {
 		try {
 			while (!BeaconFound) {
