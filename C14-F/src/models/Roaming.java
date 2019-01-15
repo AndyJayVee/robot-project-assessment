@@ -12,7 +12,7 @@ public class Roaming extends Driving implements Runnable{
 	public void setBeaconFound(boolean beaconFound) {
 		BeaconFound = beaconFound;
 	}
-
+ 
 	public void run() {
 		try {
 			while (!BeaconFound) {
@@ -23,7 +23,7 @@ public class Roaming extends Driving implements Runnable{
 			}
 				
 		} catch (Exception e) {
-			System.out.printf("Oops, something went\n wrong with roaming");
+			System.out.printf("Oops, roaming crashed");
 		}
 	}
 
