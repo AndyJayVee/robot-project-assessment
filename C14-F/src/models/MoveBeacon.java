@@ -59,6 +59,8 @@ public class MoveBeacon {
 
 		mover.shortLeg(); // leg 5. moves beacon
 		System.out.println("last leg");
+	
+		mover.stopMoving(); // stops motor
 
 		Sound.beepSequence(); // finished grabBeacon method.
 
