@@ -23,7 +23,7 @@ public class LineFollower {
 	 */
 
 	public void followLine() {
-		pilot.setAngularSpeed(150);
+		pilot.setAngularSpeed(90000);
 		pilot.setLinearSpeed(150);
 		System.out.println("A");
 		stopwatchThread.start();
@@ -31,7 +31,8 @@ public class LineFollower {
 		sensor.setCurrentMode("Red");
 		// while not pressed continue
 		while (Button.ESCAPE.isUp()) {
-			 sensor.fetchSample(scannedColor, 0);
+			while (Button.ENTER.isUp()) {
+				sensor.fetchSample(scannedColor, 0);
 				if (scannedColor[0] > .60) { // white
 					System.out.println("C");
 					pilot.rotateRight();
@@ -41,8 +42,9 @@ public class LineFollower {
 				} else { // grey
 					pilot.backward();
 					System.out.println("E");
-				}	
+				}
 			}
-		stopwatch.setNotStopped(false);
+			stopwatch.setNotStopped(false);
+		}
 	}
 }

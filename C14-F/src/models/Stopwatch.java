@@ -39,10 +39,10 @@ public class Stopwatch implements Runnable {
 				display.clear();
 				currentTime = System.currentTimeMillis();
 				elapsedTime = currentTime - startTime;
-				hours = (int) elapsedTime / (1000 * 60 * 60);
-				minutes = (int) elapsedTime % (1000 * 60 * 60) / (1000 * 60);
-				seconds = (int) elapsedTime % (1000 * 60) / 1000;
-				tenthOfSeconds = (int) elapsedTime % (1000) / 100;
+				hours = (int) (elapsedTime / (1000 * 60 * 60));
+				minutes = (int) (elapsedTime / (1000 * 60) % 60);
+				seconds = (int) (elapsedTime / 1000 % 60);
+				tenthOfSeconds = (int) (elapsedTime / 100 % 10);
 			}
 			output1 = String.format("\n%d : %d : %d.%d", hours, minutes, seconds, tenthOfSeconds);
 			display.drawString((output1), 3, 3);
