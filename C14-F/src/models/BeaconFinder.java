@@ -51,7 +51,7 @@ public class BeaconFinder {
 			distance = fetchDistance();
 			System.out.println("1st while. Distance: " + distance);
 			while (distance > 0) {
-				while (distance >= ROAM_DISTANCE) {					
+				while (distance >= DISTANCE_TRESHOLD_ROAM) {					
 					bearing = fetchBearing();
 					distance = fetchDistance();
 					System.out.println("2. Roaming | Distance: " + distance);
@@ -59,7 +59,7 @@ public class BeaconFinder {
 					drive.roam(beaconFound);
 					distance = fetchDistance();
 				}
-				while (distance < ROAM_DISTANCE) { // inRange --> turn and drive to beacon
+				while (distance < DISTANCE_TRESHOLD_ROAM) { // inRange --> turn and drive to beacon
 					setBeaconFound(true);
 					bearing = fetchBearing();	
 					distance = fetchDistance();
