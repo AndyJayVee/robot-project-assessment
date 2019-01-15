@@ -44,15 +44,7 @@ public class Stopwatch implements Runnable {
 				seconds = (int) (elapsedTime / 1000 % 60);
 				tenthOfSeconds = (int) (elapsedTime / 100 % 10);
 			}
-<<<<<<< HEAD
-			output1 = String.format("\n%d : %d : %d.%d", hours, minutes, seconds, tenthOfSeconds);
-			display.drawString((output1), 3, 3);
-
-			display.drawString(("Final time:"), 3, 2);
-=======
-			display.drawString((output1), 3, 3);
 			display.drawString(("Final time:"), 2, 2);
->>>>>>> 9e2e9884232eca8f141f9f6f355e6e35279a0df8
 	
 		} catch (Exception e) {
 			System.out.println("Oops, something went wrong with the stopwatch");

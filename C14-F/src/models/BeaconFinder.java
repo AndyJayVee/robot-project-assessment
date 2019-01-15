@@ -12,23 +12,17 @@ import models.Pilot;
 
 public class BeaconFinder {
 
-<<<<<<< HEAD
 	private static final int MAXIMUM_RANGE_IR_SENSOR = 150; // de maximum range is tussen de 100~200 centimeter
-															// afhankelijk van de bron
-	private EV3IRSensor ir = new EV3IRSensor(SensorPort.S4); 		// activeert een nieuwe IR-sensor op poort S4
-	private SensorMode seek = ir.getSeekMode(); 					// activeert de Seek modus
-	private float[] sample = new float[seek.sampleSize()]; 			// maakt array met sample informatie
 	// edit Loek
 	// initialize the Pilot and Driving in a correct manner
 	private Driving drive = new Driving();
 	private static final int ROAM_DISTANCE = 21474836;
-=======
+
 	private static final int DISTANCE_TRESHOLD_ROAM = 21474836;
-	
+
 	private EV3IRSensor ir = new EV3IRSensor(SensorPort.S4); // use port S4 for IR Sensor
 	private SensorMode seek = ir.getSeekMode(); // initiate seekmode
 	private float[] sample = new float[seek.sampleSize()]; // declare array to store samples form Sensor
->>>>>>> 9e2e9884232eca8f141f9f6f355e6e35279a0df8
 	private boolean beaconFound = false;
 	private int bearing;
 	private int distance;
@@ -48,48 +42,22 @@ public class BeaconFinder {
 	// vanaf hier is de IR-sensorcode:
 
 	/**
-	 * When placed in area with beacon, it will roam until sensor will measure it (inRange)
-	 * When inRsange it should switch to: turn&drive towards beacon.
-	 * NOTE: sensor is slow. Works, but it's not pretty
+	 * When placed in area with beacon, it will roam until sensor will measure it
+	 * (inRange) When inRsange it should switch to: turn&drive towards beacon. NOTE:
+	 * sensor is slow. Works, but it's not pretty
 	 */
-<<<<<<< HEAD
 	public void findBeacon() {
-		// @aut Loek: edit: instantiate Pilot and Driving
-		while (Button.ESCAPE.isUp()) {
-			seek.fetchSample(sample, 0);
-			int bearing = (int) sample[0];
-			System.out.println("Bearing: " + bearing);
-			int distance = (int) sample[1];
-			System.out.println("Distance: " + distance);
-
-			while (bearing != 0 && distance != 0) {
-
-				if (distance > MAXIMUM_RANGE_IR_SENSOR) {
-					// dit werkt niet omdat roam alleen begint als bearing !=0
-					// echter if (niet-in-range) dan geldt bearing ==0;
-					// dus roam start nooit omdat bearing altijd 0 is.
-		Pilot pilot = new Pilot();
-		Driving drive = new Driving(pilot.getPilot());
-
-					System.out.println("in de tweede while loop");
-					drive.roam(beaconFound); // begin met roam
-					System.out.println("Start roaming");
-				} else if (distance <= MAXIMUM_RANGE_IR_SENSOR) { // maximum range IR sensor
-		while (Button.ESCAPE.isUp()) {
-=======
-		public void findBeacon() {
 		Pilot pilot = new Pilot();
 		Driving drive = new Driving(pilot.getPilot());
 
 		while (Button.DOWN.isUp()) {
-			// TODO seek.fetchSample(sample, 0); 
-			
-			//System.out.println("1st while. Bearing: " + bearing);
->>>>>>> 9e2e9884232eca8f141f9f6f355e6e35279a0df8
+			// TODO seek.fetchSample(sample, 0);
+
+			// System.out.println("1st while. Bearing: " + bearing);
 			distance = fetchDistance();
 			System.out.println("1st while. Distance: " + distance);
 			while (distance > 0) {
-				while (distance >= DISTANCE_TRESHOLD_ROAM) {					
+				while (distance >= DISTANCE_TRESHOLD_ROAM) {
 					bearing = fetchBearing();
 					distance = fetchDistance();
 					System.out.println("2. Roaming | Distance: " + distance);
@@ -110,24 +78,9 @@ public class BeaconFinder {
 
 			}
 		}
-		// ir.close();
-					bearing = fetchBearing();	
-					distance = fetchDistance();
-					System.out.println("2. inRange | Distance: " + distance);
-					System.out.println("2. inRange | Bearing: " + bearing);
-					// turn with bearing
-					drive.turn(bearing); 	
-					distance = fetchDistance();	
-					// drive distance to beacon
-					drive.straight(distance);
-					// fetch another sample to test if movement was sufficient
-					distance = fetchDistance();
-					bearing = fetchBearing();
-				}
-			}
-		}
 		ir.close();
 	}
+
 	/*
 	 * @return Fetch bearing measurement from Sensor
 	 */
@@ -137,6 +90,7 @@ public class BeaconFinder {
 		bearing = (int) sample[0];
 		return bearing;
 	}
+
 	/**
 	 * @return Fetch distance measurement from Sensor
 	 */
