@@ -72,5 +72,15 @@ public class MarvinMover {
 		motorA.forward();
 		Delay.msDelay(8000);
 	}
+
+	/**
+	 * cruises straight with low speed
+	 */
+	public void cruise() {
+		motorA.setSpeed(-180);
+		motorB.setSpeed(-180);
+		motorA.backward();
+		motorB.backward();		
+	}
 	
 }
