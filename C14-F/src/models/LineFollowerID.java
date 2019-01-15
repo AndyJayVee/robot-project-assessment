@@ -36,16 +36,33 @@ public class LineFollowerRGB {
 		Thread stopwatchThread = new Thread(stopwatch);
 		stopwatchThread.start();
 		// set sensor to 3 colors mode
-		sensor.setCurrentMode("RGB");
+		sensor.setCurrentMode("ColorID");
 		while (Button.DOWN.isUp()) {
-			sensor.getColorID();
-			if (scannedColor[0] > 17 && scannedColor[1] > .17 && scannedColor[2] > .17) { // white
+			int currentColor = sensor.getColorID();
+			int black = 7;
+//			int grey;
+			int red = 0;
+			int white = 6;
+			int lapCount = 0;
+
+			if  (currentColor == red && lapCount == 0) {
+				marvinMover.cruise();
+//				start.timer
+//					lapCount++; 
+//				 } else if (currentColor == red && lapCount > 0) {
+//				 	stop.timer();
+//				 	lapTime[lapCount] = getLapTime();
+//				 	reset.timer();
+//					lapCount++;
+//				 }
+//				 	print ("Lap "lapCount + " " + lapTime[lapCount - 1]) ??
+			} else if (currentColor == white) { 
 				marvinMover.turnLeftOnWhite();
-			} else if (scannedColor[0] < .10 && scannedColor[1] < .10 && scannedColor[2] < .10) { // black
+			} else if (currentColor == black)  { // black
 				marvinMover.turnRightOnBlack();
-			} else if ((scannedColor[0] <= .17 && scannedColor[0] > .11)
-					&& (scannedColor[1] <= .17 && scannedColor[1] > .11)
-					&& (scannedColor[2] <= .17 && scannedColor[2] > .11)) // grey
+			} else {
+				marvinMover.driveStraightOnGrey();// grey
+			}
 			{ // grey
 				marvinMover.driveStraightOnGrey();
 			}
@@ -54,7 +71,6 @@ public class LineFollowerRGB {
 		}
 	}
 	
-
 	
 	// TODO
 				// if (sensor measures red finish line && lapCount == 0) {
