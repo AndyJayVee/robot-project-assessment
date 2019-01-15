@@ -1,6 +1,3 @@
-/**
- * MONDAY Working version, checks if needs to roam or turn/drive	
- */
 package models;
 
 import lejos.hardware.Button;

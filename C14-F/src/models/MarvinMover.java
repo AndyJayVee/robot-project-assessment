@@ -8,7 +8,7 @@ import lejos.hardware.motor.EV3LargeRegulatedMotor;
 import lejos.hardware.port.MotorPort;
 import lejos.utility.Delay;
 
-public class MarvinMover extends Driving{
+public class MarvinMover {
 
 	static EV3LargeRegulatedMotor motorA = new EV3LargeRegulatedMotor(MotorPort.A);
 	static EV3LargeRegulatedMotor motorB = new EV3LargeRegulatedMotor(MotorPort.D);

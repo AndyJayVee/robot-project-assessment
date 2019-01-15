@@ -13,8 +13,6 @@ public class Roaming extends Driving implements Runnable{
 		BeaconFound = beaconFound;
 	}
 
-	//methode om een enneagram te rijden (9 puntige ster) voor het zoeken van het beacon.
-	//Na iedere 500 mm rijden of na het keren wordt gecontroleerd of het beacon gevonden is.
 	public void run() {
 		try {
 			while (!BeaconFound) {
