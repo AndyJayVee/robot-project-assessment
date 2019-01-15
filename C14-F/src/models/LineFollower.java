@@ -1,20 +1,12 @@
 package models;
 
 import lejos.hardware.Button;
-import lejos.hardware.Brick;
-import lejos.hardware.Button;
-import lejos.hardware.Key;
-import lejos.hardware.ev3.LocalEV3;
-import lejos.hardware.lcd.TextLCD;
 import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3ColorSensor;
-import models.MarvinMover;
-import models.Driving;
-import models.Pilot;
 
-public class LineFollower { //implements Runnable {
+public class LineFollower { 
 
-//	static Brick brick;
+
 	private EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S2);
 	private MarvinMover marvinMover = new MarvinMover();
 
