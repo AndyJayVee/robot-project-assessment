@@ -56,7 +56,7 @@ public class BeaconFinder {
 					System.out.println("2. Roaming | Bearing: " + bearing);
 					distance = fetchDistance();
 				}
-				roaming.setBeaconFound(true);
+				roaming.setStopRoaming(true);
 				while (distance < DISTANCE_TRESHOLD_ROAM) { // inRange --> turn and drive to beacon
 					setBeaconFound(true);
 					bearing = fetchBearing();	
