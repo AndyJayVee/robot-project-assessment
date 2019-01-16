@@ -43,6 +43,7 @@ public class MarvinMover extends Driving {
 		motorA.setSpeed(-300);
 		motorB.forward();
 		motorA.backward();
+		Delay.msDelay(1400);
 	}
 
 	public void turn90DegreesLeft() { // turns vehicle 90 degrees left
