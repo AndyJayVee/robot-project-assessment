@@ -19,7 +19,7 @@ public class Roaming extends Driving implements Runnable{
 		try {
 			while (!stopRoaming) {
 				for (int i = 0; i < 11; i++) {
-					super.pilot.travel(500); //diameter van de ster
+					super.pilot.travel(1500); //diameter van de ster
 					super.pilot.rotate(160);                                                            
 				}
 			}

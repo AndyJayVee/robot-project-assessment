@@ -19,21 +19,21 @@ public class MarvinMover {
 
 	public void turnRightOnBlack() {
 		motorA.setSpeed(-140);
-		motorB.setSpeed(50);
+		motorB.setSpeed(100);
 		motorA.backward();
 		motorB.forward();
 	}
 
 	public void turnLeftOnWhite() {
-		motorA.setSpeed(80);
-		motorB.setSpeed(-300);
+		motorA.setSpeed(100);
+		motorB.setSpeed(-200);
 		motorA.forward();
 		motorB.backward();
 	}
 
 	public void driveStraightOnGrey() {
-		motorA.setSpeed(-350);
-		motorB.setSpeed(-350);
+		motorA.setSpeed(-200);
+		motorB.setSpeed(-200);
 		motorA.backward();
 		motorB.backward();
 	}
