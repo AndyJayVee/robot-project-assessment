@@ -8,12 +8,25 @@ import lejos.utility.Delay;
 public class LineFollowerUsingThread {
 private EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S2);
 private float[] scannedColor = new float[0];
-static float minimumValue = 0;
-static float maximumValue = 0;
+private static float minimumValue;
+private static float maximumValue;
+private static final double BORDER_BRIGHT = 0.70;
+private static final double BORDER_DARK = 0.30;
 
 	public LineFollowerUsingThread() {
 		super();
 	}
+
+	
+	public static double getBorderbright() {
+		return BORDER_BRIGHT;
+	}
+
+
+	public static double getBorderdark() {
+		return BORDER_DARK;
+	}
+
 
 	/**
 	 * method to follow a line / this works best if the marvin is placed on the
@@ -24,6 +37,8 @@ static float maximumValue = 0;
 		sensor.setCurrentMode("Red");
 		sensor.fetchSample(scannedColor, 0);
 		boolean enoughSamples = false;
+		minimumValue = 0;
+		maximumValue = 1;
 		Calibrator calibrator = new Calibrator(enoughSamples);
 		Thread calibratorThread = new Thread(calibrator);
 		int numberOfMeasurements = 0;
@@ -31,10 +46,10 @@ static float maximumValue = 0;
 		while (numberOfMeasurements<1000) {
 			sensor.fetchSample(scannedColor, 0);
 			Delay.msDelay(20);
-			if (scannedColor[0] > maximumValue) {
+			if (scannedColor[0] < maximumValue) {
 				scannedColor[0] = maximumValue;
 				numberOfMeasurements++;
-			} else if (scannedColor[0] < minimumValue) {
+			} else if (scannedColor[0] > minimumValue) {
 				scannedColor[0] = minimumValue;
 				numberOfMeasurements++;
 			} else {
@@ -48,14 +63,16 @@ static float maximumValue = 0;
 
 	public void followLine() {
 		calibrateLinefollower();
-		// initialize array to fetch sample in
 		Stopwatch stopwatch = new Stopwatch(true);
 		Thread stopwatchThread = new Thread(stopwatch);
 
 		sensor.setCurrentMode("Red");
 		sensor.fetchSample(scannedColor, 0);
 
-		Mover mover = new Mover(calibratedGrayValue());
+		boolean stopMoving = false;
+		Mover mover = new Mover(calibratedGrayValue(), stopMoving);
+		Mover.setBorderBright(BORDER_BRIGHT);
+		Mover.setBorderDark(BORDER_DARK);
 		System.out.println(calibratedGrayValue());
 		Thread moverThread = new Thread(mover);
 
@@ -63,20 +80,22 @@ static float maximumValue = 0;
 		stopwatchThread.start();
 		while (Button.DOWN.isUp()) {
 			sensor.fetchSample(scannedColor, 0);
-			while (calibratedGrayValue() > .70) {
+			while (calibratedGrayValue() > BORDER_BRIGHT) {
 				sensor.fetchSample(scannedColor, 0);
 			}
 			mover.setShadeOfGray(calibratedGrayValue());
-			while (calibratedGrayValue() < .15) {
+			while (calibratedGrayValue() < BORDER_DARK) {
 				sensor.fetchSample(scannedColor, 0);
 			}
 			mover.setShadeOfGray(calibratedGrayValue());
-			while ((calibratedGrayValue() <= 0.70) && (calibratedGrayValue() >= 0.15)) {
+			while ((calibratedGrayValue() <= BORDER_BRIGHT) && 
+					(calibratedGrayValue() >= BORDER_DARK)) {
 				sensor.fetchSample(scannedColor, 0);
 			}
 			mover.setShadeOfGray(calibratedGrayValue());
 		}
 		stopwatch.setNotStopped(false);
+		mover.setStopMoving(true);
 		Delay.msDelay(5000);
 	}
 	

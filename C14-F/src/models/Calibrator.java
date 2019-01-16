@@ -16,8 +16,12 @@ public class Calibrator extends Driving implements Runnable {
 	@Override
 	public void run() {
 		try {
-			while (calibrate = true) {
-				pilot.rotate(360);
+			pilot.rotate(30);
+			while (calibrate) {
+				pilot.setAngularSpeed(360);
+				pilot.setLinearSpeed(360);
+				pilot.rotate(-120);
+				pilot.rotate(120);
 				pilot.travel(30);
 			}
 		} catch (Exception e) {
