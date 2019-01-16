@@ -41,6 +41,15 @@ public class Menu {
 				gameStarted();
 				currentGame = "beaconfinder";
 
+			} else if (pressedButton == Button.ID_LEFT) {// 1 = button down
+				Music song = new Music();
+				song.playStarWars();
+				display.clear();
+//				display.drawString("123456789987654321", 0, 1); ruler comment
+				display.drawString("    Star Wars     ", 0, 1);
+				gameStarted();
+				currentGame = "nogame";
+
 			} else if (pressedButton == Button.ID_DOWN) {// 1 = button down
 				display.clear();
 				display.drawString("  Beacon grabber  ", 0, 1);
@@ -49,11 +58,10 @@ public class Menu {
 
 			} else if (pressedButton == Button.ID_LEFT || pressedButton == Button.ID_RIGHT) {
 				display.clear();
-//		display.drawString("123456789987654321", 0, 1); ruler comment
+//				display.drawString("123456789987654321", 0, 1); ruler comment
 				display.drawString("   Wrong button   ", 0, 1);
 				display.drawString(" Press any key to ", 0, 2);
 				display.drawString("   Choose again   ", 0, 3);
-				display.drawString("or escape to stop ", 0, 6);
 				Delay.msDelay(3000);
 			} else if (pressedButton == Button.ID_ESCAPE) {
 				repeat = false;
@@ -78,8 +86,6 @@ public class Menu {
 		display.drawString("     stopped      ", 0, 2);
 		display.drawString("  Press any key   ", 0, 3);
 		display.drawString("    continue      ", 0, 4);
-		display.drawString("or escape to stop ", 0, 6);
-
 		int pressedButton = Button.waitForAnyPress();
 		if (pressedButton == Button.ID_ESCAPE) {
 			currentGame = "nogame";
