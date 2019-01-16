@@ -2,22 +2,22 @@ package models;
 
 public class Calibrator extends Driving implements Runnable {
 
-	private boolean calibrate = true;
+	private boolean stopCalibrating = true;
 	
-	public Calibrator(boolean calibrate) {
+	public Calibrator(boolean stopCalibrating) {
 		super();
-		this.calibrate = calibrate;
+		this.stopCalibrating = stopCalibrating;
 	}
 
-	public void setCalibrate(boolean calibrate) {
-		this.calibrate = calibrate;
+	public void setStopCalibrate(boolean stopCalibrating) {
+		this.stopCalibrating = stopCalibrating;
 	}
 
 	@Override
 	public void run() {
 		try {
 			pilot.rotate(30);
-			while (calibrate) {
+			while (!stopCalibrating) {
 				pilot.setAngularSpeed(360);
 				pilot.setLinearSpeed(360);
 				pilot.rotate(-120);
