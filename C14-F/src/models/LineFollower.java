@@ -42,7 +42,7 @@ public class LineFollower {
 		stopwatch.setNotStopped(false);
 		Delay.msDelay(3000);
 		
-		System.exit(0);
+
 	}
 //		public boolean stopRacing() {
 //			boolean stop = false;

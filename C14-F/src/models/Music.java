@@ -74,29 +74,29 @@ public class Music {
 		Sound.playNote(PIANO, noteC2, sixteenth);
 		Sound.playNote(PIANO, noteA1, half);
 
-		Sound.playNote(PIANO, noteE2, quarter);
-		Sound.playNote(PIANO, noteE2, quarter);
-		Sound.playNote(PIANO, noteE2, quarter);
-		Sound.playNote(PIANO, noteF2, (int) (eighth * dotted));
-		Sound.playNote(PIANO, noteC2, sixteenth);
-		Sound.playNote(PIANO, noteAb1, quarter);
-		Sound.playNote(PIANO, noteF1, (int) (eighth * dotted));
-		Sound.playNote(PIANO, noteC2, sixteenth);
-		Sound.playNote(PIANO, noteA1, half);
-
-		playStarWarsRepeat();
-		Sound.playNote(PIANO, noteAb1, sixteenth);
-		Sound.playNote(PIANO, noteC2, quarter);
-		Sound.playNote(PIANO, noteA1, (int) (eighth * dotted));
-		Sound.playNote(PIANO, noteC2, sixteenth);
-		Sound.playNote(PIANO, noteE2, half);
-		
-		playStarWarsRepeat();
-		Sound.playNote(PIANO, noteC2, sixteenth);
-		Sound.playNote(PIANO, noteA1, quarter);
-		Sound.playNote(PIANO, noteF1, (int) (eighth * dotted));
-		Sound.playNote(PIANO, noteC2, sixteenth);
-		Sound.playNote(PIANO, noteA1, half);
+//		Sound.playNote(PIANO, noteE2, quarter);
+//		Sound.playNote(PIANO, noteE2, quarter);
+//		Sound.playNote(PIANO, noteE2, quarter);
+//		Sound.playNote(PIANO, noteF2, (int) (eighth * dotted));
+//		Sound.playNote(PIANO, noteC2, sixteenth);
+//		Sound.playNote(PIANO, noteAb1, quarter);
+//		Sound.playNote(PIANO, noteF1, (int) (eighth * dotted));
+//		Sound.playNote(PIANO, noteC2, sixteenth);
+//		Sound.playNote(PIANO, noteA1, half);
+//
+//		playStarWarsRepeat();
+//		Sound.playNote(PIANO, noteAb1, sixteenth);
+//		Sound.playNote(PIANO, noteC2, quarter);
+//		Sound.playNote(PIANO, noteA1, (int) (eighth * dotted));
+//		Sound.playNote(PIANO, noteC2, sixteenth);
+//		Sound.playNote(PIANO, noteE2, half);
+//		
+//		playStarWarsRepeat();
+//		Sound.playNote(PIANO, noteC2, sixteenth);
+//		Sound.playNote(PIANO, noteA1, quarter);
+//		Sound.playNote(PIANO, noteF1, (int) (eighth * dotted));
+//		Sound.playNote(PIANO, noteC2, sixteenth);
+//		Sound.playNote(PIANO, noteA1, half);
 	}
 
 	public void playStarWarsRepeat() {

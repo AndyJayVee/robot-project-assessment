@@ -34,16 +34,20 @@ public class GameLauncher {
 			if (currentGame.equals("linefollower")) {
 				LineFollower lineFollower = new LineFollower();
 				lineFollower.followLine();
+				System.exit(0);
 			} else if (currentGame.equals("beaconfinder")) {
 				BeaconFinder beaconFinder = new BeaconFinder();
 				beaconFinder.findBeacon();
 				System.out.println("move beacon gelukt!");
 				Delay.msDelay(1000);
+				System.exit(0);
 			} else if (currentGame.equals("movebeacon")) {
 				MoveBeacon moveBeacon = new MoveBeacon();
 				moveBeacon.grabBeacon();
+				System.exit(0);
 			} else if (currentGame.equals("nogame")) {
 				currentGame = menu.gameStopped("All programs");
+				System.exit(0);
 			}
 
 			// after running games
