@@ -49,17 +49,15 @@ public class BeaconFinder {
 				roaming.setStopRoaming(true);
 				while (distance < DISTANCE_TRESHOLD_ROAM) { // inRange --> turn and drive to beacon
 					inRange();
-//					found(); // TODO
-
 				}
 			}
 		}
 		ir.close();
 	}
-	private void found() {
-		// TODO 
-		
-	}
+//	private void found() {
+//		// TODO Stop
+//		
+//	}
 
 /**
  * initiates turn&drive towards beacon
