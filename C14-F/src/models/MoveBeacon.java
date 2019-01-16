@@ -69,5 +69,10 @@ public class MoveBeacon {
 
 		arm.liftDown();
 		System.out.println("put beacon down");
+		
+		mover.shortBack();
+		System.out.println("backing up");
+		
+		System.exit(0);
 	}
 }

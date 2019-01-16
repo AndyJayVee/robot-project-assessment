@@ -77,6 +77,14 @@ public class MarvinMover {
 		motorB.forward();
 		Delay.msDelay(1400);
 	}
+	
+	public void shortBack() { // drives vehicle backward by approximately 20 cm
+		motorA.setSpeed(-400);
+		motorA.forward();
+		motorB.setSpeed(-400);
+		motorB.forward();
+		Delay.msDelay(1400);
+	}
 
 	public void longLeg() { // drives vehicle forward by approximately 40 cm
 		motorA.setSpeed(400);
