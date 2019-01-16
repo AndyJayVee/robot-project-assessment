@@ -38,7 +38,7 @@ public class MarvinMover {
 		motorB.backward();
 	}
 
-	public void turn180DegreesCounterClockwise() { // turns vehicle 90 degrees clockwise
+	public void turn90DegreesClockwise() { // turns vehicle 90 degrees right
 		motorB.setSpeed(80);
 		motorA.setSpeed(-300);
 		motorB.forward();
@@ -46,7 +46,7 @@ public class MarvinMover {
 		Delay.msDelay(1400);
 	}
 
-	public void turn90DegreesCounterClockwise() { // turns vehicle 90 degrees counter clockwise
+	public void turn90DegreesCounterClockwise() { // turns vehicle 90 degrees left
 		motorA.setSpeed(80);
 		motorB.setSpeed(-300);
 		motorA.forward();
