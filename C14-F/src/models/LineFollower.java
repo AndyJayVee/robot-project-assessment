@@ -40,7 +40,7 @@ public class LineFollower {
 			}
 		}
 		stopwatch.setNotStopped(false);
-		Delay.msDelay(10000);
+		Delay.msDelay(3000);
 	}
 //		public boolean stopRacing() {
 //			boolean stop = false;
