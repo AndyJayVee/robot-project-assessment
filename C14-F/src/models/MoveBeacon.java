@@ -2,12 +2,13 @@ package models;
 
 import lejos.hardware.Button;
 import lejos.hardware.Sound;
-//import models.Music;
+import models.Music;
 
 public class MoveBeacon {
 
 	private LiftArm arm = new LiftArm();
 	private MarvinMover mover = new MarvinMover();
+	private Music music = new Music();
 
 	// no args constructor
 	public MoveBeacon() {
@@ -17,7 +18,7 @@ public class MoveBeacon {
 	// method to grab the beacon, move it in an F-shape, and put it down
 	public void grabBeacon() {
 		Button.LEDPattern(4); // flash green led and
-		//Music.playStarWars(); // make sound when ready.
+		Sound.beepSequenceUp(); // make sound when ready.
 		
 		arm.liftUp();
 		System.out.println("lift beacon up");
@@ -64,7 +65,7 @@ public class MoveBeacon {
 		mover.stopMoving();
 		System.out.println("stop moving");
 
-		Sound.beepSequence(); // finished grabBeacon method.
+		music.playStarWars(); // finished grabBeacon method.
 
 		arm.liftDown();
 		System.out.println("put beacon down");
