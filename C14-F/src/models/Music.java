@@ -99,26 +99,26 @@ public class Music {
 //		Sound.playNote(PIANO, noteA1, half);
 	}
 
-	public void playStarWarsRepeat() {
-		Sound.playNote(PIANO, noteA2, quarter);
-		Sound.playNote(PIANO, noteA1, (int) (eighth * dotted));
-		Sound.playNote(PIANO, noteA1, sixteenth);
-		Sound.playNote(PIANO, noteA2, quarter);
-		Sound.playNote(PIANO, noteAb2, eighth);
-		Sound.playNote(PIANO, noteG2, eighth);
-		Sound.playNote(PIANO, noteGb2, sixteenth);
-		Sound.playNote(PIANO, noteF2, sixteenth);
-		Sound.playNote(PIANO, noteGb2, quarter);
-		Sound.playNote(PIANO, noteBb1, eighth);
-		Sound.playNote(PIANO, noteEb2, quarter);
-		Sound.playNote(PIANO, noteD2, eighth);
-		Sound.playNote(PIANO, noteDb2, eighth);
-		Sound.playNote(PIANO, noteC2, sixteenth);
-		Sound.playNote(PIANO, noteB1, sixteenth);
-		Sound.playNote(PIANO, noteC2, quarter);
-		Sound.playNote(PIANO, noteF1, eighth);
-		Sound.playNote(PIANO, noteAb1, quarter);
-		Sound.playNote(PIANO, noteF1, (int) (eighth * dotted));
-
-	}
+//	public void playStarWarsRepeat() {
+//		Sound.playNote(PIANO, noteA2, quarter);
+//		Sound.playNote(PIANO, noteA1, (int) (eighth * dotted));
+//		Sound.playNote(PIANO, noteA1, sixteenth);
+//		Sound.playNote(PIANO, noteA2, quarter);
+//		Sound.playNote(PIANO, noteAb2, eighth);
+//		Sound.playNote(PIANO, noteG2, eighth);
+//		Sound.playNote(PIANO, noteGb2, sixteenth);
+//		Sound.playNote(PIANO, noteF2, sixteenth);
+//		Sound.playNote(PIANO, noteGb2, quarter);
+//		Sound.playNote(PIANO, noteBb1, eighth);
+//		Sound.playNote(PIANO, noteEb2, quarter);
+//		Sound.playNote(PIANO, noteD2, eighth);
+//		Sound.playNote(PIANO, noteDb2, eighth);
+//		Sound.playNote(PIANO, noteC2, sixteenth);
+//		Sound.playNote(PIANO, noteB1, sixteenth);
+//		Sound.playNote(PIANO, noteC2, quarter);
+//		Sound.playNote(PIANO, noteF1, eighth);
+//		Sound.playNote(PIANO, noteAb1, quarter);
+//		Sound.playNote(PIANO, noteF1, (int) (eighth * dotted));
+//
+//	}
 }

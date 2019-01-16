@@ -53,7 +53,7 @@ public class BeaconFinder {
 			}
 		}
 		ir.close();
-		System.exit(0);
+		return;
 	}
 //	private void found() {
 //		// TODO Stop
