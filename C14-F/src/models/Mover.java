@@ -2,34 +2,43 @@ package models;
 
 public class Mover extends Driving implements Runnable{
 	
-	private float shadeOfGray;
+	private float currentGray;
 	private boolean stopMoving;
-	private static double borderBright;
-	private static double borderDark;
+	private static float borderBright;
+	private static float borderDark;
 
 	
-	public Mover(float shadeOfGray, boolean stopMoving) {
+	
+	
+	public Mover(float currentGray) {
 		super();
-		this.shadeOfGray = shadeOfGray;
+		this.currentGray = currentGray;
+	}
+
+
+
+	public Mover(float currentGray, boolean stopMoving) {
+		super();
+		this.currentGray = currentGray;
 		this.stopMoving = stopMoving;
 	}
 
 	
 
-	public static void setBorderBright(double borderBright) {
+	public static void setBorderBright(float borderBright) {
 		Mover.borderBright = borderBright;
 	}
 
 
 
-	public static void setBorderDark(double borderDark) {
+	public static void setBorderDark(float borderDark) {
 		Mover.borderDark = borderDark;
 	}
 
 
 
-	public void setShadeOfGray(float shadeOfGray) {
-		this.shadeOfGray = shadeOfGray;
+	public void setCurrentGray(float currentGray) {
+		this.currentGray = currentGray;
 	}
 
 
@@ -42,10 +51,10 @@ public class Mover extends Driving implements Runnable{
 	public void run() {
 		try {
 			while (!stopMoving) {
-			if (shadeOfGray> borderBright) {
+			if (currentGray> borderBright) {
 				pilot.rotateRight();
 			}
-			else if (shadeOfGray< borderDark) {
+			else if (currentGray< borderDark) {
 				pilot.rotateLeft();
 			} else
 				pilot.backward();

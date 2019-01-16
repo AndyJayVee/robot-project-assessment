@@ -11,21 +11,22 @@ private EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S2);
 private float[] scannedColor = new float[0];
 public float minimumValue;
 public float maximumValue;
-public double BORDER_BRIGHT = 0.70;
-public double BORDER_DARK = 0.30;
+public float borderBright = (float) 0.7;
+public float borderDark = (float) 0.3;
+private float currentGray = (scannedColor[0]-minimumValue/maximumValue);
 
 	public LineFollowerUsingThread() {
 		super();
 	}
 
 	
-	public double getBorderbright() {
-		return BORDER_BRIGHT;
+	public float getBorderbright() {
+		return borderBright;
 	}
 
 
-	public double getBorderdark() {
-		return BORDER_DARK;
+	public float getBorderdark() {
+		return borderDark;
 	}
 
 
@@ -74,40 +75,36 @@ public double BORDER_DARK = 0.30;
 		sensor.fetchSample(scannedColor, 0);
 		boolean stopMoving = false;
 		System.out.println("C");
-		Mover mover = new Mover(calibratedGrayValue(), stopMoving);
+		Mover mover = new Mover(currentGray, stopMoving);
 		System.out.println("D");
-		Mover.setBorderBright(BORDER_BRIGHT);
+		Mover.setBorderBright(borderBright);
 		System.out.println("E");
-		Mover.setBorderDark(BORDER_DARK);
-		System.out.println(calibratedGrayValue());
+		Mover.setBorderDark(borderDark);
+		System.out.println(currentGray);
 		Thread moverThread = new Thread(mover);
 		moverThread.start();
 		stopwatchThread.start();
 		System.out.println("F");
 		while (Button.DOWN.isUp()) {
 			sensor.fetchSample(scannedColor, 0);
-			while (calibratedGrayValue() > BORDER_BRIGHT) {
+			while (currentGray > borderBright) {
 				sensor.fetchSample(scannedColor, 0);
 			}
-			mover.setShadeOfGray(calibratedGrayValue());
-			while (calibratedGrayValue() < BORDER_DARK) {
+			mover.setCurrentGray(currentGray);
+			while (currentGray < borderDark) {
 				sensor.fetchSample(scannedColor, 0);
 			}
-			mover.setShadeOfGray(calibratedGrayValue());
-			while ((calibratedGrayValue() <= BORDER_BRIGHT) && 
-					(calibratedGrayValue() >= BORDER_DARK)) {
+			mover.setCurrentGray(currentGray);
+			while (currentGray <= borderBright && 
+					currentGray >= borderDark) {
 				sensor.fetchSample(scannedColor, 0);
 			}
-			mover.setShadeOfGray(calibratedGrayValue());
+			mover.setCurrentGray(currentGray);
 		}
 		stopwatch.setNotStopped(false);
 		mover.setStopMoving(true);
 		Delay.msDelay(5000);
 	}
-	
-	public float calibratedGrayValue() {
-		float grayValue = (scannedColor[0]-minimumValue)/maximumValue;
-		return grayValue;
-	}
+
 	
 }
