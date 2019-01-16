@@ -53,6 +53,7 @@ public class BeaconFinder {
 			}
 		}
 		ir.close();
+		System.exit(0);
 	}
 //	private void found() {
 //		// TODO Stop
@@ -108,5 +109,7 @@ public class BeaconFinder {
 		seek.fetchSample(sample, 0);
 		distance = (int) sample[1];
 		return distance;
+		
 	}
+	
 }
