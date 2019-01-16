@@ -63,7 +63,7 @@ public class Music {
 
 	}
 
-	public void playStarWars() {
+	public void playStarWars(int length) {
 		Sound.playNote(PIANO, noteA1, quarter);
 		Sound.playNote(PIANO, noteA1, quarter);
 		Sound.playNote(PIANO, noteA1, quarter);
@@ -74,6 +74,8 @@ public class Music {
 		Sound.playNote(PIANO, noteC2, sixteenth);
 		Sound.playNote(PIANO, noteA1, half);
 
+		if (length == 1) return;
+		
 		Sound.playNote(PIANO, noteE2, quarter);
 		Sound.playNote(PIANO, noteE2, quarter);
 		Sound.playNote(PIANO, noteE2, quarter);
