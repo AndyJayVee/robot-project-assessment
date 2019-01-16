@@ -32,8 +32,8 @@ public class MarvinMover {
 	}
 
 	public void driveStraightOnGrey() {
-		motorA.setSpeed(-350);
-		motorB.setSpeed(-350);
+		motorA.setSpeed(-200);
+		motorB.setSpeed(-200);
 		motorA.backward();
 		motorB.backward();
 	}
