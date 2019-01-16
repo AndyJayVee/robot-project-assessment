@@ -73,6 +73,6 @@ public class MoveBeacon {
 		mover.shortBack();
 		System.out.println("backing up");
 		
-		System.exit(0);
+		return;
 	}
 }
