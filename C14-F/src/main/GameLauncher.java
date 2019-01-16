@@ -7,6 +7,7 @@ import lejos.utility.Delay;
 import models.Menu;
 import models.BeaconFinder;
 import models.LineFollower;
+import models.LineFollowerUsingThread;
 import models.MoveBeacon;
 
 public class GameLauncher {
@@ -32,8 +33,8 @@ public class GameLauncher {
 			currentGame = menu.chooseGame();
 
 			if (currentGame.equals("linefollower")) {
-				LineFollower lineFollower = new LineFollower();
-				lineFollower.followLine();
+				LineFollowerUsingThread lineFollower = new LineFollowerUsingThread();
+				lineFollower.followLine(); //TODO is veranderd!!! linefollower moet niet met thread, voor het moment.
 			} else if (currentGame.equals("beaconfinder")) {
 				BeaconFinder beaconFinder = new BeaconFinder();
 				beaconFinder.findBeacon();
