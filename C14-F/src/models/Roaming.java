@@ -2,20 +2,22 @@ package models;
 
 public class Roaming extends Driving implements Runnable{
 	
-	private boolean BeaconFound;
-	
-	public Roaming(boolean beaconFound) {
+	private boolean stopRoaming;
+
+
+	public Roaming(boolean stopRoaming) {
 		super();
-		BeaconFound = beaconFound;
+		this.stopRoaming = stopRoaming;
 	}
 
-	public void setBeaconFound(boolean beaconFound) {
-		BeaconFound = beaconFound;
+	public void setStopRoaming(boolean stopRoaming) {
+		this.stopRoaming = stopRoaming;
 	}
+
 
 	public void run() {
 		try {
-			while (!BeaconFound) {
+			while (!stopRoaming) {
 				for (int i = 0; i < 11; i++) {
 					super.pilot.travel(500); //diameter van de ster
 					super.pilot.rotate(160);                                                            
