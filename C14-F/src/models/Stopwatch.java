@@ -27,7 +27,7 @@ public class Stopwatch implements Runnable {
 		this.running = running;
 	}
 
-	@Override
+
 	public void run() {
 		try {
 			startTime = System.currentTimeMillis();
