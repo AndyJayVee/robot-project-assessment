@@ -9,22 +9,22 @@ public class LineFollowerUsingThread {
 	
 private EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S2);
 private float[] scannedColor = new float[0];
-private static float minimumValue;
-private static float maximumValue;
-private static final double BORDER_BRIGHT = 0.70;
-private static final double BORDER_DARK = 0.30;
+public float minimumValue;
+public float maximumValue;
+public double BORDER_BRIGHT = 0.70;
+public double BORDER_DARK = 0.30;
 
 	public LineFollowerUsingThread() {
 		super();
 	}
 
 	
-	public static double getBorderbright() {
+	public double getBorderbright() {
 		return BORDER_BRIGHT;
 	}
 
 
-	public static double getBorderdark() {
+	public double getBorderdark() {
 		return BORDER_DARK;
 	}
 
@@ -47,7 +47,7 @@ private static final double BORDER_DARK = 0.30;
 		calibratorThread.start();
 		while (numberOfMeasurements<1000) {
 			sensor.fetchSample(scannedColor, 0);
-			Delay.msDelay(20);
+			Delay.msDelay(10);
 			if (scannedColor[0] < maximumValue) {
 				scannedColor[0] = maximumValue;
 				numberOfMeasurements++;
@@ -65,21 +65,25 @@ private static final double BORDER_DARK = 0.30;
 
 	public void followLine() {
 		calibrateLinefollower();
+		System.out.println("A");
 		Stopwatch stopwatch = new Stopwatch(true);
 		Thread stopwatchThread = new Thread(stopwatch);
-		
+		System.out.println("B");
 		float[] scannedColor = new float[1];
 		sensor.setCurrentMode("Red");
 		sensor.fetchSample(scannedColor, 0);
-		
 		boolean stopMoving = false;
+		System.out.println("C");
 		Mover mover = new Mover(calibratedGrayValue(), stopMoving);
+		System.out.println("D");
 		Mover.setBorderBright(BORDER_BRIGHT);
+		System.out.println("E");
 		Mover.setBorderDark(BORDER_DARK);
 		System.out.println(calibratedGrayValue());
 		Thread moverThread = new Thread(mover);
 		moverThread.start();
 		stopwatchThread.start();
+		System.out.println("F");
 		while (Button.DOWN.isUp()) {
 			sensor.fetchSample(scannedColor, 0);
 			while (calibratedGrayValue() > BORDER_BRIGHT) {
