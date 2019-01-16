@@ -56,7 +56,7 @@ public class MoveBeacon {
 		System.out.println("F-shape drive from point 5 to point 4");
 		
 		mover.turn90DegreesCounterClockwise();
-		System.out.println(" F-shape turn from point 4 to point 1");
+		System.out.println("F-shape turn from point 4 to point 1");
 
 		mover.shortLeg();
 		System.out.println("F-shape drive from point 4 to point 1");
