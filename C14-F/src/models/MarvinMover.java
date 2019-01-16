@@ -1,5 +1,5 @@
 /**
- * Has methods to set motorspeeds to move Marvin
+ * Has methods to set motor speeds to move Marvin
  */
 
 package models;
@@ -43,7 +43,6 @@ public class MarvinMover {
 		motorA.setSpeed(-300);
 		motorB.forward();
 		motorA.backward();
-		Delay.msDelay(1400);
 	}
 
 	public void turn90DegreesLeft() { // turns vehicle 90 degrees left
@@ -76,6 +75,11 @@ public class MarvinMover {
 		motorB.setSpeed(400);
 		motorB.forward();
 		Delay.msDelay(2600);
+	}
+	
+	public void stopMoving() {
+		motorA.stop();
+		motorB.stop();
 	}
 
 }

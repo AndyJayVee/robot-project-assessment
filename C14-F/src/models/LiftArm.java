@@ -2,7 +2,6 @@ package models;
 
 import lejos.hardware.motor.EV3LargeRegulatedMotor;
 import lejos.hardware.port.MotorPort;
-import lejos.utility.Delay;
 
 public class LiftArm {
 
