@@ -7,7 +7,7 @@ import lejos.hardware.sensor.SensorMode;
 import models.Pilot;
 
 public class BeaconFinder {
-
+ 
 	private static final int DISTANCE_TRESHOLD_ROAM = 21474836;
 	
 	private EV3IRSensor ir = new EV3IRSensor(SensorPort.S4); // use port S4 for IR Sensor
