@@ -9,6 +9,7 @@ package models;
 
 import lejos.hardware.Button;
 import lejos.hardware.Sound;
+import lejos.utility.Delay;
 import models.Music;
 
 public class MoveBeacon {
@@ -37,6 +38,7 @@ public class MoveBeacon {
 		arm.liftDown();
 		System.out.println("put beacon down");
 		
+		Delay.msDelay(2000); // press escape to return to menu
 	}
 	
 	public void move_In_F_Pattern() {// method to move in an F-shape
