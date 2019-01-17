@@ -1,3 +1,9 @@
+/**
+ * @author Leo
+ * Instantiates medium sized motor on port B.
+ * Two methods to move the fork lift arm up and down.
+ */
+
 package models;
 
 import lejos.hardware.motor.EV3LargeRegulatedMotor;
