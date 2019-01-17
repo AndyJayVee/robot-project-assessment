@@ -29,7 +29,6 @@ public class Roamer extends Navigator implements Runnable{
 					pilot.travel(1500); //diameter van de ster
 					pilot.rotate(160);
 				}
-				Thread.sleep(100);
 			}
 				
 		} catch (Exception e) {
