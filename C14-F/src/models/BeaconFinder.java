@@ -28,10 +28,10 @@ public class BeaconFinder {
 		super();
 	}
 
-	/**
+	/** @author loek (+frankl for thread)
 	 * When placed in area with beacon, it will roam until sensor will measure some
-	 * values When inRange it should switch to: turn&drive towards beacon. NOTE:
-	 * sensor is slow. Works, but it's not pretty
+	 * values. When inRange it should turn & drive towards beacon. 
+	 * NOTE: sensor is slow. Works, but it's not pretty
 	 */
 	public void findBeacon() {
 		while (Button.DOWN.isUp()) {
@@ -55,13 +55,9 @@ public class BeaconFinder {
 		ir.close();
 		System.exit(0);
 	}
-//	private void found() {
-//		// TODO Stop
-//		
-//	}
 
 /**
- * initiates turn&drive towards beacon
+ * initiates turn&drive towards beacon, fetches new measurement after each move
  */
 	private void inRange() {
 		beaconFound = true;
@@ -80,7 +76,7 @@ public class BeaconFinder {
 	}
 
 	/**
-	 * initiates roamingMode from Pilot
+	 * initiates roamingMode from Pilot. Fetches new distance 
 	 */
 	private void seekRange() {
 		beaconFound = false;
@@ -92,7 +88,7 @@ public class BeaconFinder {
 	}
 
 	/*
-	 * @return Fetch bearing measurement from Sensor
+	 * @return bearing measurement from Sensor
 	 */
 	public int fetchBearing() {
 		// fetch measurement and store the value
@@ -102,7 +98,7 @@ public class BeaconFinder {
 	}
 
 	/**
-	 * @return Fetch distance measurement from Sensor
+	 * @return distance measurement from Sensor
 	 */
 	public int fetchDistance() {
 		// fetch measurement and store the value
