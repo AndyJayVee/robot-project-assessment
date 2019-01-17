@@ -7,6 +7,12 @@ import lejos.robotics.navigation.MovePilot;
 
 public class Pilot extends MovePilot{
 
+	/**@author Frank
+	 * The pilot drives the car with a predefined (our) chassis having motors and wheels.
+	 */
+	
+	
+	
 	//Wheel diameter and offset (half track with) is set in mm.
 	private static final double WHEEL_DIAMETER = 43.2;
 	private static final double TRACK_WIDTH = 114.0;

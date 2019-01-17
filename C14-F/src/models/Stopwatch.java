@@ -6,6 +6,13 @@ import lejos.hardware.lcd.TextLCD;
 
 public class Stopwatch implements Runnable {
 
+	/**@author Frank
+	 * The stopwatch starts a stopwatch when the run method is called.
+	 * The implementation of runnable enables this method to run in a thread.
+	 * In turn, this enables the simultaneous actions (e.g. following a line using LineFollower 
+	 * AND running the stopwatch.
+	 */
+	
 	private long startTime;
 	private long currentTime;
 	private long elapsedTime = 0;
