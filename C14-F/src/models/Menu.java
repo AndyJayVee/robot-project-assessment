@@ -6,6 +6,12 @@ import lejos.hardware.ev3.LocalEV3;
 import lejos.hardware.lcd.TextLCD;
 import lejos.utility.Delay;
 
+/**
+ * @author Andy Valkenburg
+ * Menu is showing the user interface
+ * it has several methods that return a string to describe what button is pressed 
+ */
+
 public class Menu {
 	private String currentGame;
 	private Brick brick = LocalEV3.get();
@@ -74,16 +80,19 @@ public class Menu {
 
 	private void gameStarted() {
 		display.drawString("     started      ", 0, 2);
-		Delay.msDelay(3000);
+		Button.LEDPattern(4);
+		Delay.msDelay(2000);
 		display.clear();
 		repeat = false;
 	}
 
 	public String gameStopped(String gameName) {
 		String currentGame;
+		Delay.msDelay(3000);
+		Button.LEDPattern(0);
 		display.clear();
 		clearPrintout();
-		Delay.msDelay(3000);
+
 		display.drawString(gameName, 0, 1);
 //         				   "123456789987654321" ruler comment
 		display.drawString("     stopped.     ", 0, 2);
