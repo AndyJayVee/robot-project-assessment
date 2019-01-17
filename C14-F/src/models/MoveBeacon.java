@@ -14,15 +14,25 @@ public class MoveBeacon {
 	public MoveBeacon() {
 		super();
 	}
-
-	// method to grab the beacon, move it in an F-shape, and put it down
-	public void grabBeacon() {
+	
+	public void grabBeacon() { // method to grab the beacon, move it in an F-shape, and put it down
 		Button.LEDPattern(4); // flash green led and
 		Sound.beepSequenceUp(); // make sound when ready.
 		
 		arm.liftUp();
 		System.out.println("lift beacon up");
 
+		move_In_F_Pattern();
+
+		music.playStarWars(1); // finished grabBeacon method.
+
+		arm.liftDown();
+		System.out.println("put beacon down");
+		
+		System.exit(0);
+	}
+	
+	public void move_In_F_Pattern() {// method to move in an F-shape
 		mover.longLeg();
 		System.out.println("F-shape drive from point 1 to point 2");
 
@@ -64,12 +74,5 @@ public class MoveBeacon {
 		
 		mover.stopMoving();
 		System.out.println("stop moving");
-
-		music.playStarWars(1); // finished grabBeacon method.
-
-		arm.liftDown();
-		System.out.println("put beacon down");
-		
-		System.exit(0);
 	}
 }
