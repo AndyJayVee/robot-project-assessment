@@ -2,6 +2,9 @@ package models;
 
 import lejos.hardware.Sound;
 
+/**@author Frank
+ * The driver tells a pilot to drive more complex movements like the star used for finding the beacon (Roamer) 
+ */
 
 public class Navigator {
 	
@@ -32,7 +35,7 @@ public class Navigator {
 		
 	
 
-	//methode om een vierkant te rijden en dit daarna ook te vieren!
+	//methode om een vierkant te rijden en dit daarna ook te vieren met geluid en beweging!
 		public void driveRectangle(int distance) {
 			for (int i = 0; i<4; i++) {
 				pilot.rotate(90);
