@@ -17,6 +17,7 @@ public class Menu {
 	private Brick brick = LocalEV3.get();
 	private TextLCD display = brick.getTextLCD();
 	private boolean repeat;
+	
 
 	public Menu() {
 		super();

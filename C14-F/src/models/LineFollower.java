@@ -30,7 +30,7 @@ public class LineFollower {
 		Thread stopwatchThread = new Thread(stopwatch);
 		stopwatchThread.start();
 		sensor.setCurrentMode("Red");
-		while (Button.DOWN.isUp()) {
+		while (Button.ESCAPE.isUp()) {
 			sensor.fetchSample(scannedColor, 0);
 			if (scannedColor[0] > .60) { // white
 				marvinMover.turnLeftOnWhite();
@@ -40,6 +40,7 @@ public class LineFollower {
 				marvinMover.driveStraightOnGrey();
 			}
 		}
+		marvinMover.stopMoving();
 		stopwatch.setNotStopped(false);
 		//Delay.msDelay(3000);
 	}

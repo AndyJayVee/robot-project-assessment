@@ -63,7 +63,6 @@ public class Music {
 	private double dotted = 1.5;
 	private double triplet = 0.33333;
 
-	
 	public void playStarWars(int length) {
 		while (Button.ESCAPE.isUp()) {
 			addNote(noteA1, quarter);
@@ -88,7 +87,6 @@ public class Music {
 			addNote(noteC2, sixteenth);
 			addNote(noteA1, half);
 
-			
 			playStarWarsRepeat();
 			addNote(noteAb1, sixteenth);
 			addNote(noteC2, quarter);
@@ -111,11 +109,11 @@ public class Music {
 				songEnd = song.size();
 
 			for (int i = 0; i < songEnd; i++) {
-				while (Button.DOWN.isUp()) {
-					int[] notes = new int[2];
-					notes = song.get(i);
-					Sound.playNote(PIANO, notes[0], notes[1]);
-				}
+				int[] notes = new int[2];
+				notes = song.get(i);
+				Sound.playNote(PIANO, notes[0], notes[1]);
+				if (Button.ESCAPE.isDown())
+					i = song.size();
 			}
 		}
 	}

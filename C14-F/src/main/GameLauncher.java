@@ -5,6 +5,13 @@ import models.BeaconFinder;
 import models.LineFollower;
 import models.MoveBeacon;
 
+/**
+ * @author Andy Valkenburg
+ * GameLauncher starts the game through the menu
+ * it contains a loop to show the menu again after finishing a game,
+ * and catches every error
+ */
+
 public class GameLauncher {
 
 	public GameLauncher() {
@@ -13,6 +20,7 @@ public class GameLauncher {
 
 	public static void main(String[] args) {
 
+		
 		GameLauncher gameLauncher = new GameLauncher();
 		gameLauncher.launchGame();
 	}
@@ -42,7 +50,8 @@ public class GameLauncher {
 //                                             "123456789987654321" ruler comment
 					currentGame = menu.gameStopped("    Move beacon   ");
 				} else if (currentGame.equals("nogame")) {
-					currentGame = menu.gameStopped("All programs");
+//                                                 "123456789987654321" ruler comment
+					currentGame = menu.gameStopped("   All programs   ");
 				}
 				if (currentGame.equals("repeat")) {
 					repeatAfterfinish = true;
