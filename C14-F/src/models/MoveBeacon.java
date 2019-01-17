@@ -14,6 +14,7 @@ import models.Music;
 
 public class MoveBeacon {
 
+	private static final int DELAY_2000 = 2000;
 	private LiftArm arm = new LiftArm();
 	private MarvinMover mover = new MarvinMover();
 	private Music music = new Music();
@@ -38,7 +39,7 @@ public class MoveBeacon {
 		arm.liftDown();
 		System.out.println("put beacon down");
 		
-		Delay.msDelay(2000); // press escape to return to menu
+		Delay.msDelay(DELAY_2000); // press escape to return to menu
 	}
 	
 	public void move_In_F_Pattern() {// method to move in an F-shape
