@@ -9,13 +9,11 @@ import lejos.utility.Delay;
 
 public class LineFollower {
 
-	private EV3ColorSensor sensor;
-	private MarvinMover marvinMover;
+	private EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S2);
+	private MarvinMover marvinMover = new MarvinMover();
 
 	public LineFollower() {
 		super();
-		this.sensor = new EV3ColorSensor(SensorPort.S2);
-		this.marvinMover = new MarvinMover();
 	}
 	/** @author loek (+frank for thread Stopwatch).
 	 * method to follow a line / this works best if the marvin is placed on the
