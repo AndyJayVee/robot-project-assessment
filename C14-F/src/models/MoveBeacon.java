@@ -65,7 +65,7 @@ public class MoveBeacon {
 		mover.stopMoving();
 		System.out.println("stop moving");
 
-		music.playStarWars(); // finished grabBeacon method.
+		music.playStarWars(1); // finished grabBeacon method.
 
 		arm.liftDown();
 		System.out.println("put beacon down");

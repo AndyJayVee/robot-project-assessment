@@ -43,7 +43,7 @@ public class Menu {
 
 			} else if (pressedButton == Button.ID_LEFT) {// 1 = button down
 				Music song = new Music();
-				song.playStarWars(2);
+				song.playStarWars(0);
 				display.clear();
 //				display.drawString("123456789987654321", 0, 1); ruler comment
 				display.drawString("    Star Wars     ", 0, 1);
