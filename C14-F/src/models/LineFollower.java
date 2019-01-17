@@ -1,4 +1,3 @@
-
 package models;
 
 import lejos.hardware.Button;
@@ -16,7 +15,6 @@ public class LineFollower {
 	public LineFollower() {
 		super();
 	}
-
 	/** @author loek (+frank for thread Stopwatch).
 	 * method to follow a line / this works best if the marvin is placed on the
 	 * border of the black line / with the line on the left of marvin
@@ -42,7 +40,5 @@ public class LineFollower {
 		}
 		stopwatch.setNotStopped(false);
 		//Delay.msDelay(3000);
-
-
 	}
 }
