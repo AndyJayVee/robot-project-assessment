@@ -1,3 +1,9 @@
+/**
+ * @author Leo
+ * @author Loek
+ * @author Frank
+ */
+
 package models;
 
 import lejos.hardware.Button;

@@ -1,3 +1,10 @@
+/**
+ * @author Leo
+ * MoveBeacon has two methods: grabBeacon and move_In_F_Pattern. 
+ * grabBeacon calls the move_In_F_Pattern method and several methods from the LiftArm class and the Music class.
+ * move_In_F_Pattern calls methods from the MarvinMover class.
+ */
+
 package models;
 
 import lejos.hardware.Button;

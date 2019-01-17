@@ -1,5 +1,9 @@
 /**
- * Has methods to set motorspeeds to move Marvin
+ * @author Loek
+ * @author Leo 
+ * Instantiates two motors: motorA and motorB.
+ * Has methods to set individual motor speeds and directions to move the vehicle.
+ * The Delay.msDelay can be adjusted to tweak the exact angles.
  */
 
 package models;
@@ -8,7 +12,7 @@ import lejos.hardware.motor.EV3LargeRegulatedMotor;
 import lejos.hardware.port.MotorPort;
 import lejos.utility.Delay;
 
-public class MarvinMover {
+public class MarvinMover { // provides movement to BeaconFinder and MoveBeacon classes
 
 	static EV3LargeRegulatedMotor motorA = new EV3LargeRegulatedMotor(MotorPort.A);
 	static EV3LargeRegulatedMotor motorB = new EV3LargeRegulatedMotor(MotorPort.D);
@@ -94,7 +98,7 @@ public class MarvinMover {
 		Delay.msDelay(2600);
 	}
 	
-	public void stopMoving() {
+	public void stopMoving() { // stops both motors
 		motorA.stop();
 		motorB.stop();
 	}
