@@ -5,6 +5,7 @@ import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3IRSensor;
 import lejos.hardware.sensor.SensorMode;
 import models.Pilot;
+import models.Roamer;
 
 public class BeaconFinder {
 
@@ -39,24 +40,21 @@ public class BeaconFinder {
 			System.out.println("1st while. Distance: " + distance);
 			Roamer roaming = new Roamer(beaconFound);
 			Thread roamThread = new Thread(roaming);
-			while (distance > 0) {
+			while (distance > 3 && Button.DOWN.isUp()) {
 				if (distance >= DISTANCE_TRESHOLD_ROAM) {
 					roamThread.start();
 				}
-				while (distance >= DISTANCE_TRESHOLD_ROAM) {
+				while (distance >= DISTANCE_TRESHOLD_ROAM && Button.DOWN.isUp()) {
 					seekRange();
 				}
-				 // TODO this needs to be the first action in inRange() method
 				 // TODO setStopRoaming should not get 'true' but beaconFound as argument (or it can be, right?)
-				 // TODO maybe also setStopRoaming in first line of seekRange() , as this needs to invoke start roaming??
 				roaming.setStopRoaming(true);
-				while (distance < DISTANCE_TRESHOLD_ROAM) { // inRange --> turn and drive to beacon
+				while (distance < DISTANCE_TRESHOLD_ROAM && Button.DOWN.isUp()) { // inRange --> turn and drive to beacon
 					inRange();
 				}
 			}
 		}
 		ir.close();
-		System.exit(0);
 	}
 
 /**
