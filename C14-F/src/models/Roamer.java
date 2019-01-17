@@ -24,8 +24,8 @@ public class Roamer extends Navigator implements Runnable{
 
 	public void run() {
 		try {
+			for (int i = 0; i<11; i++) {
 			while (!stopRoaming) {
-				for (int i = 0; i < 11; i++) {
 					pilot.travel(1500); //diameter van de ster
 					pilot.rotate(160);
 				}
