@@ -9,7 +9,6 @@ import lejos.utility.Delay;
 
 public class LineFollower {
 
-
 	private EV3ColorSensor sensor;
 	private MarvinMover marvinMover;
 
@@ -43,7 +42,5 @@ public class LineFollower {
 		}
 		stopwatch.setNotStopped(false);
 		//Delay.msDelay(3000);
-
-
 	}
 }
