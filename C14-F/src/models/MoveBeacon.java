@@ -24,7 +24,8 @@ public class MoveBeacon {
 
 		move_In_F_Pattern();
 
-		music.playStarWars(1); // finished grabBeacon method.
+		music.playStarWars(2); // finished grabBeacon method.
+		System.out.println("Imperial March!");
 
 		arm.liftDown();
 		System.out.println("put beacon down");
