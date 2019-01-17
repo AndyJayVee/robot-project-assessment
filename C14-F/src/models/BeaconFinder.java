@@ -37,7 +37,7 @@ public class BeaconFinder {
 		while (Button.DOWN.isUp()) {
 			distance = fetchDistance();
 			System.out.println("1st while. Distance: " + distance);
-			Roaming roaming = new Roaming(beaconFound);
+			Roamer roaming = new Roamer(beaconFound);
 			Thread roamThread = new Thread(roaming);
 			while (distance > 0) {
 				if (distance >= DISTANCE_TRESHOLD_ROAM) {

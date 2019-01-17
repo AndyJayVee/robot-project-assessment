@@ -3,7 +3,7 @@ package models;
 import lejos.hardware.Sound;
 
 
-public class Driving {
+public class Navigator {
 	
 	private int travelDistance;
 	private int rotation;

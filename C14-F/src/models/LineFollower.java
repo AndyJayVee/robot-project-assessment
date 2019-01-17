@@ -44,17 +44,4 @@ public class LineFollower {
 		System.exit(0);
 
 	}
-//		public boolean stopRacing() {
-//			boolean stop = false;
-//			EV3IRSensor ir = new EV3IRSensor(SensorPort.S4);
-//			SensorMode seek = ir.getSeekMode();
-//			float[] sample = new float[seek.sampleSize()];
-//			seek.fetchSample(sample, 0);
-//			int distance = (int) sample[1];
-//			ir.close();
-//			if (distance <1000) {
-//				stop = true;
-//			}
-//			return stop;
-//		}	
 }
