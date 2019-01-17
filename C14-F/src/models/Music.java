@@ -1,10 +1,15 @@
 package models;
 
+import java.util.ArrayList;
+
+import lejos.hardware.Button;
 import lejos.hardware.Sound;
 
 public class Music {
 
 	private final static int[] PIANO = new int[] { 4, 25, 500, 7000, 5 };
+	private ArrayList<int[]> song = new ArrayList<int[]>();
+	private int songEnd;
 
 	private double tempered = 1.0595;
 	private int noteA00 = 110;
@@ -49,77 +54,96 @@ public class Music {
 	private int noteC3 = (int) (noteB2 * tempered);
 
 	private int tempo = 103;
-	private int noteLength = 60000 / tempo;
-	private int whole = noteLength * 4;
-	private int half = noteLength * 2;
-	private int quarter = noteLength * 1;
-	private int eighth = (int) (noteLength * 0.5);
-	private int sixteenth = (int) (noteLength * 0.25);
+	private int quarterNoteLength = 60000 / tempo;
+	private int whole = quarterNoteLength * 4;
+	private int half = quarterNoteLength * 2;
+	private int quarter = quarterNoteLength * 1;
+	private int eighth = (int) (quarterNoteLength * 0.5);
+	private int sixteenth = (int) (quarterNoteLength * 0.25);
 	private double dotted = 1.5;
 	private double triplet = 0.33333;
 
-	public Music() {
-		super();
-
-	}
-
+	
 	public void playStarWars(int length) {
-		Sound.playNote(PIANO, noteA1, quarter);
-		if (length == 1) return;
-		Sound.playNote(PIANO, noteA1, quarter);
-		Sound.playNote(PIANO, noteA1, quarter);
-		Sound.playNote(PIANO, noteF1, (int) (eighth * dotted));
-		Sound.playNote(PIANO, noteC2, sixteenth);
-		Sound.playNote(PIANO, noteA1, quarter);
-		Sound.playNote(PIANO, noteF1, (int) (eighth * dotted));
-		Sound.playNote(PIANO, noteC2, sixteenth);
-		Sound.playNote(PIANO, noteA1, half);
-		if (length == 2) return;
-		Sound.playNote(PIANO, noteE2, quarter);
-		Sound.playNote(PIANO, noteE2, quarter);
-		Sound.playNote(PIANO, noteE2, quarter);
-		Sound.playNote(PIANO, noteF2, (int) (eighth * dotted));
-		Sound.playNote(PIANO, noteC2, sixteenth);
-		Sound.playNote(PIANO, noteAb1, quarter);
-		Sound.playNote(PIANO, noteF1, (int) (eighth * dotted));
-		Sound.playNote(PIANO, noteC2, sixteenth);
-		Sound.playNote(PIANO, noteA1, half);
+		while (Button.ESCAPE.isUp()) {
+			addNote(noteA1, quarter);
+			// length 1
+			addNote(noteA1, quarter);
+			addNote(noteA1, quarter);
+			addNote(noteF1, (int) (eighth * dotted));
+			addNote(noteC2, sixteenth);
+			addNote(noteA1, quarter);
+			addNote(noteF1, (int) (eighth * dotted));
+			addNote(noteC2, sixteenth);
+			addNote(noteA1, half);
 
-		playStarWarsRepeat();
-		Sound.playNote(PIANO, noteAb1, sixteenth);
-		Sound.playNote(PIANO, noteC2, quarter);
-		Sound.playNote(PIANO, noteA1, (int) (eighth * dotted));
-		Sound.playNote(PIANO, noteC2, sixteenth);
-		Sound.playNote(PIANO, noteE2, half);
-		
-		playStarWarsRepeat();
-		Sound.playNote(PIANO, noteC2, sixteenth);
-		Sound.playNote(PIANO, noteA1, quarter);
-		Sound.playNote(PIANO, noteF1, (int) (eighth * dotted));
-		Sound.playNote(PIANO, noteC2, sixteenth);
-		Sound.playNote(PIANO, noteA1, half);
+			// length 2
+			addNote(noteE2, quarter);
+			addNote(noteE2, quarter);
+			addNote(noteE2, quarter);
+			addNote(noteF2, (int) (eighth * dotted));
+			addNote(noteC2, sixteenth);
+			addNote(noteAb1, quarter);
+			addNote(noteF1, (int) (eighth * dotted));
+			addNote(noteC2, sixteenth);
+			addNote(noteA1, half);
+
+			
+			playStarWarsRepeat();
+			addNote(noteAb1, sixteenth);
+			addNote(noteC2, quarter);
+			addNote(noteA1, (int) (eighth * dotted));
+			addNote(noteC2, sixteenth);
+			addNote(noteE2, half);
+
+			playStarWarsRepeat();
+			addNote(noteC2, sixteenth);
+			addNote(noteA1, quarter);
+			addNote(noteF1, (int) (eighth * dotted));
+			addNote(noteC2, sixteenth);
+			addNote(noteA1, half);
+
+			if (length == 1) {
+				songEnd = 1;
+			} else if (length == 2) {
+				songEnd = 9;
+			} else
+				songEnd = song.size();
+
+			for (int i = 0; i < songEnd; i++) {
+				while (Button.DOWN.isUp()) {
+					int[] notes = new int[2];
+					notes = song.get(i);
+					Sound.playNote(PIANO, notes[0], notes[1]);
+				}
+			}
+		}
 	}
 
 	public void playStarWarsRepeat() {
-		Sound.playNote(PIANO, noteA2, quarter);
-		Sound.playNote(PIANO, noteA1, (int) (eighth * dotted));
-		Sound.playNote(PIANO, noteA1, sixteenth);
-		Sound.playNote(PIANO, noteA2, quarter);
-		Sound.playNote(PIANO, noteAb2, eighth);
-		Sound.playNote(PIANO, noteG2, eighth);
-		Sound.playNote(PIANO, noteGb2, sixteenth);
-		Sound.playNote(PIANO, noteF2, sixteenth);
-		Sound.playNote(PIANO, noteGb2, quarter);
-		Sound.playNote(PIANO, noteBb1, eighth);
-		Sound.playNote(PIANO, noteEb2, quarter);
-		Sound.playNote(PIANO, noteD2, eighth);
-		Sound.playNote(PIANO, noteDb2, eighth);
-		Sound.playNote(PIANO, noteC2, sixteenth);
-		Sound.playNote(PIANO, noteB1, sixteenth);
-		Sound.playNote(PIANO, noteC2, quarter);
-		Sound.playNote(PIANO, noteF1, eighth);
-		Sound.playNote(PIANO, noteAb1, quarter);
-		Sound.playNote(PIANO, noteF1, (int) (eighth * dotted));
+		addNote(noteA2, quarter);
+		addNote(noteA1, (int) (eighth * dotted));
+		addNote(noteA1, sixteenth);
+		addNote(noteA2, quarter);
+		addNote(noteAb2, eighth);
+		addNote(noteG2, eighth);
+		addNote(noteGb2, sixteenth);
+		addNote(noteF2, sixteenth);
+		addNote(noteGb2, quarter);
+		addNote(noteBb1, eighth);
+		addNote(noteEb2, quarter);
+		addNote(noteD2, eighth);
+		addNote(noteDb2, eighth);
+		addNote(noteC2, sixteenth);
+		addNote(noteB1, sixteenth);
+		addNote(noteC2, quarter);
+		addNote(noteF1, eighth);
+		addNote(noteAb1, quarter);
+		addNote(noteF1, (int) (eighth * dotted));
+	}
 
+	public void addNote(int noteHight, int noteLength) {
+		int[] notes = { noteHight, noteLength };
+		song.add(notes);
 	}
 }
