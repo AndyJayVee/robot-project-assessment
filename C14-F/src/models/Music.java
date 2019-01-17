@@ -64,57 +64,56 @@ public class Music {
 	private double triplet = 0.33333;
 
 	public void playStarWars(int length) {
-		while (Button.ESCAPE.isUp()) {
-			addNote(noteA1, quarter);
-			// length 1
-			addNote(noteA1, quarter);
-			addNote(noteA1, quarter);
-			addNote(noteF1, (int) (eighth * dotted));
-			addNote(noteC2, sixteenth);
-			addNote(noteA1, quarter);
-			addNote(noteF1, (int) (eighth * dotted));
-			addNote(noteC2, sixteenth);
-			addNote(noteA1, half);
 
-			// length 2
-			addNote(noteE2, quarter);
-			addNote(noteE2, quarter);
-			addNote(noteE2, quarter);
-			addNote(noteF2, (int) (eighth * dotted));
-			addNote(noteC2, sixteenth);
-			addNote(noteAb1, quarter);
-			addNote(noteF1, (int) (eighth * dotted));
-			addNote(noteC2, sixteenth);
-			addNote(noteA1, half);
+		addNote(noteA1, quarter);
+		// length 1
+		addNote(noteA1, quarter);
+		addNote(noteA1, quarter);
+		addNote(noteF1, (int) (eighth * dotted));
+		addNote(noteC2, sixteenth);
+		addNote(noteA1, quarter);
+		addNote(noteF1, (int) (eighth * dotted));
+		addNote(noteC2, sixteenth);
+		addNote(noteA1, half);
 
-			playStarWarsRepeat();
-			addNote(noteAb1, sixteenth);
-			addNote(noteC2, quarter);
-			addNote(noteA1, (int) (eighth * dotted));
-			addNote(noteC2, sixteenth);
-			addNote(noteE2, half);
+		// length 2
+		addNote(noteE2, quarter);
+		addNote(noteE2, quarter);
+		addNote(noteE2, quarter);
+		addNote(noteF2, (int) (eighth * dotted));
+		addNote(noteC2, sixteenth);
+		addNote(noteAb1, quarter);
+		addNote(noteF1, (int) (eighth * dotted));
+		addNote(noteC2, sixteenth);
+		addNote(noteA1, half);
 
-			playStarWarsRepeat();
-			addNote(noteC2, sixteenth);
-			addNote(noteA1, quarter);
-			addNote(noteF1, (int) (eighth * dotted));
-			addNote(noteC2, sixteenth);
-			addNote(noteA1, half);
+		playStarWarsRepeat();
+		addNote(noteAb1, sixteenth);
+		addNote(noteC2, quarter);
+		addNote(noteA1, (int) (eighth * dotted));
+		addNote(noteC2, sixteenth);
+		addNote(noteE2, half);
 
-			if (length == 1) {
-				songEnd = 1;
-			} else if (length == 2) {
-				songEnd = 9;
-			} else
-				songEnd = song.size();
+		playStarWarsRepeat();
+		addNote(noteC2, sixteenth);
+		addNote(noteA1, quarter);
+		addNote(noteF1, (int) (eighth * dotted));
+		addNote(noteC2, sixteenth);
+		addNote(noteA1, half);
 
-			for (int i = 0; i < songEnd; i++) {
-				int[] notes = new int[2];
-				notes = song.get(i);
-				Sound.playNote(PIANO, notes[0], notes[1]);
-				if (Button.ESCAPE.isDown())
-					i = song.size();
-			}
+		if (length == 1) {
+			songEnd = 1;
+		} else if (length == 2) {
+			songEnd = 9;
+		} else
+			songEnd = song.size();
+
+		for (int i = 0; i < songEnd; i++) {
+			int[] notes = new int[2];
+			notes = song.get(i);
+			Sound.playNote(PIANO, notes[0], notes[1]);
+			if (Button.ESCAPE.isDown())
+				i = song.size();
 		}
 	}
 
