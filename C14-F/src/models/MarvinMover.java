@@ -22,8 +22,8 @@ public class MarvinMover { // provides movement to BeaconFinder and MoveBeacon c
 	private static final int DELAY_2600 = 2600;
 	private static final int SPEED_300 = 300;
 	private static final int SPEED_80 = 80;
-	EV3LargeRegulatedMotor motorA;
-	EV3LargeRegulatedMotor motorD;
+	private EV3LargeRegulatedMotor motorA;
+	private EV3LargeRegulatedMotor motorD;
 
 	public MarvinMover() {
 		super();
