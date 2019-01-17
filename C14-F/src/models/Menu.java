@@ -57,6 +57,15 @@ public class Menu {
 				gameStarted();
 				currentGame = "nogame";
 
+			} else if (pressedButton == Button.ID_RIGHT) {// 1 = button down
+				Music song = new Music();
+				song.playStarwarsImprov();
+				display.clear();
+//				                   "123456789987654321" ruler comment
+				display.drawString(" Star Wars jammm! ", 0, 1);
+				gameStarted();
+				currentGame = "nogame";
+
 			} else if (pressedButton == Button.ID_DOWN) {// 1 = button down
 				display.clear();
 				display.drawString("  Beacon grabber  ", 0, 1);

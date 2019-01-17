@@ -1,6 +1,7 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import lejos.hardware.Button;
 import lejos.hardware.Sound;
@@ -10,6 +11,7 @@ public class Music {
 	private final static int[] PIANO = new int[] { 4, 25, 500, 7000, 5 };
 	private ArrayList<int[]> song = new ArrayList<int[]>();
 	private int songEnd;
+	private boolean improv = false;
 
 	private double tempered = 1.0595;
 	private int noteA00 = 110;
@@ -101,6 +103,10 @@ public class Music {
 		addNote(noteC2, sixteenth);
 		addNote(noteA1, half);
 
+		if (improv) {
+			return;
+		}
+		
 		if (length == 1) {
 			songEnd = 1;
 		} else if (length == 2) {
@@ -109,6 +115,17 @@ public class Music {
 			songEnd = song.size();
 
 		for (int i = 0; i < songEnd; i++) {
+			int[] notes = new int[2];
+			notes = song.get(i);
+			Sound.playNote(PIANO, notes[0], notes[1]);
+			if (Button.ESCAPE.isDown())
+				i = song.size();
+		}
+	
+	}
+	public void playStarwarsImprov() {
+		Collections.shuffle(song);
+		for (int i = 0; i < song.size(); i++) {
 			int[] notes = new int[2];
 			notes = song.get(i);
 			Sound.playNote(PIANO, notes[0], notes[1]);
