@@ -51,10 +51,12 @@ private static final float BORDER_DARK = 0.30f;
 			sensor.fetchSample(scannedColor, 0);
 			Delay.msDelay(10);
 			if (scannedColor[0] > maximumValue) {
+				System.out.println("scanned max");
 				scannedColor[0] = maximumValue;
 				numberOfMeasurements++;
 			} else if (scannedColor[0] < minimumValue) {
 				scannedColor[0] = minimumValue;
+				System.out.println("scanned min");
 				numberOfMeasurements++;
 			} else {
 				numberOfMeasurements++;
@@ -75,13 +77,13 @@ private static final float BORDER_DARK = 0.30f;
 		sensor.fetchSample(scannedColor, 0);
 		System.out.println(shadeOfGray(scannedColor[0]));
 		
-		boolean move = true;
-		Racer mover = new Racer(shadeOfGray(scannedColor[0]), move);
+		boolean race = true;
+		Racer racer = new Racer(shadeOfGray(scannedColor[0]), race);
 		Racer.setBorderBright(BORDER_BRIGHT);
 		Racer.setBorderDark(BORDER_DARK);
-		Thread moverThread = new Thread(mover);
+		Thread moverThread = new Thread(racer);
 	
-		Stopwatch stopwatch = new Stopwatch(move);
+		Stopwatch stopwatch = new Stopwatch(race);
 		Thread stopwatchThread = new Thread(stopwatch);
 
 		System.out.println(shadeOfGray(scannedColor[0])+ "WOW, hier al!");		
@@ -91,26 +93,27 @@ private static final float BORDER_DARK = 0.30f;
 		System.out.println("Threads lopen!");
 		while (Button.ESCAPE.isUp()) {
 			sensor.fetchSample(scannedColor, 0);
+			Delay.msDelay(10);
 			while (shadeOfGray(scannedColor[0]) > BORDER_BRIGHT) {
 				sensor.fetchSample(scannedColor, 0);
 				System.out.println("te wit");
+				racer.setShadeOfGray(shadeOfGray(scannedColor[0]));
 			}
-			mover.setShadeOfGray(shadeOfGray(scannedColor[0]));
 			while (shadeOfGray(scannedColor[0]) < BORDER_DARK) {
 				sensor.fetchSample(scannedColor, 0);
 				System.out.println("te zwart");
+				racer.setShadeOfGray(shadeOfGray(scannedColor[0]));
 			}
-			mover.setShadeOfGray(shadeOfGray(scannedColor[0]));
 			while ((shadeOfGray(scannedColor[0]) <= BORDER_BRIGHT) && 
 					(shadeOfGray(scannedColor[0]) >= BORDER_DARK)) {
 				sensor.fetchSample(scannedColor, 0);
 				System.out.println("kleur is goed!");
+				racer.setShadeOfGray(shadeOfGray(scannedColor[0]));
 			}
-			mover.setShadeOfGray(shadeOfGray(scannedColor[0]));
 		}
 		stopwatch.setNotStopped(false);
-		mover.setRacing(false);
-		Delay.msDelay(5000);
+		racer.setRacing(false);
+		Delay.msDelay(1000);
 	}
 	
 	public float shadeOfGray(float ScannedGray) {
