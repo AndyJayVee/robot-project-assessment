@@ -14,6 +14,14 @@ import lejos.utility.Delay;
 
 public class MarvinMover { // provides movement to BeaconFinder and MoveBeacon classes
 
+	private static final int SPEED_200 = 200;
+	private static final int SPEED_100 = 100;
+	private static final int SPEED_140 = 140;
+	private static final int DELAY_1400 = 1400;
+	private static final int SPEED_400 = 400;
+	private static final int DELAY_2600 = 2600;
+	private static final int SPEED_300 = 300;
+	private static final int SPEED_80 = 80;
 	EV3LargeRegulatedMotor motorA;
 	EV3LargeRegulatedMotor motorD;
 
@@ -24,80 +32,80 @@ public class MarvinMover { // provides movement to BeaconFinder and MoveBeacon c
 	}
 
 	public void turnRightOnBlack() {
-		motorA.setSpeed(-140);
-		motorD.setSpeed(100);
+		motorA.setSpeed(-SPEED_140);
+		motorD.setSpeed(SPEED_100);
 		motorA.backward();
 		motorD.forward();
 	}
 
 	public void turnLeftOnWhite() {
-		motorA.setSpeed(100);
-		motorD.setSpeed(-200);
+		motorA.setSpeed(SPEED_100);
+		motorD.setSpeed(-SPEED_200);
 		motorA.forward();
 		motorD.backward();
 	}
 
 	public void driveStraightOnGrey() {
-		motorA.setSpeed(-200);
-		motorD.setSpeed(-200);
+		motorA.setSpeed(-SPEED_200);
+		motorD.setSpeed(-SPEED_200);
 		motorA.backward();
 		motorD.backward();
 	}
 
 	public void turn90DegreesClockwise() { // turns vehicle 90 degrees right
-		motorD.setSpeed(80);
-		motorA.setSpeed(-300);
+		motorD.setSpeed(SPEED_80);
+		motorA.setSpeed(-SPEED_300);
 		motorD.forward();
 		motorA.backward();
-		Delay.msDelay(1400);
+		Delay.msDelay(DELAY_1400);
 	}
 
 	public void turn90DegreesCounterClockwise() { // turns vehicle 90 degrees left
-		motorA.setSpeed(80);
-		motorD.setSpeed(-300);
+		motorA.setSpeed(SPEED_80);
+		motorD.setSpeed(-SPEED_300);
 		motorA.forward();
 		motorD.backward();
-		Delay.msDelay(1400);
+		Delay.msDelay(DELAY_1400);
 	}
 
 	public void turn180DegreesCounterClockwise() { // turns vehicle 180 degrees counter clockwise
-		motorA.setSpeed(80);
-		motorD.setSpeed(-300);
+		motorA.setSpeed(SPEED_80);
+		motorD.setSpeed(-SPEED_300);
 		motorA.forward();
 		motorD.backward();
-		Delay.msDelay(2600);
+		Delay.msDelay(DELAY_2600);
 	}
 	
 	public void turn180DegreesClockwise() { // turns vehicle 180 degrees clockwise
-		motorD.setSpeed(80);
-		motorA.setSpeed(-300);
+		motorD.setSpeed(SPEED_80);
+		motorA.setSpeed(-SPEED_300);
 		motorD.forward();
 		motorA.backward();
-		Delay.msDelay(2600);
+		Delay.msDelay(DELAY_2600);
 	}
 
 	public void shortLeg() { // drives vehicle forward by approximately 20 cm
-		motorA.setSpeed(400);
+		motorA.setSpeed(SPEED_400);
 		motorA.forward();
-		motorD.setSpeed(400);
+		motorD.setSpeed(SPEED_400);
 		motorD.forward();
-		Delay.msDelay(1400);
+		Delay.msDelay(DELAY_1400);
 	}
 	
 	public void shortBack() { // drives vehicle backward by approximately 20 cm
-		motorA.setSpeed(-400);
+		motorA.setSpeed(-SPEED_400);
 		motorA.forward();
-		motorD.setSpeed(-400);
+		motorD.setSpeed(-SPEED_400);
 		motorD.forward();
 		Delay.msDelay(700);
 	}
 
 	public void longLeg() { // drives vehicle forward by approximately 40 cm
-		motorA.setSpeed(400);
+		motorA.setSpeed(SPEED_400);
 		motorA.forward();
-		motorD.setSpeed(400);
+		motorD.setSpeed(SPEED_400);
 		motorD.forward();
-		Delay.msDelay(2600);
+		Delay.msDelay(DELAY_2600);
 	}
 	
 	public void stopMoving() { // stops both motors

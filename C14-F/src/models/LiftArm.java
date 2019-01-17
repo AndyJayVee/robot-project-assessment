@@ -11,6 +11,8 @@ import lejos.hardware.port.MotorPort;
 
 public class LiftArm {
 
+	private static final int NUMBER_OF_ROTATIONS = 120;
+	private static final int ROTATION_SPEED = 25;
 	private EV3LargeRegulatedMotor liftArm = new EV3LargeRegulatedMotor(MotorPort.B);// instantiate the connection of
 																						// the liftArm to port B
 
@@ -23,13 +25,13 @@ public class LiftArm {
 	// methods for moving the LiftArm
 
 	public void liftUp() { // rotates the motor at a set speed and number of rotations
-		liftArm.setSpeed(25); // initial speed set @25
-		liftArm.rotate(120); // initial degrees of rotations set @120
+		liftArm.setSpeed(ROTATION_SPEED); // initial speed set @25
+		liftArm.rotate(NUMBER_OF_ROTATIONS); // initial degrees of rotations set @120
 	}
 
 	public void liftDown() { // rotates the motor at a set speed and number of rotations
-		liftArm.setSpeed(25); // initial speed set @25
-		liftArm.rotate(-120); // initial degrees of rotations set @-120
+		liftArm.setSpeed(ROTATION_SPEED); // initial speed set @25
+		liftArm.rotate(-NUMBER_OF_ROTATIONS); // initial degrees of rotations set @-120
 	}
 
 }
