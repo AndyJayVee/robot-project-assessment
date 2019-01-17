@@ -46,6 +46,9 @@ public class BeaconFinder {
 				while (distance >= DISTANCE_TRESHOLD_ROAM) {
 					seekRange();
 				}
+				 // TODO this needs to be the first action in inRange() method
+				 // TODO setStopRoaming should not get 'true' but beaconFound as argument (or it can be, right?)
+				 // TODO maybe also setStopRoaming in first line of seekRange() , as this needs to invoke start roaming??
 				roaming.setStopRoaming(true);
 				while (distance < DISTANCE_TRESHOLD_ROAM) { // inRange --> turn and drive to beacon
 					inRange();
