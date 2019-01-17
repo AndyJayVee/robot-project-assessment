@@ -19,7 +19,8 @@ public class Roaming extends Driving implements Runnable{
 			while (!BeaconFound) {
 				for (int i = 0; i < 11; i++) {
 					super.pilot.travel(500); //diameter van de ster
-					super.pilot.rotate(160);                                                            
+					super.pilot.rotate(160); 
+					
 				}
 			}
 				
