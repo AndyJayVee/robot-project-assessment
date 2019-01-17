@@ -37,7 +37,6 @@ public class MoveBeacon {
 		arm.liftDown();
 		System.out.println("put beacon down");
 		
-		System.exit(0);
 	}
 	
 	public void move_In_F_Pattern() {// method to move in an F-shape
