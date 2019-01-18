@@ -5,7 +5,10 @@ import java.util.Collections;
 
 import lejos.hardware.Button;
 import lejos.hardware.Sound;
-
+/**
+ * @author Andy Valkenburg
+ * Plays Star Wars Imperial March
+ */
 public class Music {
 
 	private final static int[] PIANO = new int[] { 4, 25, 500, 7000, 5 };

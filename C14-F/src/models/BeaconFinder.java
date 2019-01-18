@@ -41,23 +41,23 @@ public class BeaconFinder {
 	 *         not pretty
 	 */
 	public void findBeacon() {
-//		Roamer roaming = new Roamer(beaconFound);
-//		Thread roamThread = new Thread(roaming);
-//		roamThread.start();
+		Roamer roaming = new Roamer(beaconFound);
+		Thread roamThread = new Thread(roaming);
+		roamThread.start();
 		distance = fetchDistance();
-//		System.out.println("Distance = " + distance);
-//		while (!stop || (distance<=0)) { 
-//			distance = fetchDistance();
-//			System.out.println("1st while. Distance: " + distance);;
-//			while (distance >= 1500 || distance <= 0) {
-//				bearing = fetchBearing();
-//				distance = fetchDistance();
-//				System.out.println("2. Roaming | Distance: " + distance);
-//				System.out.println("2. Roaming | Bearing: " + bearing);
-//			}
-//			beaconFound = true;
-//			roaming.setStopRoaming(beaconFound);
-//			roamThread.interrupt();
+		System.out.println("Distance = " + distance);
+		while (!stop || (distance<=0)) { 
+			distance = fetchDistance();
+			System.out.println("1st while. Distance: " + distance);;
+			while (distance >= 1500 || distance <= 0) {
+				bearing = fetchBearing();
+				distance = fetchDistance();
+				System.out.println("2. Roaming | Distance: " + distance);
+				System.out.println("2. Roaming | Bearing: " + bearing);
+			}
+			beaconFound = true;
+			roaming.setStopRoaming(beaconFound);
+			roamThread.interrupt();
 		pilot.arc(5000, 45);
 		pilot.arc(-5000, -45);
 			while (distance < 1000 && distance > 5) { // inRange --> turn and drive to beacon
@@ -74,15 +74,16 @@ public class BeaconFinder {
 				distance = fetchDistance();
 				bearing = fetchBearing();
 				}
-//			if (distance <= 5) {
-//				stop = true;
-//			}
-//			beaconFound = false;
-//			roaming.setStopRoaming(beaconFound);
-//			if (stop = true) {
-//				break;
-//			}
-			ir.close();	
+			if (distance <= 5) {
+				stop = true;
+			}
+			beaconFound = false;
+			roaming.setStopRoaming(beaconFound);
+			if (stop = true) {
+				break;
+			}	
+		}
+		ir.close();
 	}
 
 	/**
@@ -103,10 +104,10 @@ public class BeaconFinder {
 //		distance = fetchDistance();
 //		bearing = fetchBearing();
 //	}
-//
-//	/**
-//	 * initiates roamingMode from Pilot. Fetches new distance
-//	 */
+
+	/**
+	 * initiates roamingMode from Pilot. Fetches new distance
+	 */
 //	private void seekRange() {
 //		beaconFound = false;
 //		bearing = fetchBearing();

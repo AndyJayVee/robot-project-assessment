@@ -3,9 +3,7 @@ package models;
 import lejos.hardware.Button;
 import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3ColorSensor;
-import lejos.hardware.sensor.EV3IRSensor;
-import lejos.hardware.sensor.SensorMode;
-import lejos.utility.Delay;
+
 
 public class LineFollower {
 

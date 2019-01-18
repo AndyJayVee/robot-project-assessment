@@ -10,18 +10,13 @@ public class Navigator {
 	
 	private int travelDistance;
 	private int rotation;
+	protected Pilot pilot = new Pilot();
 	
-	Pilot pilot = new Pilot();
-	
-	public int getTravelDistance() {
-		return travelDistance;
-	}
+
 	public void setTravelDistance(int travelDistance) {
 		this.travelDistance = travelDistance;
 	}
-	public int getRotation() {
-		return rotation;
-	}
+
 	public void setRotation(int rotate) {
 		this.rotation = rotate;
 	}
