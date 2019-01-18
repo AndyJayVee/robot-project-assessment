@@ -1,14 +1,16 @@
-/**
- * MONDAY Working version, checks if needs to roam or turn/drive
- */
+/** @author loek
+* BeaconFinder version as intended
+*/
+
 package models;
 
 import lejos.hardware.Button;
 import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3IRSensor;
 import lejos.hardware.sensor.SensorMode;
-import models.Driver;
+import models.Navigator;
 import models.Pilot;
+import models.Roamer;
 
 public class BeaconFinder {
 
@@ -19,7 +21,8 @@ public class BeaconFinder {
 	private float[] sample; // declare array to store samples form Sensor
 	private boolean beaconFound;
 	private Pilot pilot;
-	private Driver drive;
+	private Navigator navigator;
+	private Roamer roamer;
 
 	private int bearing;
 	private int distance;
@@ -32,7 +35,8 @@ public class BeaconFinder {
 		this.sample = new float[seek.sampleSize()]; // initialize array to store sensordata in
 		this.beaconFound = beaconFound;
 		this.pilot = new Pilot();
-		this.drive = new Driver.
+		this.navigator = new Navigator();
+		this.roamer = new Roamer(beaconFound);
 
 	}
 
@@ -70,7 +74,7 @@ public class BeaconFinder {
 		distance = fetchDistance();
 		System.out.println("2. Roaming | Distance: " + distance);
 		System.out.println("2. Roaming | Bearing: " + bearing);
-		drive.roam(beaconFound);
+		roamer.roam(beaconFound);
 		distance = fetchDistance();
 	}
 
@@ -80,10 +84,10 @@ public class BeaconFinder {
 		System.out.println("2. inRange | Distance: " + distance);
 		System.out.println("2. inRange | Bearing: " + bearing);
 		// turn with bearing
-		drive.turn(bearing);
+		navigator.turn(bearing);
 		distance = fetchDistance();
 		// drive distance to beacon
-		drive.straight(distance);
+		navigator.straight(distance);
 		// fetch another sample to test if movement was sufficient
 		distance = fetchDistance();
 		bearing = fetchBearing();
