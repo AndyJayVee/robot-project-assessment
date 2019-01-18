@@ -1,89 +1,96 @@
+/** @author loek
+* BeaconFinder version as intended
+*/
+
 package models;
 
 import lejos.hardware.Button;
 import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3IRSensor;
 import lejos.hardware.sensor.SensorMode;
+import models.Navigator;
 import models.Pilot;
+import models.Roamer;
 
 public class BeaconFinder {
 
 	private static final int DISTANCE_TRESHOLD_ROAM = 21474836;
 
-	private EV3IRSensor ir = new EV3IRSensor(SensorPort.S4); // use port S4 for IR Sensor
-	private SensorMode seek = ir.getSeekMode(); // initiate seekmode in Sensor
-	private float[] sample = new float[seek.sampleSize()]; // declare array to store samples form Sensor
+	private EV3IRSensor irSensor;
+	private SensorMode seek;
+	private float[] sample; 
 	private boolean beaconFound;
+	private Pilot pilot;
+	private Navigator navigator;
+	private Roamer roamer;
+
 	private int bearing;
 	private int distance;
 
-	private static Pilot pilot = new Pilot();
+	// no args cons
+	public BeaconFinder() {
+		super();
+		this.irSensor = new EV3IRSensor(SensorPort.S4); // use port S4 for IR Sensor
+		this.seek = irSensor.getSeekMode(); // initiate seekmode
+		this.sample = new float[seek.sampleSize()]; // initialize array to store sensordata in
+		this.beaconFound = beaconFound;
+		this.pilot = new Pilot();
+		this.navigator = new Navigator();
+		this.roamer = new Roamer(beaconFound);
+
+	}
 
 	public boolean isBeaconFound() {
 		return beaconFound;
 	}
 
-	// no args cons
-	public BeaconFinder() {
-		super();
-	}
-
 	/**
-	 * When placed in area with beacon, it will roam until sensor will measure some
-	 * values When inRange it should switch to: turn&drive towards beacon. NOTE:
+	 * When placed in area with beacon, it will roam until sensor will measure it
+	 * (inRange) When inRsange it should switch to: turn&drive towards beacon. NOTE:
 	 * sensor is slow. Works, but it's not pretty
 	 */
 	public void findBeacon() {
-		while (Button.DOWN.isUp()) {
+
+		while (Button.ESCAPE.isUp()) {
 			distance = fetchDistance();
 			System.out.println("1st while. Distance: " + distance);
-			Roaming roaming = new Roaming(beaconFound);
-			Thread roamThread = new Thread(roaming);
 			while (distance > 0) {
-				if (distance >= DISTANCE_TRESHOLD_ROAM) {
-					roamThread.start();
-				}
-				while (distance >= DISTANCE_TRESHOLD_ROAM) {
+				while (distance >= ROAM_DISTANCE) {
+					setBeaconFound(false);
 					seekRange();
 				}
-				roaming.setStopRoaming(true);
-				while (distance < DISTANCE_TRESHOLD_ROAM) { // inRange --> turn and drive to beacon
+				while (distance < ROAM_DISTANCE) { // inRange --> turn and drive to beacon
+					setBeaconFound(true);
 					inRange();
-
 				}
 			}
+			irSensor.close();
 		}
-		ir.close();
-	}
-/**
- * initiates turn&drive towards beacon
- */
-	private void inRange() {
-		beaconFound = true;
-		bearing = fetchBearing();
-		distance = fetchDistance();
-		System.out.println("2. inRange | Distance: " + distance);
-		System.out.println("2. inRange | Bearing: " + bearing);
-		// turn with bearing, use Pilot
-		pilot.rotate(-bearing);
-		distance = fetchDistance();
-		// drive distance to beacon
-		pilot.travel(distance * 10);
-		// fetch another sample to test if movement was sufficient
-		distance = fetchDistance();
-		bearing = fetchBearing();
+
 	}
 
-	/**
-	 * initiates roamingMode from Pilot
-	 */
 	private void seekRange() {
-		beaconFound = false;
 		bearing = fetchBearing();
 		distance = fetchDistance();
 		System.out.println("2. Roaming | Distance: " + distance);
 		System.out.println("2. Roaming | Bearing: " + bearing);
+		roamer.roam(beaconFound);
 		distance = fetchDistance();
+
+
+	private void inRange() {
+		bearing = fetchBearing();
+		distance = fetchDistance();
+		System.out.println("2. inRange | Distance: " + distance);
+		System.out.println("2. inRange | Bearing: " + bearing);
+		// turn with bearing
+		navigator.turn(bearing);
+		distance = fetchDistance();
+		// drive distance to beacon
+		navigator.straight(distance);
+		// fetch another sample to test if movement was sufficient
+		distance = fetchDistance();
+		bearing = fetchBearing();
 	}
 
 	/*
