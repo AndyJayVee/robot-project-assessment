@@ -119,7 +119,7 @@ public class BeaconFinder {
 	/*
 	 * @return bearing measurement from Sensor
 	 */
-	public int fetchBearing() {
+	private int fetchBearing() {
 		// fetch measurement and store the value
 		seek.fetchSample(sample, 0);
 		bearing = (int) sample[0];
@@ -129,7 +129,7 @@ public class BeaconFinder {
 	/**
 	 * @return distance measurement from Sensor
 	 */
-	public int fetchDistance() {
+	private int fetchDistance() {
 		// fetch measurement and store the value
 		seek.fetchSample(sample, 0);
 		distance = (int) sample[1];
