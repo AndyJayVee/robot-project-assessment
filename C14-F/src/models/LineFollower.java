@@ -3,18 +3,19 @@ package models;
 import lejos.hardware.Button;
 import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3ColorSensor;
-import lejos.utility.Delay;
+
 
 public class LineFollower {
 
-	private EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S2);
-	private MarvinMover marvinMover = new MarvinMover();
+	private EV3ColorSensor sensor;
+	private MarvinMover marvinMover;
 
 	public LineFollower() {
 		super();
+		this.sensor = new EV3ColorSensor(SensorPort.S2);
+		this.marvinMover = new MarvinMover();
 	}
-
-	/**
+	/** @author loek (+frank for thread Stopwatch).
 	 * method to follow a line / this works best if the marvin is placed on the
 	 * border of the black line / with the line on the left of marvin
 	 */
@@ -27,7 +28,7 @@ public class LineFollower {
 		Thread stopwatchThread = new Thread(stopwatch);
 		stopwatchThread.start();
 		sensor.setCurrentMode("Red");
-		while (Button.DOWN.isUp()) {
+		while (Button.ESCAPE.isUp()) {
 			sensor.fetchSample(scannedColor, 0);
 			if (scannedColor[0] > .60) { // white
 				marvinMover.turnLeftOnWhite();
@@ -37,7 +38,8 @@ public class LineFollower {
 				marvinMover.driveStraightOnGrey();
 			}
 		}
+		marvinMover.stopMoving();
 		stopwatch.setNotStopped(false);
-		Delay.msDelay(10000);
+		//Delay.msDelay(3000);
 	}
 }
